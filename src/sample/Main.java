@@ -9,7 +9,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Main extends Application {
+
+    public static Grid grid;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -21,6 +27,27 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        launch(args);
+        testVehicleCollisions();
+//        launch(args);
     }
+
+    public static void testVehicleCollisions() {
+        System.out.println("Testing...");
+        Main.grid = new Grid();
+        List<Vehicle> testVehicles = Arrays.asList(
+              new Vehicle(1, Vehicle.Orientation.HORIZONTAL, 2, 0, 2),
+              new Vehicle(2, Vehicle.Orientation.HORIZONTAL, 2, 3, 4),
+              new Vehicle(2, Vehicle.Orientation.HORIZONTAL, 2, 2, 3)
+        );
+
+        for (Vehicle v : testVehicles) {
+            if (!Main.grid.addVehicle(v)) {
+                System.err.println("poop");
+                return;
+            }
+            System.out.println("Vehicle added successfully");
+        }
+
+    }
+
 }
