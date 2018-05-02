@@ -11,25 +11,37 @@ public class Grid {
 
     ArrayList<Vehicle> vehicles;
 
-    /** 0, 0 at top left, positive x going left and positive y going down */
-    int grid[][] = new int[GRID_SIZE][GRID_SIZE];
 
     public Grid() {
-        for (int i = 0; i < GRID_SIZE; i++) {
-            Arrays.fill(grid[i], 0);
-        }
         this.vehicles = new ArrayList<>();
     }
 
     public boolean addVehicle(Vehicle vehicle) {
-        if (this.vehicles.stream()
-              .filter(v -> vehicle.collidesWith(v))
-              .collect(Collectors.toList())
-              .size() > 0) return false;
+
+        // Check other vehicles for collisions
+        for (Vehicle v : this.vehicles) {
+            if (v.collidesWith(vehicle)) return false;
+        }
         vehicles.add(vehicle);
         return true;
+    }
+    /** 0, 0 at top left, positive x going left and positive y going down */
+    public int[][] getGridObject() {
+        int[][] grid = new int[GRID_SIZE][GRID_SIZE];
+        for (int i = 0; i < GRID_SIZE; i++) {
+            Arrays.fill(grid[i], 0);
+        }
+
+        for (Vehicle v : this.vehicles) {
+            for (Coordinate c : v.getOccupiedSpaces()) {
+                grid[c.colIndex][c.rowIndex] = v.getCarId();
+            }
+        }
+
+        return grid;
     }
 
 
 
 }
+

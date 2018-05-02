@@ -10,6 +10,9 @@ public class Vehicle {
         VERTICAL, HORIZONTAL
     };
 
+    public int getCarId() {
+        return carId;
+    }
 
     private int carId;
     private Orientation orientation;
