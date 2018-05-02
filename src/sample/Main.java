@@ -43,7 +43,7 @@ public class Main extends Application {
 
         for (Vehicle v : testVehicles) {
             if (!Main.grid.addVehicle(v)) {
-                System.err.println("poop");
+                System.err.println("Vehicle " + v + " failed to add");
                 return;
             }
             System.out.println("Vehicle added successfully");

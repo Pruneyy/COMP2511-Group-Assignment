@@ -31,26 +31,19 @@ public class Vehicle {
     }
 
     public List<Coordinate> getOccupiedSpaces() {
-        if (this.orientation == Orientation.VERTICAL) {
-            return IntStream.range(this.firstSpaceOccupied, this.lastSpaceOccupied)
-                  .boxed()
-                  .map(i -> new Coordinate(this.file, i))
-                  .collect(Collectors.toList());
-        } else if (this.orientation == Orientation.HORIZONTAL) {
-            return IntStream.range(this.firstSpaceOccupied, this.lastSpaceOccupied)
-                  .boxed()
-                  .map(i -> new Coordinate(i, this.file))
-                  .collect(Collectors.toList());
-        }
-        System.err.println("Unrecognised orientation");
-        return new ArrayList<>();
+        return IntStream.range(this.firstSpaceOccupied, this.lastSpaceOccupied + 1)
+              .boxed()
+              .map(i -> Coordinate.fromOrientation(this.orientation, this.file, i))
+              .collect(Collectors.toList());
     }
 
     public boolean collidesWith(Vehicle v) {
-        return this.getOccupiedSpaces().stream()
-              .filter(coord1 -> v.getOccupiedSpaces().stream().filter(coord2 -> coord1.isEqual(coord2)).collect(Collectors.toList()).size() > 0)
-              .collect(Collectors.toList())
-              .size() > 0;
+        for (Coordinate c1 : this.getOccupiedSpaces()) {
+            for (Coordinate c2 : v.getOccupiedSpaces()) {
+                if (c1.isEqual(c2)) return true;
+            }
+        }
+        return false;
     }
 
     public String toString() {
