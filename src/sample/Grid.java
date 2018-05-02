@@ -37,6 +37,42 @@ public class Grid {
     }
 
     /**
+     * Attempts to move the vehicle in the positive direction by 1, checking if the move is valid
+     * @param vehicle The vehicle to move
+     * @return true if move is successful
+     */
+    public boolean moveVehicleForward(Vehicle vehicle) {
+        return moveVehicleBySteps(vehicle.getCarId(), 1);
+    }
+
+    /**
+     * Attempts to move the vehicle in the negative direction by 1, checking if the move is valid
+     * @param vehicle The vehicle to move
+     * @return true if move is successful
+     */
+    public boolean moveVehicleBackward(Vehicle vehicle) {
+        return moveVehicleBySteps(vehicle.getCarId(), -1);
+    }
+
+    private boolean moveVehicleBySteps(int vehicleId, int steps) {
+
+        Vehicle vehicle = vehicles.get(vehicleId - 1);
+        // Create a dummy and perform the move
+        Vehicle dummyVehicle = vehicle.clone();
+        dummyVehicle.move(steps);
+        // Check if vehicle is out of grid
+        if (dummyVehicle.getFirstSpaceOccupied() < 0 || dummyVehicle.getLastSpaceOccupied() >= GRID_SIZE) return false;
+        // Check collisions with the dummy
+        for (Vehicle v : this.vehicles) {
+            if (vehicle == v) continue;
+            if (dummyVehicle.collidesWith(v)) return false;
+        }
+        // If no collisions, move actual vehicle forward
+        vehicle.move(steps);
+        return true;
+    }
+
+    /**
      * Computes a 2d array of the layout of the grid
      * 0 is empty, while a positive integer is the id of the car
      * @return 2d array representing the layout of the grid
@@ -54,6 +90,15 @@ public class Grid {
         }
 
         return grid;
+    }
+
+    /** Unfortunately this prints the grid as a flipped matrix */
+    public String toString() {
+        int[][] grid = this.getGridObject();
+        return Arrays.deepToString(grid)
+              .replace("], ", "]\n")
+              .replace("[[", "[")
+              .replace("]]", "]");
     }
 
 

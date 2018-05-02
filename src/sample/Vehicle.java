@@ -10,12 +10,9 @@ public class Vehicle {
         VERTICAL, HORIZONTAL
     };
 
-    public int getCarId() {
-        return carId;
-    }
-
     private int carId;
     private Orientation orientation;
+
     /** the row/column index of the Vehicle */
     private int file;
     private int firstSpaceOccupied;
@@ -27,7 +24,6 @@ public class Vehicle {
         this.file = file;
         this.firstSpaceOccupied = firstSpaceOccupied;
         this.lastSpaceOccupied = lastSpaceOccupied;
-        System.out.println(this.getOccupiedSpaces());
     }
 
     public List<Coordinate> getOccupiedSpaces() {
@@ -46,8 +42,36 @@ public class Vehicle {
         return false;
     }
 
+    /** Assumes the move is valid, moves the vehicle by steps in the positive direction on the file */
+    public void move(int steps) {
+        this.firstSpaceOccupied += steps;
+        this.lastSpaceOccupied += steps;
+    }
+
+    public Vehicle clone() {
+        return new Vehicle(
+              this.carId,
+              this.orientation,
+              this.file,
+              this.firstSpaceOccupied,
+              this.lastSpaceOccupied);
+    }
+
     public String toString() {
         return carId + " " + this.getOccupiedSpaces().toString();
     }
+
+    public int getCarId() {
+        return carId;
+    }
+
+    public int getFirstSpaceOccupied() {
+        return firstSpaceOccupied;
+    }
+
+    public int getLastSpaceOccupied() {
+        return lastSpaceOccupied;
+    }
+
 
 }

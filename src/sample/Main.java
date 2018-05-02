@@ -32,8 +32,13 @@ public class Main extends Application {
 //        launch(args);
     }
 
+    /**
+     * Informal testing on grid/vehicle methods
+     * Assumes asserts are on and working
+     * You might need to ensure that the VM argument -ea is used when running the program for these to report errors
+     */
     public static void testVehicleCollisions() {
-        System.out.println("Testing...");
+        System.out.println("testing Grid.addVehicle");
         Main.grid = new Grid();
         List<Vehicle> testVehicles = Arrays.asList(
               new Vehicle(1, Vehicle.Orientation.HORIZONTAL, 2, 0, 2),
@@ -41,14 +46,19 @@ public class Main extends Application {
               new Vehicle(3, Vehicle.Orientation.HORIZONTAL, 2, 2, 3)
         );
 
-        for (Vehicle v : testVehicles) {
-            if (!Main.grid.addVehicle(v)) {
-                System.err.println("Vehicle " + v + " failed to add");
-                return;
-            }
-            System.out.println("Vehicle added successfully");
-        }
+        assert(Main.grid.addVehicle(testVehicles.get(0)) == true);      // Vehicle 1 is free to be added
+        assert(Main.grid.addVehicle(testVehicles.get(1)) == true);      // Vehicle 2 is free to be added
+        assert(Main.grid.addVehicle(testVehicles.get(2)) == false);     // Vehicle 3 would be blocked by 1 and 2
+
+        System.out.println("testing Grid.moveVehicleForward");
+        assert(Main.grid.moveVehicleForward(testVehicles.get(0)) == false);     // Vehicle 1 is blocked by vehicle 2
+        assert(Main.grid.moveVehicleForward(testVehicles.get(1)) == true);      // Vehicle 2 is free to move away from vehicle 1
+        assert(Main.grid.moveVehicleForward(testVehicles.get(1)) == false);     // Vehicle 2 cannot move past the edge of the grid
+
+        System.out.println("All tests pass!");
+
 
     }
+
 
 }
