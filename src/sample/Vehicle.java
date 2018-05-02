@@ -71,7 +71,7 @@ public class Vehicle {
     }
 
     public String toString() {
-
+    	return null;
     }
 
 }

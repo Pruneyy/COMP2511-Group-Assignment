@@ -38,7 +38,7 @@ public class Main extends Application {
         List<Vehicle> testVehicles = Arrays.asList(
               new Vehicle(1, Vehicle.Orientation.HORIZONTAL, 2, 0, 2),
               new Vehicle(2, Vehicle.Orientation.HORIZONTAL, 2, 3, 4),
-              new Vehicle(2, Vehicle.Orientation.HORIZONTAL, 2, 2, 3)
+              new Vehicle(3, Vehicle.Orientation.HORIZONTAL, 2, 2, 3)
         );
 
         for (Vehicle v : testVehicles) {
