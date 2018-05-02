@@ -10,26 +10,6 @@ public class Vehicle {
         VERTICAL, HORIZONTAL
     };
 
-    public class Coordinate {
-        /** x coord */
-        int colIndex;
-        /** y coord */
-        int rowIndex;
-
-        public Coordinate(int colIndex, int rowIndex) {
-            this.colIndex = colIndex;
-            this.rowIndex = rowIndex;
-        }
-
-        public boolean isEqual(Coordinate c) {
-            boolean b = this.colIndex == c.colIndex && this.rowIndex == c.rowIndex;
-            return b;
-        }
-
-        public String toString() {
-            return "{" + this.colIndex + ", " + this.rowIndex + "}";
-        }
-    }
 
     private int carId;
     private Orientation orientation;
@@ -53,7 +33,7 @@ public class Vehicle {
                   .boxed()
                   .map(i -> new Coordinate(this.file, i))
                   .collect(Collectors.toList());
-        } else if (this.orientation == Orientation.HORIZONTAL){
+        } else if (this.orientation == Orientation.HORIZONTAL) {
             return IntStream.range(this.firstSpaceOccupied, this.lastSpaceOccupied)
                   .boxed()
                   .map(i -> new Coordinate(i, this.file))
@@ -71,7 +51,7 @@ public class Vehicle {
     }
 
     public String toString() {
-    	return null;
+        return carId + " " + this.getOccupiedSpaces().toString();
     }
 
 }
