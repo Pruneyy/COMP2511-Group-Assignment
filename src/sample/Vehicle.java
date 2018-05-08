@@ -1,5 +1,6 @@
 package sample;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,12 +18,16 @@ public class Vehicle {
     private int firstSpaceOccupied;
     private int lastSpaceOccupied;
 
+    /** Not sure if necessary, but a bonus to be able to track each invidivual vehicle's movements */
+    private ArrayList<Move> moves;
+
     public Vehicle(int carId, Orientation orientation, int file, int firstSpaceOccupied, int lastSpaceOccupied) {
         this.carId = carId;
         this.orientation = orientation;
         this.file = file;
         this.firstSpaceOccupied = firstSpaceOccupied;
         this.lastSpaceOccupied = lastSpaceOccupied;
+        this.moves = new ArrayList<>();
     }
 
     public List<Coordinate> getOccupiedSpaces() {
@@ -42,9 +47,12 @@ public class Vehicle {
     }
 
     /** Assumes the move is valid, moves the vehicle by steps in the positive direction on the file */
-    public void move(int steps) {
+    public Move move(int steps) {
+        Move move = new Move(this, steps);
+        this.moves.add(move);
         this.firstSpaceOccupied += steps;
         this.lastSpaceOccupied += steps;
+        return move;
     }
 
     public Vehicle clone() {

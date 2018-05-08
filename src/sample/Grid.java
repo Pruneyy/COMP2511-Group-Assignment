@@ -13,8 +13,7 @@ public class Grid {
     static final int GRID_SIZE = 6;
     static final int RED_ID = 1;
 
-    ArrayList<Vehicle> vehicles;
-
+    private ArrayList<Vehicle> vehicles;
 
     public Grid() {
         this.vehicles = new ArrayList<>();
@@ -53,7 +52,7 @@ public class Grid {
         return moveVehicleBySteps(vehicle.getCarId(), -1);
     }
 
-    private boolean moveVehicleBySteps(int vehicleId, int steps) {
+    public boolean moveVehicleBySteps(int vehicleId, int steps) {
 
         Vehicle vehicle = vehicles.get(vehicleId - 1);
         // Create a dummy and perform the move
@@ -89,6 +88,13 @@ public class Grid {
         }
 
         return grid;
+    }
+
+    public Vehicle getVehicleById(int id) {
+        for (Vehicle v : this.vehicles) {
+            if (v.getCarId() == id) return v;
+        }
+        return null;
     }
 
     /** Unfortunately this prints the grid as a flipped matrix */

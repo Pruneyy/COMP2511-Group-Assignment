@@ -29,6 +29,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         testVehicleCollisions();
+        testPuzzleGenerator();
         launch(args);
     }
 
@@ -56,8 +57,22 @@ public class Main extends Application {
         assert(Main.grid.moveVehicleForward(testVehicles.get(1)) == false);     // Vehicle 2 cannot move past the edge of the grid
 
         System.out.println("All tests pass!");
+    }
 
-
+    public static void testPuzzleGenerator() {
+        System.out.println("testing Grid.addVehicle");
+        GeneratorPuzzleService puzzleGenerator = new GeneratorPuzzleService();
+        Main.grid = puzzleGenerator.getNewPuzzle();
+        if (Main.grid == null) {
+            System.err.println("The generator failed to generate a puzzle, try using less vehicles or something");
+            return;
+        }
+        System.out.println("Puzzle generated! (Keep in mind the output is flipped on stdout because of the print function");
+        System.out.println(Main.grid);
+        System.out.println("Undoing moves...");
+        puzzleGenerator.solve();
+        System.out.println("Puzzle solved!");
+        System.out.println(Main.grid);
     }
 
 
