@@ -1,3 +1,4 @@
+# https://www.thinkfun.com/play-online/rush-hour/
 # Difficulty Easy (puzzle board - Easy 1)
 # Keyword, car ID, orientation, Row/Col number (1 - 6), starting block (1 - 6),length of vehicle
 Set 0 H 3 1 2	#RED
