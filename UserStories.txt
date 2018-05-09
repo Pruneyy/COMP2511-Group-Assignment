@@ -1,0 +1,16 @@
+User Stories:
+
+1.
+As a game player I want to see a visualisation of the puzzle so I can begin an attempt to solve the puzzle
+
+2.
+As a game player I want to be able to move puzzle pieces so that I can step through my solution attempt
+
+3.
+As a game player I want to be presented with a victory screen so that I can determine when I've completed the puzzle
+
+4.
+As a player I want to be able to advance to the next puzzle so that I may continue playing the game
+
+5.
+As a developer I want to be able to verify that a particular puzzle board has a definite solution so that I can avoid presenting boards that are unsolvable
