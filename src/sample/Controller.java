@@ -10,9 +10,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class Controller {
 
 	private static final Color[] colors = {Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.PURPLE, Color.BROWN, Color.AQUAMARINE, Color.SALMON, Color.GRAY};
@@ -20,8 +17,12 @@ public class Controller {
 	@FXML private BorderPane game;
 	@FXML private Button start;
 	@FXML private GridPane gameBoard;
+	@FXML private StackPane stackPane;
 	private boolean startFlag = false;
-	
+
+	private double mouseClickX;
+	private double mouseClickY;
+
 	@FXML protected void handleButtonPress(ActionEvent event) {
 		System.out.println("Start Game");
 		if (startFlag == false) {
@@ -32,11 +33,9 @@ public class Controller {
 			makeGrid(g);
 			startFlag = true;
 			start.setText("New Game");
-		} else {
-			
 		}
 	}
-		
+
 	public void makeGrid() {
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
@@ -47,7 +46,7 @@ public class Controller {
 		}
 	}
 
-	private Rectangle getGridTile() {
+	private Rectangle getGridTile(int id) {
 		Rectangle rec = new Rectangle();
 		rec.setWidth(50);
 		rec.setHeight(50);
@@ -56,10 +55,24 @@ public class Controller {
 
 	private Rectangle getVehicleRender(Vehicle v) {
 		int unitLength = 50;
-		if (v.getOrientation() == Vehicle.Orientation.HORIZONTAL) {
-			return new Rectangle(v.getLength() * unitLength, 1 * unitLength);
-		}
-		return new Rectangle(1 * unitLength, v.getLength() * unitLength);
+		Rectangle rec = new Rectangle(v.getLength() * unitLength, 1 * unitLength);
+		rec.setOnDragDetected(e -> {
+			rec.setFill(Color.YELLOW);
+		});
+		rec.setOnMousePressed(e -> {
+			mouseClickX = e.getSceneX();
+			mouseClickY = e.getSceneY();
+		});
+		rec.setOnMouseDragged(e -> {
+			double deltaX = e.getSceneX() - mouseClickX;
+			double deltaY = e.getSceneY() - mouseClickY;
+			rec.setTranslateX(rec.getTranslateX()+deltaX);
+			rec.setTranslateY(rec.getTranslateY()+deltaY);
+			mouseClickX = e.getSceneX();
+			mouseClickY = e.getSceneY();
+		});
+		rec.setOnMouseReleased(e -> {});
+		return rec;
 	}
 
 
@@ -68,12 +81,13 @@ public class Controller {
 		for (int x = 0; x < grid.GRID_SIZE; x++) {
 			for (int y = 0; y < grid.GRID_SIZE; y++) {
 				int gridVal = gridObj[y][x];
-				Rectangle rec = getGridTile();
+				Rectangle rec = getGridTile(gridVal);
 				gameBoard.add(rec, y, x);
-				if (gridVal != 0) {
-					rec.setFill(colors[gridVal]);
-				}
 			}
 		}
+		Rectangle render = getVehicleRender(grid.getVehicleById(1));
+		stackPane.getChildren().add(render);
+		Rectangle render2 = getVehicleRender(grid.getVehicleById(2));
+		stackPane.getChildren().add(render2);
 	}
 }
