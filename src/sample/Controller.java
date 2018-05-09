@@ -59,7 +59,7 @@ public class Controller {
 
 	private Rectangle getVehicleRender(Vehicle v) {
 		int unitLength = 50;
-		Rectangle rec = new Rectangle(v.getLength() * unitLength, 1 * unitLength);
+		Rectangle rec = new Rectangle(v.getLength() * unitLength + 2*(v.getLength()-1), 1 * unitLength);
 		rec.setOnDragDetected(e -> {
 			rec.setFill(Color.YELLOW);
 		});
