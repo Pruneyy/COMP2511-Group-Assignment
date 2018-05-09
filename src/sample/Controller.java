@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Controller {
 
-	private static final Color[] colors = {Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.PURPLE, Color.BROWN, Color.AQUAMARINE, Color.SALMON, Color.BEIGE};
+	private static final Color[] colors = {Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.PURPLE, Color.BROWN, Color.AQUAMARINE, Color.SALMON, Color.GRAY};
 
 	@FXML private BorderPane game;
 	@FXML private Button start;
