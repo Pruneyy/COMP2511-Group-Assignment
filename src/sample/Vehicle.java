@@ -18,7 +18,7 @@ public class Vehicle {
     private int firstSpaceOccupied;
     private int lastSpaceOccupied;
 
-    /** Not sure if necessary, but a bonus to be able to track each invidivual vehicle's movements */
+    /** Not sure if necessary, but a bonus to be able to track each individual vehicle's movements */
     private ArrayList<Move> moves;
 
     public Vehicle(int carId, Orientation orientation, int file, int firstSpaceOccupied, int lastSpaceOccupied) {

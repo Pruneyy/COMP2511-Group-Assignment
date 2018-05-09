@@ -29,9 +29,12 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        testVehicleCollisions();
-        testPuzzleGenerator();
+        //testVehicleCollisions();
+        //testPuzzleGenerator();
         launch(args);
+		//FilePuzzleService test = new FilePuzzleService("Easy");
+		//test.getNewPuzzle("1.txt");
+		
     }
 
     /**

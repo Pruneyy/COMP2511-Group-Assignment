@@ -27,8 +27,12 @@ public class Controller {
 		System.out.println("Start Game");
 		if (startFlag == false) {
 
-			GeneratorPuzzleService gps = new GeneratorPuzzleService();
-			Grid g = gps.getNewPuzzle();
+			//GeneratorPuzzleService gps = new GeneratorPuzzleService();
+			//Grid g = gps.getNewPuzzle();
+			
+			FilePuzzleService gps = new FilePuzzleService("Easy");
+			Grid g = gps.getNewPuzzle("3.txt");
+			
 			System.out.println(g);
 			makeGrid(g);
 			startFlag = true;
