@@ -5,8 +5,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="game" fx:controller="sample.Controller"
-	xmlns:fx="http://javafx.com/fxml">
+<?import javafx.scene.layout.StackPane?>
+<BorderPane minHeight="350" minWidth="500" fx:id="game" fx:controller="sample.Controller"
+			xmlns:fx="http://javafx.com/fxml">
 	<center>
 		<GridPane fx:id="gameBoard" hgap="1" vgap="1">
 			<BorderPane.margin>
@@ -19,7 +20,7 @@
 			<BorderPane.margin>
 	             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
 	        </BorderPane.margin>
-		    <Button fx:id="start" id="start" text="PLAY" 
+		    <Button fx:id="start" id="start" text="PLAY"
 		    	onAction="#handleButtonPress"/>
 		</VBox>
 	</right>

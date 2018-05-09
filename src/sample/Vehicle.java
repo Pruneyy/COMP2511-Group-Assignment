@@ -80,5 +80,11 @@ public class Vehicle {
         return lastSpaceOccupied;
     }
 
+    public Orientation getOrientation() {
+        return orientation;
+    }
 
+    public int getLength() {
+        return this.getLastSpaceOccupied() - this.getFirstSpaceOccupied() + 1;
+    }
 }

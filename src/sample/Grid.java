@@ -107,6 +107,8 @@ public class Grid {
     }
 
 
-
+    public ArrayList<Vehicle> getVehicles() {
+        return vehicles;
+    }
 }
 
