@@ -2,6 +2,7 @@ package sample;
 
 
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 import javafx.event.ActionEvent;
@@ -67,9 +68,9 @@ public class Controller {
 		int unitLength = 50;
 		int length;
 		int width;
-		BiFunction<MouseEvent, Rectangle, Integer> onMouseDrag;
-		BiFunction<MouseEvent, Rectangle, Integer> onMousePress;
-		BiFunction<MouseEvent, Rectangle, Integer> onMouseRelease;
+		BiConsumer<MouseEvent, Rectangle> onMouseDrag;
+		BiConsumer<MouseEvent, Rectangle> onMousePress;
+		BiConsumer<MouseEvent, Rectangle> onMouseRelease;
 		
 		Vehicle.Orientation orient = v.getOrientation();
 		if (orient == Vehicle.Orientation.HORIZONTAL) {
@@ -77,15 +78,12 @@ public class Controller {
 				double deltaX = e.getSceneX() - mouseClickX;
 				r.setTranslateX(r.getTranslateX()+deltaX);
 				mouseClickX = e.getSceneX();
-				return 0;
 			};
 			onMousePress = (e,r) -> {
 				mouseClickX = e.getSceneX();
-				return 0;
 			};
 			
 			onMouseRelease = (e,r) -> {
-				return 0;
 			};
 			
 			length = v.getLength() * unitLength + 2*(v.getLength()-1);
@@ -95,15 +93,12 @@ public class Controller {
 				double deltaY = e.getSceneY() - mouseClickY;
 				r.setTranslateY(r.getTranslateY()+deltaY);
 				mouseClickY = e.getSceneY();
-				return 0;
 			};
 			onMousePress = (e,r) -> {
 				mouseClickY = e.getSceneY();
-				return 0;
 			};
 
 			onMouseRelease = (e,r) -> {
-				return 0;
 			};
 			length = 1 * unitLength ;
 			width = v.getLength() * unitLength + 2*(v.getLength()-1);
@@ -121,13 +116,13 @@ public class Controller {
 			rec.setFill(Color.YELLOW);
 		});*/
 		rec.setOnMousePressed(e -> {
-			onMousePress.apply(e, rec);
+			onMousePress.accept(e, rec);
 		});
 		rec.setOnMouseDragged(e -> {
-			onMouseDrag.apply(e, rec);
+			onMouseDrag.accept(e, rec);
 		});
 		rec.setOnMouseReleased(e -> {
-			onMouseRelease.apply(e, rec);
+			onMouseRelease.accept(e, rec);
 			/*double deltaX = e.getSceneX();
 			double deltaY = e.getSceneY();
 			System.out.println("X: " + deltaX + " Y: " + deltaY + " ==== RecX: " + rec.getTranslateX() + " RecY: " + rec.getTranslateY());*/
