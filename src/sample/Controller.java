@@ -1,24 +1,23 @@
 package sample;
 
-
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import sample.Vehicle.Orientation;
 
-public class Controller {
+public class Controller implements Initializable {
 
 	private static final Color[] colors = {Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.PURPLE, Color.BROWN, Color.AQUAMARINE, Color.SALMON, Color.GRAY};
 
@@ -32,21 +31,25 @@ public class Controller {
 	private double mouseClickY;
 	private int unitLength = 50;
 
-	@FXML protected void handleButtonPress(ActionEvent event) {
+	@FXML public void initialize(URL url, ResourceBundle resourceBundle) {
 		System.out.println("Start Game");
 		if (startFlag == false) {
 
 			//GeneratorPuzzleService gps = new GeneratorPuzzleService();
 			//Grid g = gps.getNewPuzzle();
-			
+
 			FilePuzzleService gps = new FilePuzzleService("Easy");
 			Grid g = gps.getNewPuzzle("3.txt");
-			
+
 			System.out.println(g);
 			makeGrid(g);
 			startFlag = true;
 			start.setText("New Game");
 		}
+	}
+
+	@FXML protected void handleButtonPress(ActionEvent event) {
+		// Make new game
 	}
 
 	public void makeGrid() {
