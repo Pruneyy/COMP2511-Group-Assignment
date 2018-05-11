@@ -6,8 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class Controller {
@@ -17,7 +19,7 @@ public class Controller {
 	@FXML private BorderPane game;
 	@FXML private Button start;
 	@FXML private GridPane gameBoard;
-	@FXML private StackPane stackPane;
+	@FXML private Pane stackPane;
 	private boolean startFlag = false;
 
 	private double mouseClickX;
@@ -59,7 +61,10 @@ public class Controller {
 
 	private Rectangle getVehicleRender(Vehicle v) {
 		int unitLength = 50;
-		Rectangle rec = new Rectangle(v.getLength() * unitLength + 2*(v.getLength()-1), 1 * unitLength);
+		int length = v.getLength() * unitLength + 2*(v.getLength()-1);
+		int width = 1 * unitLength;
+		Rectangle rec = new Rectangle(length, width);
+		rec.relocate(0,0);
 		rec.setOnDragDetected(e -> {
 			rec.setFill(Color.YELLOW);
 		});
@@ -75,7 +80,12 @@ public class Controller {
 			mouseClickX = e.getSceneX();
 			mouseClickY = e.getSceneY();
 		});
-		rec.setOnMouseReleased(e -> {});
+		rec.setOnMouseReleased(e -> {
+			double deltaX = e.getSceneX();
+			double deltaY = e.getSceneY();
+			System.out.println("X: " + deltaX + " Y: " + deltaY + " ==== RecX: " + rec.getTranslateX() + " RecY: " + rec.getTranslateY());
+			
+		});
 		return rec;
 	}
 
@@ -86,9 +96,15 @@ public class Controller {
 			for (int y = 0; y < grid.GRID_SIZE; y++) {
 				int gridVal = gridObj[y][x];
 				Rectangle rec = getGridTile(gridVal);
+				rec.setFill(Color.LIGHTGRAY);
 				gameBoard.add(rec, y, x);
 			}
 		}
+		stackPane.relocate(0, 0);
+		Circle circ = new Circle();
+		circ.setRadius(20);
+		circ.setFill(Color.GREEN);
+		stackPane.getChildren().add(circ);
 		Rectangle render = getVehicleRender(grid.getVehicleById(1));
 		stackPane.getChildren().add(render);
 		Rectangle render2 = getVehicleRender(grid.getVehicleById(2));

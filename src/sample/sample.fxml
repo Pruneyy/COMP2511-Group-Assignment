@@ -5,17 +5,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.BorderPane?>
 
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Pane?>
 <BorderPane minHeight="350" minWidth="500" fx:id="game" fx:controller="sample.Controller"
 			xmlns:fx="http://javafx.com/fxml">
 	<center>
-		<StackPane fx:id="stackPane">
+		<Pane fx:id="stackPane">
 			<BorderPane.margin>
 				<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
 			</BorderPane.margin>
 			<GridPane fx:id="gameBoard" gridLinesVisible="true" hgap="2" vgap="2">
 			</GridPane>
-		</StackPane>
+		</Pane>
 	</center>
 	<right>
 		<VBox>
