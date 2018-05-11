@@ -9,7 +9,7 @@
 <BorderPane minHeight="350" minWidth="500" fx:id="game" fx:controller="sample.Controller"
 			xmlns:fx="http://javafx.com/fxml">
 	<center>
-		<Pane fx:id="stackPane">
+		<Pane fx:id="pane">
 			<BorderPane.margin>
 				<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
 			</BorderPane.margin>

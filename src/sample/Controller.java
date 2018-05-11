@@ -1,9 +1,13 @@
 package sample;
 
 
+import java.util.List;
+import java.util.function.BiFunction;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -19,7 +23,7 @@ public class Controller {
 	@FXML private BorderPane game;
 	@FXML private Button start;
 	@FXML private GridPane gameBoard;
-	@FXML private Pane stackPane;
+	@FXML private Pane pane;
 	private boolean startFlag = false;
 
 	private double mouseClickX;
@@ -61,30 +65,72 @@ public class Controller {
 
 	private Rectangle getVehicleRender(Vehicle v) {
 		int unitLength = 50;
-		int length = v.getLength() * unitLength + 2*(v.getLength()-1);
-		int width = 1 * unitLength;
+		int length;
+		int width;
+		BiFunction<MouseEvent, Rectangle, Integer> onMouseDrag;
+		BiFunction<MouseEvent, Rectangle, Integer> onMousePress;
+		BiFunction<MouseEvent, Rectangle, Integer> onMouseRelease;
+		
+		Vehicle.Orientation orient = v.getOrientation();
+		if (orient == Vehicle.Orientation.HORIZONTAL) {
+			onMouseDrag = (e,r) -> {
+				double deltaX = e.getSceneX() - mouseClickX;
+				r.setTranslateX(r.getTranslateX()+deltaX);
+				mouseClickX = e.getSceneX();
+				return 0;
+			};
+			onMousePress = (e,r) -> {
+				mouseClickX = e.getSceneX();
+				return 0;
+			};
+			
+			onMouseRelease = (e,r) -> {
+				return 0;
+			};
+			
+			length = v.getLength() * unitLength + 2*(v.getLength()-1);
+			width = 1 * unitLength;
+		} else {
+			onMouseDrag = (e,r) -> {
+				double deltaY = e.getSceneY() - mouseClickY;
+				r.setTranslateY(r.getTranslateY()+deltaY);
+				mouseClickY = e.getSceneY();
+				return 0;
+			};
+			onMousePress = (e,r) -> {
+				mouseClickY = e.getSceneY();
+				return 0;
+			};
+
+			onMouseRelease = (e,r) -> {
+				return 0;
+			};
+			length = 1 * unitLength ;
+			width = v.getLength() * unitLength + 2*(v.getLength()-1);
+		}
 		Rectangle rec = new Rectangle(length, width);
-		rec.relocate(0,0);
-		rec.setOnDragDetected(e -> {
+		
+		List<Coordinate> coords = v.getOccupiedSpaces();
+		int col = coords.get(0).getColIndex();
+		int row = coords.get(0).getRowIndex();
+		int colCoord = col * unitLength + 2*(col);
+		int rowCoord = row * unitLength + 2*(row);
+		rec.relocate(colCoord,rowCoord);
+		
+		/*rec.setOnDragDetected(e -> {
 			rec.setFill(Color.YELLOW);
-		});
+		});*/
 		rec.setOnMousePressed(e -> {
-			mouseClickX = e.getSceneX();
-			mouseClickY = e.getSceneY();
+			onMousePress.apply(e, rec);
 		});
 		rec.setOnMouseDragged(e -> {
-			double deltaX = e.getSceneX() - mouseClickX;
-			double deltaY = e.getSceneY() - mouseClickY;
-			rec.setTranslateX(rec.getTranslateX()+deltaX);
-			rec.setTranslateY(rec.getTranslateY()+deltaY);
-			mouseClickX = e.getSceneX();
-			mouseClickY = e.getSceneY();
+			onMouseDrag.apply(e, rec);
 		});
 		rec.setOnMouseReleased(e -> {
-			double deltaX = e.getSceneX();
+			onMouseRelease.apply(e, rec);
+			/*double deltaX = e.getSceneX();
 			double deltaY = e.getSceneY();
-			System.out.println("X: " + deltaX + " Y: " + deltaY + " ==== RecX: " + rec.getTranslateX() + " RecY: " + rec.getTranslateY());
-			
+			System.out.println("X: " + deltaX + " Y: " + deltaY + " ==== RecX: " + rec.getTranslateX() + " RecY: " + rec.getTranslateY());*/
 		});
 		return rec;
 	}
@@ -100,14 +146,10 @@ public class Controller {
 				gameBoard.add(rec, y, x);
 			}
 		}
-		stackPane.relocate(0, 0);
-		Circle circ = new Circle();
-		circ.setRadius(20);
-		circ.setFill(Color.GREEN);
-		stackPane.getChildren().add(circ);
-		Rectangle render = getVehicleRender(grid.getVehicleById(1));
-		stackPane.getChildren().add(render);
-		Rectangle render2 = getVehicleRender(grid.getVehicleById(2));
-		stackPane.getChildren().add(render2);
+		
+		for (Vehicle v : grid.getVehicles()) {
+			Rectangle render = getVehicleRender(v);
+			pane.getChildren().add(render);
+		}
 	}
 }

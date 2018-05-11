@@ -27,5 +27,13 @@ public class Coordinate {
             return new Coordinate(file, space);
         }
     }
+    
+    public int getColIndex() {
+    	return colIndex;
+    }
+    
+    public int getRowIndex() {
+    	return rowIndex;
+    }
 }
 
