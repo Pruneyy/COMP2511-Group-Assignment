@@ -55,18 +55,41 @@ public class Grid {
     public boolean moveVehicleBySteps(int vehicleId, int steps) {
 
         Vehicle vehicle = vehicles.get(vehicleId - 1);
+
         // Create a dummy and perform the move
         Vehicle dummyVehicle = vehicle.clone();
         dummyVehicle.move(steps);
-        // Check if vehicle is out of grid
-        if (dummyVehicle.getFirstSpaceOccupied() < 0 || dummyVehicle.getLastSpaceOccupied() >= GRID_SIZE) return false;
-        // Check collisions with the dummy
-        for (Vehicle v : this.vehicles) {
-            if (vehicle == v) continue;
-            if (dummyVehicle.collidesWith(v)) return false;
-        }
+
+        // Check if vehicle is valid
+        if (!vehicleIsValid(dummyVehicle)) return false;
+
         // If no collisions, move actual vehicle forward
         vehicle.move(steps);
+        return true;
+    }
+
+    /** index is the first space occupied for which the vehicle is to move to */
+    public boolean moveVehicleToIndex(int vehicleId, int index) {
+        Vehicle v = vehicles.get(vehicleId - 1);
+        int diff = index - v.getFirstSpaceOccupied();
+        while (diff != 0) {
+            if (diff < 0) {
+                if (!moveVehicleBySteps(vehicleId, -1)) return false;
+                diff += 1;
+            } else {
+                if (!moveVehicleBySteps(vehicleId, 1)) return false;
+                diff -=1;
+            }
+        }
+        return true;
+    }
+
+    private boolean vehicleIsValid(Vehicle vehicle) {
+        if (vehicle.getFirstSpaceOccupied() < 0 || vehicle.getLastSpaceOccupied() >= GRID_SIZE) return false;
+        for (Vehicle v : this.vehicles) {
+            if (vehicle.getCarId() == v.getCarId()) continue;
+            if (vehicle.collidesWith(v)) return false;
+        }
         return true;
     }
 

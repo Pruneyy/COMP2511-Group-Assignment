@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -21,9 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import sample.Vehicle.Orientation;
 
 public class Controller implements Initializable {
 
@@ -37,6 +34,8 @@ public class Controller implements Initializable {
 	@FXML private Pane pane;
 	@FXML private AnchorPane root;
 	private boolean startFlag = false;
+
+	private Grid grid;
 
 	private double mouseClickX;
 	private double mouseClickY;
@@ -52,10 +51,10 @@ public class Controller implements Initializable {
 			//GeneratorPuzzleService gps = new GeneratorPuzzleService();
 			//Grid g = gps.getNewPuzzle();
 			FilePuzzleService gps = new FilePuzzleService("Easy");
-			Grid g = gps.getNewPuzzle("3.txt");
+			grid = gps.getNewPuzzle("3.txt");
 
-			System.out.println(g);
-			makeGrid(g);
+			System.out.println(grid);
+			makeGrid(grid);
 			startFlag = true;
 			start.setText("New Game");
 		}
@@ -88,19 +87,15 @@ public class Controller implements Initializable {
 		BiConsumer<MouseEvent, Rectangle> onMouseRelease;
 		
 		Vehicle.Orientation orient = v.getOrientation();
-		onMouseDrag = getOnMouseDrag(orient);
-		onMousePress = getOnMousePress(orient);
-		onMouseRelease = getOnMouseRelease(orient);
+		onMouseDrag = getOnMouseDrag(v);
+		onMousePress = getOnMousePress(v);
+		onMouseRelease = getOnMouseRelease(v);
 		Rectangle rec = getRectangle(v);
-		
-		List<Coordinate> coords = v.getOccupiedSpaces();
-		int col = coords.get(0).getColIndex();
-		int row = coords.get(0).getRowIndex();
-		rec.relocate(getGridPos(col),getGridPos(row));
-		
-		/*rec.setOnDragDetected(e -> {
-			rec.setFill(Color.YELLOW);
-		});*/
+
+		snapRectangleToGrid(v, rec);
+
+//		rec.setOnDragDetected(e -> {
+//		});
 		rec.setOnMousePressed(e -> {
 			onMousePress.accept(e, rec);
 		});
@@ -109,16 +104,34 @@ public class Controller implements Initializable {
 		});
 		rec.setOnMouseReleased(e -> {
 			onMouseRelease.accept(e, rec);
-			/*double deltaX = e.getSceneX();
-			double deltaY = e.getSceneY();
-			System.out.println("X: " + deltaX + " Y: " + deltaY + " ==== RecX: " + rec.getTranslateX() + " RecY: " + rec.getTranslateY());*/
+//			double deltaX = e.getSceneX();
+//			double deltaY = e.getSceneY();
+//			System.out.println("X: " + deltaX + " Y: " + deltaY + " ==== RecX: " + rec.getTranslateX() + " RecY: " + rec.getTranslateY());
 		});
 		return rec;
 	}
 
+	private void snapRectangleToGrid(Vehicle v, Rectangle r) {
+		List<Coordinate> coords = v.getOccupiedSpaces();
+		int col = coords.get(0).getColIndex();
+		int row = coords.get(0).getRowIndex();
+		r.relocate(getGridPixelCoord(col), getGridPixelCoord(row));
+	}
 
-	private int getGridPos(int col) {
+
+	private int getGridPixelCoord(int col) {
 		return col * unitLength + 2*(col);
+	}
+
+	private double getGridCoord(double pixelCoord) {
+		return pixelCoord / (unitLength + 2.0);
+	}
+
+	private double getLayoutInGridCoords(double translationInPixels, double delta) {
+		if (delta < 0) {
+			return Math.floor(getGridCoord(translationInPixels));
+		}
+		return Math.ceil(getGridCoord(translationInPixels));
 	}
 
 	private Rectangle getRectangle(Vehicle v) {
@@ -135,21 +148,23 @@ public class Controller implements Initializable {
 		return new Rectangle(length, width);
 	}
 
-	private BiConsumer<MouseEvent, Rectangle> getOnMouseRelease(Orientation orient) {
+	private BiConsumer<MouseEvent, Rectangle> getOnMouseRelease(Vehicle v) {
 		BiConsumer<MouseEvent, Rectangle> onMouseRelease;
-		if (orient == Vehicle.Orientation.HORIZONTAL) {
+		if (v.getOrientation() == Vehicle.Orientation.HORIZONTAL) {
 			onMouseRelease = (e,r) -> {
+				snapRectangleToGrid(v, r);
 			};
 		} else {
 			onMouseRelease = (e,r) -> {
+				snapRectangleToGrid(v, r);
 			};
 		}
 		return onMouseRelease;
 	}
 
-	private BiConsumer<MouseEvent, Rectangle> getOnMousePress(Orientation orient) {
+	private BiConsumer<MouseEvent, Rectangle> getOnMousePress(Vehicle v) {
 		BiConsumer<MouseEvent, Rectangle> onMousePress;
-		if (orient == Vehicle.Orientation.HORIZONTAL) {
+		if (v.getOrientation() == Vehicle.Orientation.HORIZONTAL) {
 			onMousePress = (e,r) -> {
 				mouseClickX = e.getSceneX();
 			};
@@ -161,19 +176,27 @@ public class Controller implements Initializable {
 		return onMousePress;
 	}
 
-	private BiConsumer<MouseEvent, Rectangle> getOnMouseDrag(Vehicle.Orientation orient) {
+	private BiConsumer<MouseEvent, Rectangle> getOnMouseDrag(Vehicle v) {
 		BiConsumer<MouseEvent, Rectangle> onMouseDrag;
-		if (orient == Vehicle.Orientation.HORIZONTAL) {
+		if (v.getOrientation() == Vehicle.Orientation.HORIZONTAL) {
 			onMouseDrag = (e,r) -> {
 				double deltaX = e.getSceneX() - mouseClickX;
-				r.setTranslateX(r.getTranslateX()+deltaX);
 				mouseClickX = e.getSceneX();
+				if (!grid.moveVehicleToIndex(v.getCarId(), (int) getLayoutInGridCoords(r.getLayoutX(), deltaX))) {
+					snapRectangleToGrid(v, r);
+					return;
+				}
+				r.setLayoutX(r.getLayoutX() + deltaX);
 			};
 		} else {
 			onMouseDrag = (e,r) -> {
 				double deltaY = e.getSceneY() - mouseClickY;
-				r.setTranslateY(r.getTranslateY()+deltaY);
 				mouseClickY = e.getSceneY();
+				if (!grid.moveVehicleToIndex(v.getCarId(), (int) getLayoutInGridCoords(r.getLayoutY(), deltaY))) {
+					snapRectangleToGrid(v, r);
+					return;
+				}
+				r.setLayoutY(r.getLayoutY() + deltaY);
 			};
 		}
 		return onMouseDrag;
