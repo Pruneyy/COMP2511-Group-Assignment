@@ -16,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import sample.Vehicle.Orientation;
 
 public class Controller {
 
@@ -29,6 +30,7 @@ public class Controller {
 
 	private double mouseClickX;
 	private double mouseClickY;
+	private int unitLength = 50;
 
 	@FXML protected void handleButtonPress(ActionEvent event) {
 		System.out.println("Start Game");
@@ -65,52 +67,20 @@ public class Controller {
 	}
 
 	private Rectangle getVehicleRender(Vehicle v) {
-		int unitLength = 50;
-		int length;
-		int width;
 		BiConsumer<MouseEvent, Rectangle> onMouseDrag;
 		BiConsumer<MouseEvent, Rectangle> onMousePress;
 		BiConsumer<MouseEvent, Rectangle> onMouseRelease;
 		
 		Vehicle.Orientation orient = v.getOrientation();
-		if (orient == Vehicle.Orientation.HORIZONTAL) {
-			onMouseDrag = (e,r) -> {
-				double deltaX = e.getSceneX() - mouseClickX;
-				r.setTranslateX(r.getTranslateX()+deltaX);
-				mouseClickX = e.getSceneX();
-			};
-			onMousePress = (e,r) -> {
-				mouseClickX = e.getSceneX();
-			};
-			
-			onMouseRelease = (e,r) -> {
-			};
-			
-			length = v.getLength() * unitLength + 2*(v.getLength()-1);
-			width = 1 * unitLength;
-		} else {
-			onMouseDrag = (e,r) -> {
-				double deltaY = e.getSceneY() - mouseClickY;
-				r.setTranslateY(r.getTranslateY()+deltaY);
-				mouseClickY = e.getSceneY();
-			};
-			onMousePress = (e,r) -> {
-				mouseClickY = e.getSceneY();
-			};
-
-			onMouseRelease = (e,r) -> {
-			};
-			length = 1 * unitLength ;
-			width = v.getLength() * unitLength + 2*(v.getLength()-1);
-		}
-		Rectangle rec = new Rectangle(length, width);
+		onMouseDrag = getOnMouseDrag(orient);
+		onMousePress = getOnMousePress(orient);
+		onMouseRelease = getOnMouseRelease(orient);
+		Rectangle rec = getRectangle(v);
 		
 		List<Coordinate> coords = v.getOccupiedSpaces();
 		int col = coords.get(0).getColIndex();
 		int row = coords.get(0).getRowIndex();
-		int colCoord = col * unitLength + 2*(col);
-		int rowCoord = row * unitLength + 2*(row);
-		rec.relocate(colCoord,rowCoord);
+		rec.relocate(getGridPos(col),getGridPos(row));
 		
 		/*rec.setOnDragDetected(e -> {
 			rec.setFill(Color.YELLOW);
@@ -130,6 +100,68 @@ public class Controller {
 		return rec;
 	}
 
+
+	private int getGridPos(int col) {
+		return col * unitLength + 2*(col);
+	}
+
+	private Rectangle getRectangle(Vehicle v) {
+		int length;
+		int width;
+		Vehicle.Orientation orient = v.getOrientation();
+		if (orient == Vehicle.Orientation.HORIZONTAL) {
+			length = v.getLength() * unitLength + 2*(v.getLength()-1);
+			width = 1 * unitLength;
+		} else {
+			length = 1 * unitLength ;
+			width = v.getLength() * unitLength + 2*(v.getLength()-1);
+		}
+		return new Rectangle(length, width);
+	}
+
+	private BiConsumer<MouseEvent, Rectangle> getOnMouseRelease(Orientation orient) {
+		BiConsumer<MouseEvent, Rectangle> onMouseRelease;
+		if (orient == Vehicle.Orientation.HORIZONTAL) {
+			onMouseRelease = (e,r) -> {
+			};
+		} else {
+			onMouseRelease = (e,r) -> {
+			};
+		}
+		return onMouseRelease;
+	}
+
+	private BiConsumer<MouseEvent, Rectangle> getOnMousePress(Orientation orient) {
+		BiConsumer<MouseEvent, Rectangle> onMousePress;
+		if (orient == Vehicle.Orientation.HORIZONTAL) {
+			onMousePress = (e,r) -> {
+				mouseClickX = e.getSceneX();
+			};
+		} else {
+			onMousePress = (e,r) -> {
+				mouseClickY = e.getSceneY();
+			};
+		}
+		return onMousePress;
+	}
+
+	private BiConsumer<MouseEvent, Rectangle> getOnMouseDrag(Vehicle.Orientation orient) {
+		BiConsumer<MouseEvent, Rectangle> onMouseDrag;
+		if (orient == Vehicle.Orientation.HORIZONTAL) {
+			onMouseDrag = (e,r) -> {
+				double deltaX = e.getSceneX() - mouseClickX;
+				r.setTranslateX(r.getTranslateX()+deltaX);
+				mouseClickX = e.getSceneX();
+			};
+		} else {
+			onMouseDrag = (e,r) -> {
+				double deltaY = e.getSceneY() - mouseClickY;
+				r.setTranslateY(r.getTranslateY()+deltaY);
+				mouseClickY = e.getSceneY();
+			};
+		}
+		return onMouseDrag;
+	}
 
 	public void makeGrid(Grid grid) {
 		int [][] gridObj = grid.getGridObject();
