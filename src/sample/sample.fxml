@@ -1,29 +1,54 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.BorderPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<BorderPane minHeight="350" minWidth="500" fx:id="game" fx:controller="sample.Controller"
-			xmlns:fx="http://javafx.com/fxml">
-	<center>
-		<Pane fx:id="pane">
-			<BorderPane.margin>
-				<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-			</BorderPane.margin>
-			<GridPane fx:id="gameBoard" gridLinesVisible="true" hgap="2" vgap="2">
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane style="-fx-background-color: #b3b3b3;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <BorderPane fx:id="game" minHeight="350" minWidth="500" style="-fx-background-color: #b3b3b3;">
+      	<center>
+      		<Pane fx:id="pane">
+      			<BorderPane.margin>
+      				<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+      			</BorderPane.margin>
+      			<GridPane fx:id="gameBoard" gridLinesVisible="true" hgap="2" vgap="2">
 			</GridPane>
-		</Pane>
-	</center>
-	<right>
-		<VBox>
-			<BorderPane.margin>
-	             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-	        </BorderPane.margin>
-		    <Button fx:id="start" id="start" text="PLAY"
-		    	onAction="#handleButtonPress"/>
-		</VBox>
-	</right>
-</BorderPane>
+      		</Pane>
+      	</center>
+      	<right>
+      		<VBox>
+      			<BorderPane.margin>
+      	             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+      	        </BorderPane.margin>
+      		    <Button id="start" fx:id="start" mnemonicParsing="false" onAction="#handleButtonPress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Play">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+               </Button>
+               <Button id="start" fx:id="undo" mnemonicParsing="false" onAction="#handleButtonPress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Undo">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <VBox.margin>
+                     <Insets top="10.0" />
+                  </VBox.margin>
+               </Button>
+               <Button id="start" fx:id="quit" mnemonicParsing="false" onAction="#handleButtonPress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Quit">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <VBox.margin>
+                     <Insets top="10.0" />
+                  </VBox.margin>
+               </Button>
+      		</VBox>
+      	</right>
+      </BorderPane>
+   </children>
+</AnchorPane>

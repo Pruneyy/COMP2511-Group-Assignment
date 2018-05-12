@@ -1,20 +1,28 @@
 package sample;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.BiConsumer;
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import sample.Vehicle.Orientation;
 
 public class Controller implements Initializable {
@@ -23,8 +31,11 @@ public class Controller implements Initializable {
 
 	@FXML private BorderPane game;
 	@FXML private Button start;
+	@FXML private Button quit;
+	@FXML private Button undo;
 	@FXML private GridPane gameBoard;
 	@FXML private Pane pane;
+	@FXML private AnchorPane root;
 	private boolean startFlag = false;
 
 	private double mouseClickX;
@@ -32,12 +43,14 @@ public class Controller implements Initializable {
 	private int unitLength = 50;
 
 	@FXML public void initialize(URL url, ResourceBundle resourceBundle) {
+		if(!Main.isSplashLoaded) {
+			loadSplashScreen();
+		}
 		System.out.println("Start Game");
 		if (startFlag == false) {
 
 			//GeneratorPuzzleService gps = new GeneratorPuzzleService();
 			//Grid g = gps.getNewPuzzle();
-
 			FilePuzzleService gps = new FilePuzzleService("Easy");
 			Grid g = gps.getNewPuzzle("3.txt");
 
@@ -180,6 +193,44 @@ public class Controller implements Initializable {
 		for (Vehicle v : grid.getVehicles()) {
 			Rectangle render = getVehicleRender(v);
 			pane.getChildren().add(render);
+		}
+	}
+	
+	private void loadSplashScreen() {
+		try {
+			Main.isSplashLoaded = true;
+			StackPane sPane = FXMLLoader.load(getClass().getResource(("SplashScreen.fxml")));
+			game.getChildren().setAll(sPane);	
+			
+			FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), sPane);
+			fadeIn.setFromValue(1);
+			fadeIn.setToValue(0);
+			fadeIn.setCycleCount(1);
+			
+			FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), sPane);
+			fadeOut.setFromValue(0);
+			fadeOut.setToValue(1);
+			fadeOut.setCycleCount(1);
+			
+			fadeIn.play();
+			
+			fadeIn.setOnFinished((e)->{
+				fadeOut.play();
+			});
+			
+			fadeOut.setOnFinished((e) -> {
+				try {
+					AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("sample.fxml")));
+					game.getChildren().setAll(parentContent);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			});
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

@@ -17,6 +17,7 @@ import java.util.List;
 public class Main extends Application {
 
     public static Grid grid;
+    public static Boolean isSplashLoaded = false;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
