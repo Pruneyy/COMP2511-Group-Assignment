@@ -47,7 +47,7 @@ public class Controller implements Initializable {
 
 	@FXML public void initialize(URL url, ResourceBundle resourceBundle) {
 		if(!Main.isSplashLoaded) {
-			//loadSplashScreen();
+			loadSplashScreen();
 		}
 		if (startFlag == false) {
 			this.vehicleRenders = new ArrayList<Rectangle>();
@@ -78,7 +78,7 @@ public class Controller implements Initializable {
 
 	private void reset() {
 		this.gameBoard.getChildren().clear();
-		this.pane.getChildren().removeAll(this.vehicleRenders);
+		this.pane2.getChildren().removeAll(this.vehicleRenders);
 		this.vehicleRenders = new ArrayList<Rectangle>();
 	}
 
@@ -254,7 +254,7 @@ public class Controller implements Initializable {
 			StackPane sPane = FXMLLoader.load(getClass().getResource(("SplashScreen.fxml")));
 			game.getChildren().setAll(sPane);	
 			
-			FadeTransition fadeIn = new FadeTransition(Duration.seconds(5), sPane);
+			FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), sPane);
 			fadeIn.setFromValue(0);
 			fadeIn.setToValue(1);
 			fadeIn.setCycleCount(1);

@@ -1,5 +1,8 @@
 .rootPane {
-    -fx-background-image: url("background1.jpg");
+    -fx-background-image: url("background5.jpg");
+    -fx-background-size: 20%;
+    
+    
 }
 
 .panePane {
