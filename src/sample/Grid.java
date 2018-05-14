@@ -2,6 +2,8 @@ package sample;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Grid
@@ -14,9 +16,11 @@ public class Grid {
     static final int RED_ID = 1;
 
     private ArrayList<Vehicle> vehicles;
+    private ArrayList<Move> moves;
 
     public Grid() {
         this.vehicles = new ArrayList<>();
+        this.moves = new ArrayList<>();
     }
 
     /**
@@ -64,7 +68,7 @@ public class Grid {
         if (!vehicleIsValid(dummyVehicle)) return false;
 
         // If no collisions, move actual vehicle forward
-        vehicle.move(steps);
+        this.moves.add(vehicle.move(steps));
         return true;
     }
 
@@ -132,6 +136,21 @@ public class Grid {
 
     public ArrayList<Vehicle> getVehicles() {
         return vehicles;
+    }
+
+    public ArrayList<Move> getMoves() {
+        return moves;
+    }
+
+    public Vehicle undoLastVehicleMoves() {
+        if (this.moves.size() == 0) return null;
+        Vehicle vehicle = this.moves.get(this.moves.size() - 1).getVehicle();
+        int i;
+        for (i = this.moves.size() - 1; i >= 0 && this.moves.get(i).getVehicle() == vehicle; i--) {
+            this.moves.get(i).revert();
+        }
+        this.moves = new ArrayList<>(this.moves.subList(0, i + 1));
+        return vehicle;
     }
 }
 

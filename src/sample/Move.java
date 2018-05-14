@@ -22,5 +22,9 @@ public class Move {
         this.vehicle.move(-steps);
         this.steps = -this.steps;
     }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
 }
 

@@ -2,6 +2,7 @@ package sample;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.BiConsumer;
@@ -36,6 +37,7 @@ public class Controller implements Initializable {
 	private boolean startFlag = false;
 
 	private Grid grid;
+	private ArrayList<Rectangle> vehicleRenders;
 
 	private double mouseClickX;
 	private double mouseClickY;
@@ -50,18 +52,37 @@ public class Controller implements Initializable {
 
 			//GeneratorPuzzleService gps = new GeneratorPuzzleService();
 			//Grid g = gps.getNewPuzzle();
+			this.vehicleRenders = new ArrayList<Rectangle>();
 			FilePuzzleService gps = new FilePuzzleService("Easy");
 			grid = gps.getNewPuzzle("3.txt");
 
 			System.out.println(grid);
 			makeGrid(grid);
 			startFlag = true;
-			start.setText("New Game");
 		}
 	}
 
-	@FXML protected void handleButtonPress(ActionEvent event) {
+	@FXML protected void handleNewGamePress(ActionEvent event) {
 		// Make new game
+	}
+
+	@FXML protected void handleGenerateGamePress(ActionEvent event) {
+		// Make new game
+	}
+
+	@FXML protected void handleUndoPress(ActionEvent event) {
+		System.out.println(grid.getMoves());
+		Vehicle v = grid.undoLastVehicleMoves();
+		if (v != null) {
+			snapRectangleToGrid(v, vehicleRenders.get(v.getCarId() - 1));
+		}
+		System.out.println(grid.getMoves());
+		// undo
+	}
+
+	@FXML protected void handleQuitPress(ActionEvent event) {
+		// Exit game
+		System.exit(0);
 	}
 
 	public void makeGrid() {
@@ -81,7 +102,7 @@ public class Controller implements Initializable {
 		return rec;
 	}
 
-	private Rectangle getVehicleRender(Vehicle v) {
+	private Rectangle createVehicleRender(Vehicle v) {
 		BiConsumer<MouseEvent, Rectangle> onMouseDrag;
 		BiConsumer<MouseEvent, Rectangle> onMousePress;
 		BiConsumer<MouseEvent, Rectangle> onMouseRelease;
@@ -221,7 +242,8 @@ public class Controller implements Initializable {
 		}
 		
 		for (Vehicle v : grid.getVehicles()) {
-			Rectangle render = getVehicleRender(v);
+			Rectangle render = createVehicleRender(v);
+			this.vehicleRenders.add(render);
 			pane.getChildren().add(render);
 		}
 	}
