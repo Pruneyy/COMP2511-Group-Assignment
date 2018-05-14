@@ -60,7 +60,10 @@ public class GeneratorPuzzleService implements PuzzleService {
 //                if (Math.random() < 0.5) g.moveVehicleForward(g.getVehicleById(randomInt(2, this.noOfCars)));
 //                g.moveVehicleBackward(g.getVehicleById(randomInt(2, this.noOfCars)));
             }
-            if (checkValidPuzzle(g)) return g;
+            if (checkValidPuzzle(g)) {
+                g.getMoves().clear();
+                return g;
+            }
             stop++;
         }
         return null;

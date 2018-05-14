@@ -71,7 +71,6 @@ public class Controller implements Initializable {
 	private void initPuzzle(PuzzleService puzzleService) {
 		this.reset();
 		grid = puzzleService.getNewPuzzle(PuzzleService.Difficulty.EASY);
-		grid.getMoves().clear();
 		makeGrid(grid);
 	}
 
