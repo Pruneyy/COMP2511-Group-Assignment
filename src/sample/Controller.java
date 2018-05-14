@@ -31,6 +31,7 @@ public class Controller implements Initializable {
 	@FXML private Button start;
 	@FXML private Button quit;
 	@FXML private Button undo;
+	@FXML private Button generate;
 	@FXML private GridPane gameBoard;
 	@FXML private Pane pane;
 	@FXML private AnchorPane root;
@@ -252,14 +253,14 @@ public class Controller implements Initializable {
 			StackPane sPane = FXMLLoader.load(getClass().getResource(("SplashScreen.fxml")));
 			game.getChildren().setAll(sPane);	
 			
-			FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), sPane);
-			fadeIn.setFromValue(1);
-			fadeIn.setToValue(0);
+			FadeTransition fadeIn = new FadeTransition(Duration.seconds(5), sPane);
+			fadeIn.setFromValue(0);
+			fadeIn.setToValue(1);
 			fadeIn.setCycleCount(1);
 			
 			FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), sPane);
-			fadeOut.setFromValue(0);
-			fadeOut.setToValue(1);
+			fadeOut.setFromValue(1);
+			fadeOut.setToValue(0);
 			fadeOut.setCycleCount(1);
 			
 			fadeIn.play();
