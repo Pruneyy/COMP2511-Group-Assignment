@@ -1,12 +1,5 @@
 package sample;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.function.BiConsumer;
-
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,18 +7,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.function.BiConsumer;
+
 public class Controller implements Initializable {
 
+	private static Integer RED_CAR_ID = 1;		// the ID of the red car
+	private static Integer RED_HEAD_COLUMN = 5; // the column location the head of the red car must be to finish the game
+	private static Integer RED_TAIL_COLUMN = 4; // the column location the tail of the red car must be to finish the game
 	private static final Color[] colors = {Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.PURPLE, Color.BROWN, Color.AQUAMARINE, Color.SALMON, Color.GRAY};
 
 	@FXML private BorderPane game;
@@ -142,8 +141,29 @@ public class Controller implements Initializable {
 		int col = coords.get(0).getColIndex();
 		int row = coords.get(0).getRowIndex();
 		r.relocate(getGridPixelCoord(col), getGridPixelCoord(row));
+
+		// Will check if the red car is in the winning spaces when it is moved
+		if (v.getCarId() == RED_CAR_ID) {
+			checkForWin(grid);
+		}
 	}
 
+	private void checkForWin(Grid grid) {
+		Vehicle redCar = grid.getVehicleById(RED_CAR_ID);
+		Coordinate redCarHead = redCar.getOccupiedSpaces().get(1);
+		Coordinate redCarTail = redCar.getOccupiedSpaces().get(0);
+
+		// ===== DEBUGGING =====
+//		System.out.println("HEAD: " + redCarHead);
+//		System.out.println("TAIL: " + redCarTail);
+		// ===== END DEBUG =====
+
+		if (redCarHead.getColIndex() == RED_HEAD_COLUMN && redCarTail.getColIndex() == RED_TAIL_COLUMN) {
+			System.out.println("CONGRATULATIONS YOU WON!!!");
+			//ADD CODE FOR VICTORY SCREEN HERE
+		}
+
+	}
 
 	private int getGridPixelCoord(int col) {
 		return col * unitLength + 2*(col);
@@ -191,6 +211,10 @@ public class Controller implements Initializable {
 				snapRectangleToGrid(v, r);
 			};
 		}
+
+		// This will only enter when the red car was moved as the red car
+		// has to be moved to final position last
+
 		return onMouseRelease;
 	}
 
