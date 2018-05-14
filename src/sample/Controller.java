@@ -34,6 +34,7 @@ public class Controller implements Initializable {
 	@FXML private Button generate;
 	@FXML private GridPane gameBoard;
 	@FXML private Pane pane;
+	@FXML private Pane pane2;
 	@FXML private AnchorPane root;
 	private boolean startFlag = false;
 
@@ -46,7 +47,7 @@ public class Controller implements Initializable {
 
 	@FXML public void initialize(URL url, ResourceBundle resourceBundle) {
 		if(!Main.isSplashLoaded) {
-			loadSplashScreen();
+			//loadSplashScreen();
 		}
 		if (startFlag == false) {
 			this.vehicleRenders = new ArrayList<Rectangle>();
@@ -243,7 +244,7 @@ public class Controller implements Initializable {
 		for (Vehicle v : grid.getVehicles()) {
 			Rectangle render = createVehicleRender(v);
 			this.vehicleRenders.add(render);
-			pane.getChildren().add(render);
+			pane2.getChildren().add(render);
 		}
 	}
 	
