@@ -47,17 +47,13 @@ public class Controller implements Initializable {
 		if(!Main.isSplashLoaded) {
 			loadSplashScreen();
 		}
-		System.out.println("Start Game");
 		if (startFlag == false) {
-
-			//GeneratorPuzzleService gps = new GeneratorPuzzleService();
-			//Grid g = gps.getNewPuzzle();
 			this.vehicleRenders = new ArrayList<Rectangle>();
-			FilePuzzleService gps = new FilePuzzleService("Easy");
-			grid = gps.getNewPuzzle("3.txt");
+			this.initPuzzle(new GeneratorPuzzleService());
+//			FilePuzzleService gps = new FilePuzzleService("Easy");
+//			grid = gps.getNewPuzzle("3.txt");
 
 			System.out.println(grid);
-			makeGrid(grid);
 			startFlag = true;
 		}
 	}
@@ -68,6 +64,21 @@ public class Controller implements Initializable {
 
 	@FXML protected void handleGenerateGamePress(ActionEvent event) {
 		// Make new game
+		this.initPuzzle(new GeneratorPuzzleService());
+
+	}
+
+	private void initPuzzle(PuzzleService puzzleService) {
+		this.reset();
+		grid = puzzleService.getNewPuzzle(PuzzleService.Difficulty.EASY);
+		grid.getMoves().clear();
+		makeGrid(grid);
+	}
+
+	private void reset() {
+		this.gameBoard.getChildren().clear();
+		this.pane.getChildren().removeAll(this.vehicleRenders);
+		this.vehicleRenders = new ArrayList<Rectangle>();
 	}
 
 	@FXML protected void handleUndoPress(ActionEvent event) {
@@ -85,20 +96,10 @@ public class Controller implements Initializable {
 		System.exit(0);
 	}
 
-	public void makeGrid() {
-		for(int i = 0; i < 6; i++) {
-			for(int j = 0; j < 6; j++) {
-				Rectangle rec = new Rectangle();
-				if ((i%2 == 0 && j%2 == 0) || (i%2 != 0 && j%2 != 0)) rec.setFill(Color.AQUAMARINE);
-				gameBoard.add(rec, i, j);
-			}
-		}
-	}
-
-	private Rectangle getGridTile(int id) {
+	private Rectangle getGridTile() {
 		Rectangle rec = new Rectangle();
-		rec.setWidth(50);
-		rec.setHeight(50);
+		rec.setWidth(unitLength);
+		rec.setHeight(unitLength);
 		return rec;
 	}
 
@@ -231,11 +232,9 @@ public class Controller implements Initializable {
 	}
 
 	public void makeGrid(Grid grid) {
-		int [][] gridObj = grid.getGridObject();
 		for (int x = 0; x < grid.GRID_SIZE; x++) {
 			for (int y = 0; y < grid.GRID_SIZE; y++) {
-				int gridVal = gridObj[y][x];
-				Rectangle rec = getGridTile(gridVal);
+				Rectangle rec = getGridTile();
 				rec.setFill(Color.LIGHTGRAY);
 				gameBoard.add(rec, y, x);
 			}

@@ -67,7 +67,7 @@ public class Main extends Application {
     public static void testPuzzleGenerator() {
         System.out.println("testing Grid.addVehicle");
         GeneratorPuzzleService puzzleGenerator = new GeneratorPuzzleService();
-        Main.grid = puzzleGenerator.getNewPuzzle();
+        Main.grid = puzzleGenerator.getNewPuzzle(PuzzleService.Difficulty.EASY);
         if (Main.grid == null) {
             System.err.println("The generator failed to generate a puzzle, try using less vehicles or something");
             return;

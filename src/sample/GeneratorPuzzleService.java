@@ -47,7 +47,7 @@ public class GeneratorPuzzleService implements PuzzleService {
         return g;
     }
 
-    public Grid getNewPuzzle() {
+    public Grid getNewPuzzle(Difficulty d) {
         // We could just use an infinite loop, but better not - handle the null case instead
         int stop = 0;
         while (stop < GENERATOR_ITERATIONS) {
