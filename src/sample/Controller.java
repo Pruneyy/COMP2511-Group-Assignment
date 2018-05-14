@@ -21,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class Controller implements Initializable {
@@ -36,6 +37,7 @@ public class Controller implements Initializable {
 	@FXML private Pane pane;
 	@FXML private Pane pane2;
 	@FXML private AnchorPane root;
+	@FXML private Text title;
 	private boolean startFlag = false;
 
 	private Grid grid;
@@ -254,12 +256,12 @@ public class Controller implements Initializable {
 			StackPane sPane = FXMLLoader.load(getClass().getResource(("SplashScreen.fxml")));
 			game.getChildren().setAll(sPane);	
 			
-			FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), sPane);
+			FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), sPane.lookup(".tie"));
 			fadeIn.setFromValue(0);
 			fadeIn.setToValue(1);
 			fadeIn.setCycleCount(1);
 			
-			FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), sPane);
+			FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), sPane.lookup(".tie"));
 			fadeOut.setFromValue(1);
 			fadeOut.setToValue(0);
 			fadeOut.setCycleCount(1);

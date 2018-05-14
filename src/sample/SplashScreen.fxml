@@ -15,7 +15,7 @@
          </image>
       </ImageView>
       <Pane opacity="0.2" prefHeight="379.0" prefWidth="549.0" style="-fx-background-color: #000000;" />
-      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Gridlock!">
+      <Text fx:id="title" styleClass="tie" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Gridlock!">
          <font>
             <Font size="56.0" />
          </font>
