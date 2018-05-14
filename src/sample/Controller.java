@@ -6,9 +6,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -21,6 +24,8 @@ import java.util.ResourceBundle;
 import java.util.function.BiConsumer;
 
 public class Controller implements Initializable {
+
+	public static int UNIT_LENGTH = 50;
 
 	private static Integer RED_CAR_ID = 1;		// the ID of the red car
 	private static Integer RED_HEAD_COLUMN = 5; // the column location the head of the red car must be to finish the game
@@ -44,11 +49,10 @@ public class Controller implements Initializable {
 
 	private double mouseClickX;
 	private double mouseClickY;
-	private int unitLength = 50;
 
 	@FXML public void initialize(URL url, ResourceBundle resourceBundle) {
 		if(!Main.isSplashLoaded) {
-			loadSplashScreen();
+//			loadSplashScreen();
 		}
 		if (startFlag == false) {
 			this.vehicleRenders = new ArrayList<Rectangle>();
@@ -101,8 +105,8 @@ public class Controller implements Initializable {
 
 	private Rectangle getGridTile() {
 		Rectangle rec = new Rectangle();
-		rec.setWidth(unitLength);
-		rec.setHeight(unitLength);
+		rec.setWidth(UNIT_LENGTH);
+		rec.setHeight(UNIT_LENGTH);
 		return rec;
 	}
 
@@ -111,12 +115,11 @@ public class Controller implements Initializable {
 		BiConsumer<MouseEvent, Rectangle> onMousePress;
 		BiConsumer<MouseEvent, Rectangle> onMouseRelease;
 		
-		Vehicle.Orientation orient = v.getOrientation();
 		onMouseDrag = getOnMouseDrag(v);
 		onMousePress = getOnMousePress(v);
 		onMouseRelease = getOnMouseRelease(v);
-		Rectangle rec = getRectangle(v);
-		rec.setFill(colors[v.getCarId()]);
+		Rectangle rec = new VehicleView(v).getRec();
+//		rec.setFill(colors[v.getCarId()]);
 
 		snapRectangleToGrid(v, rec);
 
@@ -167,11 +170,11 @@ public class Controller implements Initializable {
 	}
 
 	private int getGridPixelCoord(int col) {
-		return col * unitLength + 2*(col);
+		return col * UNIT_LENGTH + 2*(col);
 	}
 
 	private double getGridCoord(double pixelCoord) {
-		return pixelCoord / (unitLength + 2.0);
+		return pixelCoord / (UNIT_LENGTH + 2.0);
 	}
 
 	/**
@@ -185,20 +188,6 @@ public class Controller implements Initializable {
 			return Math.floor(getGridCoord(translationInPixels - 1));
 		}
 		return Math.ceil(getGridCoord(translationInPixels + 1));
-	}
-
-	private Rectangle getRectangle(Vehicle v) {
-		int length;
-		int width;
-		Vehicle.Orientation orient = v.getOrientation();
-		if (orient == Vehicle.Orientation.HORIZONTAL) {
-			length = v.getLength() * unitLength + 2*(v.getLength()-1);
-			width = 1 * unitLength;
-		} else {
-			length = 1 * unitLength ;
-			width = v.getLength() * unitLength + 2*(v.getLength()-1);
-		}
-		return new Rectangle(length, width);
 	}
 
 	private BiConsumer<MouseEvent, Rectangle> getOnMouseRelease(Vehicle v) {
