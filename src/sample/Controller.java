@@ -136,9 +136,9 @@ public class Controller implements Initializable {
 	 */
 	private double getLayoutInGridCoords(double translationInPixels, double delta) {
 		if (delta < 0) {
-			return Math.floor(getGridCoord(translationInPixels) - 0.1);
+			return Math.floor(getGridCoord(translationInPixels - 1));
 		}
-		return Math.ceil(getGridCoord(translationInPixels) + 0.1);
+		return Math.ceil(getGridCoord(translationInPixels + 1));
 	}
 
 	private Rectangle getRectangle(Vehicle v) {
