@@ -1,3 +1,7 @@
 .rootPane {
     -fx-background-image: url("background1.jpg");
 }
+
+.panePane {
+	-fx-background-image: url("background3.jpg");
+}

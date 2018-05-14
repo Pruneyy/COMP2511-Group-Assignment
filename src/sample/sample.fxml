@@ -13,7 +13,7 @@
    <children>
       <BorderPane fx:id="game" minHeight="350" minWidth="500">
       	<center>
-            <Pane fx:id="pane" prefHeight="320.0" prefWidth="320.0" style="-fx-background-color: white;">
+            <Pane styleClass="panePane" fx:id="pane" prefHeight="320.0" prefWidth="320.0">
                 <BorderPane.margin>
                     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                 </BorderPane.margin>
