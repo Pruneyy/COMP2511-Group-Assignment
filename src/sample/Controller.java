@@ -128,6 +128,12 @@ public class Controller implements Initializable {
 		return pixelCoord / (unitLength + 2.0);
 	}
 
+	/**
+	 * Computes the next grid position of the rectangle, given it's current position and mouse movement
+	 * @param translationInPixels The file position of a rectangle, in pixel coordinates
+	 * @param delta The change in movement of the mouse
+	 * @return The file position of a rectangle, in grid coordinates
+	 */
 	private double getLayoutInGridCoords(double translationInPixels, double delta) {
 		if (delta < 0) {
 			return Math.floor(getGridCoord(translationInPixels) - 0.1);
