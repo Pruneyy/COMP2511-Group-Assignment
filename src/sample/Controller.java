@@ -91,6 +91,7 @@ public class Controller implements Initializable {
 		onMousePress = getOnMousePress(v);
 		onMouseRelease = getOnMouseRelease(v);
 		Rectangle rec = getRectangle(v);
+		rec.setFill(colors[v.getCarId()]);
 
 		snapRectangleToGrid(v, rec);
 
