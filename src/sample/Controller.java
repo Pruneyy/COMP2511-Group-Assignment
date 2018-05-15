@@ -25,7 +25,7 @@ public class Controller implements Initializable {
 	private static Integer RED_CAR_ID = 1;		// the ID of the red car
 	private static Integer RED_HEAD_COLUMN = 5; // the column location the head of the red car must be to finish the game
 	private static Integer RED_TAIL_COLUMN = 4; // the column location the tail of the red car must be to finish the game
-	private static final Color[] colors = {Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.PURPLE, Color.BROWN, Color.AQUAMARINE, Color.SALMON, Color.GRAY};
+	private static final Color[] colors = {Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.PURPLE, Color.BROWN, Color.AQUAMARINE, Color.SALMON, Color.YELLOW, Color.DEEPPINK, Color.ORANGE, Color.FUCHSIA, Color.NAVY, Color.SPRINGGREEN};
 
 	@FXML private BorderPane game;
 	@FXML private Button start;
@@ -56,7 +56,7 @@ public class Controller implements Initializable {
 //			FilePuzzleService gps = new FilePuzzleService("Easy");
 //			grid = gps.getNewPuzzle("3.txt");
 
-			System.out.println(grid);
+			//System.out.println(grid);
 			startFlag = true;
 		}
 	}

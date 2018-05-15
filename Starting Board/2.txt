@@ -1,4 +1,4 @@
-# Difficulty Medium (puzzle board - Medium 1)
+# Difficulty Easy (puzzle board - Easy 2)
 # Keyword, car ID, orientation, Row/Col number (1 - 6), starting block (1 - 6),length of vehicle
 Set 0 H 3 4 2	#RED
 Set 1 V 6 1 3	#YELLOW
