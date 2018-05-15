@@ -2,14 +2,21 @@ package sample;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Scanner;
 
-public class FilePuzzleService {
+import sample.PuzzleService.Difficulty;
+
+public class FilePuzzleService implements PuzzleService {
 	private MoveSet moveSet;	//keeps track of all movements
 	private MoveSet solution;
+	Random rand = new Random();
+	
+	//(edbert) increase this number as more preloaded puzzles are created
+	int randomNum = rand.nextInt(3) + 1;
 	
 	
-	public FilePuzzleService(String difficulty) {
+	public FilePuzzleService() {
 		// TODO Auto-generated constructor stub
 		this.moveSet = new MoveSet();
 		this.solution = new MoveSet();
@@ -21,11 +28,13 @@ public class FilePuzzleService {
 	 * @param input file which provides the initial composition of the puzzle
 	 * @return a grid for the UI to display
 	 */
-	public Grid getNewPuzzle(String input){
+	public Grid getNewPuzzle(Difficulty d){
+		String input = randomNum + ".txt";
+		System.out.print(input);
         Grid puzzle = new Grid();
 		Scanner sc = null;
 	      try
-	      {
+	      { 
 	          sc = new Scanner(new File(input));
 	          String keyword;
 	          int carId;
@@ -50,7 +59,7 @@ public class FilePuzzleService {
 	        			  colNumber = sc.nextInt() -1;
 	        			  rowNumber = sc.nextInt() -1;
 	        		  }
-        			  System.out.println("ORIENTATION = " + orientation);
+        			  //System.out.println("ORIENTATION = " + orientation);
 
 	        		  length = sc.nextInt() -1;
 	        		  
@@ -58,13 +67,13 @@ public class FilePuzzleService {
 	        		  if(orientation.equals("H")){
 	        			  Vehicle v = new Vehicle(carId, Vehicle.Orientation.HORIZONTAL, rowNumber, colNumber,(colNumber +length));
 	        			  boolean b = puzzle.addVehicle(v);
-	        			  System.out.println("VEHICLE Horizontal V ADDED (CHECK: " + b);
+	        			  //System.out.println("VEHICLE Horizontal V ADDED (CHECK: " + b);
 
 
 	        		  }else if(orientation.equals("V")){
 	        			  Vehicle v = new Vehicle(carId, Vehicle.Orientation.VERTICAL, colNumber, rowNumber,(rowNumber +length));
 	        			  boolean b = puzzle.addVehicle(v);
-	        			  System.out.println("VEHICLE Vertical V ADDED (CHECK:" + b);
+	        			  //System.out.println("VEHICLE Vertical V ADDED (CHECK:" + b);
 
 
 	        		  }

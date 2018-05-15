@@ -33,8 +33,8 @@ public class Main extends Application {
         //testVehicleCollisions();
         //testPuzzleGenerator();
         launch(args);
-		//FilePuzzleService test = new FilePuzzleService("Easy");
-		//test.getNewPuzzle("1.txt");
+		//FilePuzzleService test = new FilePuzzleService();
+		//test.getNewPuzzle(PuzzleService.Difficulty.EASY);
 		
     }
 

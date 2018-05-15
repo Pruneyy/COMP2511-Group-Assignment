@@ -62,11 +62,12 @@ public class Controller implements Initializable {
 	}
 
 	@FXML protected void handleNewGamePress(ActionEvent event) {
-		// Make new game
+		// Make new game from the bank of pre-loaded puzzles
+		this.initPuzzle(new FilePuzzleService());
 	}
 
 	@FXML protected void handleGenerateGamePress(ActionEvent event) {
-		// Make new game
+		// Make new game using the generator algorithm
 		this.initPuzzle(new GeneratorPuzzleService());
 
 	}

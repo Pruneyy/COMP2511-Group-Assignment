@@ -32,7 +32,7 @@
                 <BorderPane.margin>
                     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                 </BorderPane.margin>
-                <Button id="start" fx:id="start" mnemonicParsing="false" onAction="#handleNewGamePress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="New Game">
+                <Button id="start" fx:id="start" mnemonicParsing="false" onAction="#handleNewGamePress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="New Puzzle">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
