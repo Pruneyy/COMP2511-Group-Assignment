@@ -18,6 +18,7 @@ public class Main extends Application {
 
     public static Grid grid;
     public static Boolean isSplashLoaded = false;
+    public static Boolean isVictoryLoaded = false;
 
     @Override
     public void start(Stage primaryStage) throws Exception{

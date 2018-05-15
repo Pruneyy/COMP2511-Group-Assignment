@@ -52,7 +52,7 @@ public class Controller implements Initializable {
 
 	@FXML public void initialize(URL url, ResourceBundle resourceBundle) {
 		if(!Main.isSplashLoaded) {
-//			loadSplashScreen();
+			loadSplashScreen();
 		}
 		if (startFlag == false) {
 			this.vehicleRenders = new ArrayList<Rectangle>();
@@ -165,6 +165,7 @@ public class Controller implements Initializable {
 		if (redCarHead.getColIndex() == RED_HEAD_COLUMN && redCarTail.getColIndex() == RED_TAIL_COLUMN) {
 			System.out.println("CONGRATULATIONS YOU WON!!!");
 			//ADD CODE FOR VICTORY SCREEN HERE
+			loadVictoryScreen();
 		}
 
 	}
@@ -295,6 +296,44 @@ public class Controller implements Initializable {
 					e1.printStackTrace();
 				}
 			});
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void loadVictoryScreen() {
+		try {
+			Main.isVictoryLoaded = true;
+			StackPane sPane = FXMLLoader.load(getClass().getResource(("VictoryScreen.fxml")));
+			game.getChildren().setAll(sPane);	
+			
+			FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), sPane.lookup(".tie"));
+			fadeIn.setFromValue(0);
+			fadeIn.setToValue(1);
+			fadeIn.setCycleCount(1);
+			
+			FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), sPane.lookup(".tie"));
+			fadeOut.setFromValue(1);
+			fadeOut.setToValue(0);
+			fadeOut.setCycleCount(1);
+			
+			fadeIn.play();
+			
+			fadeIn.setOnFinished((e)->{
+				fadeOut.play();
+			});
+			
+//			fadeOut.setOnFinished((e) -> {
+//				try {
+//					AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("sample.fxml")));
+//					game.getChildren().setAll(parentContent);
+//				} catch (IOException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//			});
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
