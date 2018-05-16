@@ -56,7 +56,7 @@ public class Controller implements Initializable {
 		}
 		if (startFlag == false) {
 			this.vehicleRenders = new ArrayList<Rectangle>();
-			this.initPuzzle(new GeneratorPuzzleService());
+			this.initPuzzle(new FilePuzzleService());
 //			FilePuzzleService gps = new FilePuzzleService("Easy");
 //			grid = gps.getNewPuzzle("3.txt");
 
