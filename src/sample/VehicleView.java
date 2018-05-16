@@ -11,10 +11,10 @@ import java.util.List;
 
 public class VehicleView {
     private Vehicle v;
-    private enum colorNames {
-        RED, YELLOW, BLUE, GREEN, ORANGE, PURPLE, PINK, GREY, NAVY, BROWN, BLACK, WHITE, CYAN 
+    private enum colorName {
+        RANDOM, RED, YELLOW, BLUE, GREEN, ORANGE, PURPLE, PINK, GREY, NAVY, BROWN, BLACK, WHITE, CYAN
     }
-    private static final List<colorNames> COLORS = Arrays.asList(colorNames.values());
+    private static final List<colorName> COLORS = Arrays.asList(colorName.values());
 
     public VehicleView(Vehicle v) {
         this.v = v;
@@ -38,9 +38,11 @@ public class VehicleView {
     }
 
     public ColorAdjust getColorizer() {
-        int color = v.getCarId() - 1;
+        int index = v.getCarId();
         ColorAdjust colorizer = new ColorAdjust();
-        switch (COLORS.get(color)) {
+        colorName color = (v.getCarId() < COLORS.size()) ? COLORS.get(index) : colorName.RANDOM;
+
+        switch (color) {
             case RED:
                 colorizer.setHue(0.0);
                 colorizer.setSaturation(0.8);
@@ -101,10 +103,11 @@ public class VehicleView {
                 colorizer.setHue(1);
                 colorizer.setSaturation(1);
                 return colorizer;
+            case RANDOM:
             default:
                 // Attempt to generate non-red colors
                 double hue;
-                while (Math.abs((hue = Math.random())) < 0.2) {
+                while (Math.abs((hue = Math.random() * 2.0 - 1)) < 0.02) {
                 }
                 colorizer.setHue(hue);
                 colorizer.setSaturation(Math.random());
