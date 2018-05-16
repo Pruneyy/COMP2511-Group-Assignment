@@ -1,10 +1,10 @@
 .rootPane {
-    -fx-background-image: url("background5.jpg");
+    -fx-background-image: url("MainGameBackground.jpg");
     -fx-background-size: 20%;
     
     
 }
 
 .panePane {
-	-fx-background-image: url("background3.jpg");
+	-fx-background-image: url("GridBorderBackground.jpg");
 }

@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="376.0" fitWidth="523.0" pickOnBounds="false">
          <image>
-            <Image url="@background1.jpg" />
+            <Image url="@SplashBackground.jpg" />
          </image>
       </ImageView>
       <Pane opacity="0.2" prefHeight="379.0" prefWidth="549.0" style="-fx-background-color: #000000;" />
