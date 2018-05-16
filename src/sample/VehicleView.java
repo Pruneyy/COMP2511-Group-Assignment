@@ -79,8 +79,8 @@ public class VehicleView {
                 return colorizer;
             case NAVY:
                 colorizer.setHue(-0.7);
-                colorizer.setSaturation(1);
-                colorizer.setBrightness(-0.25);
+                colorizer.setSaturation(-1);
+                colorizer.setBrightness(0);
                 return colorizer;
             case BROWN:
                 colorizer.setHue(0.0);
