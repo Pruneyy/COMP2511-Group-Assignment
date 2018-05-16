@@ -71,16 +71,17 @@ public class VehicleView {
                 colorizer.setSaturation(1);
                 return colorizer;
             case PURPLE:
-                colorizer.setHue(-0.55);
+                colorizer.setHue(-0.3);
                 colorizer.setSaturation(1);
+                colorizer.setBrightness(-0.5);
                 return colorizer;
             case GREY:
                 colorizer.setBrightness(-0.5);
                 return colorizer;
             case NAVY:
                 colorizer.setHue(-0.7);
-                colorizer.setSaturation(-1);
-                colorizer.setBrightness(0);
+                colorizer.setSaturation(0.7);
+                colorizer.setBrightness(-0.5);
                 return colorizer;
             case BROWN:
                 colorizer.setHue(0.0);
