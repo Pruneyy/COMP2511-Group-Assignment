@@ -9,9 +9,9 @@
 
 <StackPane fx:id="rootPane" layoutX="250.0" layoutY="180.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="508.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SplashScreenController">
    <children>
-      <ImageView fitHeight="376.0" fitWidth="523.0" pickOnBounds="false">
+      <ImageView fitHeight="376.0" fitWidth="523.0" pickOnBounds="false" >
          <image>
-            <Image url="File:../../Images/SplashBackground.jpg" />
+            <Image url="@../Images/SplashBackground.jpg"/>
          </image>
       </ImageView>
       <Pane opacity="0.2" prefHeight="379.0" prefWidth="549.0" style="-fx-background-color: #000000;" />

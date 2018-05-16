@@ -28,7 +28,7 @@ public class FilePuzzleService implements PuzzleService {
 	 * @return a grid for the UI to display
 	 */
 	public Grid getNewPuzzle(Difficulty d){
-		String input = "Starting Board/" + returnRandom() + ".txt";
+		String input = "src/Starting Board/" + returnRandom() + ".txt";
 		//System.out.print(input +"\n");
         Grid puzzle = new Grid();
 		Scanner sc = null;

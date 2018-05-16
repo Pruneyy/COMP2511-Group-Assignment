@@ -28,9 +28,9 @@ public class VehicleView {
         if (v.getOrientation() == Vehicle.Orientation.HORIZONTAL) {
             rec.getTransforms().add(new Rotate(-90, 25, 25));
         }
-        Image img = new Image("File:././Images/car.png");
+        Image img = new Image("File:./src/Images/car.png");
         if (v.getLength() == 3) {
-            img = new Image("File:././Images/truck.png");
+            img = new Image("File:./src/Images/truck.png");
         }
         rec.setEffect(this.getColorizer());
         rec.setFill(new ImagePattern(img));
