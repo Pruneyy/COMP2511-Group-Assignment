@@ -5,7 +5,6 @@ package sample;
  * @author dong
  */
 public class GeneratorPuzzleService implements PuzzleService {
-    private static final int GENERATOR_ITERATIONS = 100;
     private static final int STEP_ITERATIONS = 1000;
     private MoveSet moveSet; //TODO (dong): Keep track of moves when generating the puzzle
     private int noOfCars;
@@ -49,24 +48,18 @@ public class GeneratorPuzzleService implements PuzzleService {
 
     public Grid getNewPuzzle(Difficulty d) {
         // We could just use an infinite loop, but better not - handle the null case instead
-        int stop = 0;
-        while (stop < GENERATOR_ITERATIONS) {
+        while (true) {
             Grid g = generateEndState();
             for (int i = 0; i < STEP_ITERATIONS; i++) {
                 if (this.moveVehicleAndTrack(1, -1, g)) continue;
-
                 // No better actions to take, move a vehicle at random
                 this.moveVehicleAndTrack(randomInt(2, this.noOfCars), randomInt(-1, 1), g);
-//                if (Math.random() < 0.5) g.moveVehicleForward(g.getVehicleById(randomInt(2, this.noOfCars)));
-//                g.moveVehicleBackward(g.getVehicleById(randomInt(2, this.noOfCars)));
             }
             if (checkValidPuzzle(g)) {
                 g.getMoves().clear();
                 return g;
             }
-            stop++;
         }
-        return null;
     }
 
     public void solve() {
