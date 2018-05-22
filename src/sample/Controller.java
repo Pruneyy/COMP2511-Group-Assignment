@@ -13,6 +13,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -250,10 +251,17 @@ public class Controller implements Initializable {
 	}
 
 	public void makeGrid(Grid grid) {
+		Image img = new Image("Images/MrCat.jpg");
 		for (int x = 0; x < grid.GRID_SIZE; x++) {
 			for (int y = 0; y < grid.GRID_SIZE; y++) {
 				Rectangle rec = getGridTile();
-				rec.setFill(Color.LIGHTGRAY);
+				if (x == 2 && (y == 4 || y == 5)) {
+					rec.setStrokeType(StrokeType.INSIDE);
+					rec.setStroke(Color.BLACK);
+					rec.setFill(new ImagePattern(img));
+				} else {
+					rec.setFill(Color.LIGHTGRAY);
+				}
 				gameBoard.add(rec, y, x);
 			}
 		}
