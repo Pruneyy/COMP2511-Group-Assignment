@@ -26,6 +26,7 @@ public class Main extends Application {
         primaryStage.setTitle("Grid Lock!");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
+        primaryStage.sizeToScene();
         primaryStage.show();
     }
 

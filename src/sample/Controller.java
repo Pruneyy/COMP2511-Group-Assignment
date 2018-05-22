@@ -268,7 +268,7 @@ public class Controller implements Initializable {
 	private void loadSplashScreen() {
 		try {
 			Main.isSplashLoaded = true;
-			StackPane sPane = FXMLLoader.load(getClass().getResource(("SplashScreen.fxml")));
+			AnchorPane sPane = FXMLLoader.load(getClass().getResource(("SplashScreen.fxml")));
 			game.getChildren().setAll(sPane);	
 			
 			FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.5), sPane.lookup(".tie"));
@@ -306,7 +306,7 @@ public class Controller implements Initializable {
 	private void loadVictoryScreen() {
 		try {
 			Main.isVictoryLoaded = true;
-			StackPane sPane = FXMLLoader.load(getClass().getResource(("VictoryScreen.fxml")));
+			AnchorPane sPane = FXMLLoader.load(getClass().getResource(("VictoryScreen.fxml")));
 			game.getChildren().setAll(sPane);	
 			
 			FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.5), sPane.lookup(".tie"));
