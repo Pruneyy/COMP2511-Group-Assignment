@@ -53,6 +53,14 @@
                         <Insets top="10.0" />
                     </VBox.margin>
                 </Button>
+                <Button id="restart" fx:id="restart" mnemonicParsing="false" onAction="#handleRestartPress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Restart">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Button>
                 <Button id="quit" fx:id="quit" mnemonicParsing="false" onAction="#handleQuitPress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Quit">
                     <cursor>
                         <Cursor fx:constant="HAND" />

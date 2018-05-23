@@ -90,15 +90,25 @@ public class Controller implements Initializable {
 	}
 
 	@FXML protected void handleUndoPress(ActionEvent event) {
-		System.out.println(grid.getMoves());
+		//System.out.println(grid.getMoves());
 		Vehicle v = grid.undoLastVehicleMoves();
 		if (v != null) {
 			snapRectangleToGrid(v, vehicleRenders.get(v.getCarId() - 1));
 		}
-		System.out.println(grid.getMoves());
+		//System.out.println(grid.getMoves());
 		// undo
 	}
-
+	@FXML protected void handleRestartPress(ActionEvent event) {
+		// restart the game board
+		//System.out.println(grid.getMoves().size());
+		while(!grid.getMoves().isEmpty()) {
+		Vehicle v = grid.undoLastVehicleMoves();
+		if (v != null) {
+			snapRectangleToGrid(v, vehicleRenders.get(v.getCarId() - 1));
+		}
+		//System.out.println(grid.getMoves());
+		}
+	}
 	@FXML protected void handleQuitPress(ActionEvent event) {
 		// Exit game
 		System.exit(0);
