@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,12 +37,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        //testVehicleCollisions();
-        //testPuzzleGenerator();
         launch(args);
-		//FilePuzzleService test = new FilePuzzleService();
-		//test.getNewPuzzle(PuzzleService.Difficulty.EASY);
-		
     }
 
     /**
@@ -87,8 +81,4 @@ public class Main extends Application {
         System.out.println("Puzzle solved!");
         System.out.println(Main.grid);
     }
-
-
-
-
 }

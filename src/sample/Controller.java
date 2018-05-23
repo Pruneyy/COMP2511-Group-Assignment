@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -32,18 +31,12 @@ public class Controller implements Initializable {
 	private static Integer RED_CAR_ID = 1;		// the ID of the red car
 	private static Integer RED_HEAD_COLUMN = 5; // the column location the head of the red car must be to finish the game
 	private static Integer RED_TAIL_COLUMN = 4; // the column location the tail of the red car must be to finish the game
-	private static final Color[] colors = {Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.PURPLE, Color.BROWN, Color.AQUAMARINE, Color.SALMON, Color.YELLOW, Color.DEEPPINK, Color.ORANGE, Color.FUCHSIA, Color.NAVY, Color.SPRINGGREEN};
 
 	@FXML private BorderPane game;
-	@FXML private Button start;
-	@FXML private Button quit;
-	@FXML private Button undo;
-	@FXML private Button generate;
 	@FXML private GridPane gameBoard;
 	@FXML private Pane pane;
 	@FXML private Pane pane2;
 	@FXML private AnchorPane root;
-	@FXML private Text title;
 	private boolean startFlag = false;
 
 	private Grid grid;
@@ -100,23 +93,18 @@ public class Controller implements Initializable {
 	}
 
 	@FXML protected void handleUndoPress(ActionEvent event) {
-		//System.out.println(grid.getMoves());
 		Vehicle v = grid.undoLastVehicleMoves();
 		if (v != null) {
 			snapRectangleToGrid(v, vehicleRenders.get(v.getCarId() - 1));
 		}
-		//System.out.println(grid.getMoves());
-		// undo
 	}
 	@FXML protected void handleRestartPress(ActionEvent event) {
 		// restart the game board
-		//System.out.println(grid.getMoves().size());
 		while(!grid.getMoves().isEmpty()) {
 		Vehicle v = grid.undoLastVehicleMoves();
 		if (v != null) {
 			snapRectangleToGrid(v, vehicleRenders.get(v.getCarId() - 1));
 		}
-		//System.out.println(grid.getMoves());
 		}
 	}
 	@FXML protected void handleQuitPress(ActionEvent event) {
@@ -140,12 +128,9 @@ public class Controller implements Initializable {
 		onMousePress = getOnMousePress(v);
 		onMouseRelease = getOnMouseRelease(v);
 		Rectangle rec = new VehicleView(v).getRec();
-//		rec.setFill(colors[v.getCarId()]);
 
 		snapRectangleToGrid(v, rec);
 
-//		rec.setOnDragDetected(e -> {
-//		});
 		rec.setOnMousePressed(e -> {
 			onMousePress.accept(e, rec);
 		});
@@ -154,9 +139,6 @@ public class Controller implements Initializable {
 		});
 		rec.setOnMouseReleased(e -> {
 			onMouseRelease.accept(e, rec);
-//			double deltaX = e.getSceneX();
-//			double deltaY = e.getSceneY();
-//			System.out.println("X: " + deltaX + " Y: " + deltaY + " ==== RecX: " + rec.getTranslateX() + " RecY: " + rec.getTranslateY());
 		});
 		return rec;
 	}
@@ -178,14 +160,7 @@ public class Controller implements Initializable {
 		Coordinate redCarHead = redCar.getOccupiedSpaces().get(1);
 		Coordinate redCarTail = redCar.getOccupiedSpaces().get(0);
 
-		// ===== DEBUGGING =====
-//		System.out.println("HEAD: " + redCarHead);
-//		System.out.println("TAIL: " + redCarTail);
-		// ===== END DEBUG =====
-
 		if (redCarHead.getColIndex() == RED_HEAD_COLUMN && redCarTail.getColIndex() == RED_TAIL_COLUMN) {
-			//System.out.println("CONGRATULATIONS YOU WON!!!");
-			//ADD CODE FOR VICTORY SCREEN HERE
 			loadVictoryScreen();
 		}
 
@@ -223,10 +198,6 @@ public class Controller implements Initializable {
 				snapRectangleToGrid(v, r);
 			};
 		}
-
-		// This will only enter when the red car was moved as the red car
-		// has to be moved to final position last
-
 		return onMouseRelease;
 	}
 
@@ -303,7 +274,6 @@ public class Controller implements Initializable {
 	private void loadVictoryScreen() {
 		FXMLLoader loader = loadView("VictoryScreen.fxml");
 		VictoryScreenController victoryScreenController = loader.getController();
-
 	}
 	
 	public static FadeTransition fadeSet(Node nodeToFade, double time, int setFrom, int setTo, int setCycle) {
@@ -312,7 +282,6 @@ public class Controller implements Initializable {
 		fadeIn.setToValue(setTo);
 		fadeIn.setCycleCount(setCycle);
 		return fadeIn;
-		
 	}
 
 	public FXMLLoader loadView(String fxmlPath) {
@@ -324,14 +293,10 @@ public class Controller implements Initializable {
 			FXMLLoader loader = new FXMLLoader(Controller.class.getResource(fxmlPath));
 			AnchorPane sPane = loader.load();
 			rootPane.getChildren().setAll(sPane);
-
 			return loader;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
-
 	}
-
 }

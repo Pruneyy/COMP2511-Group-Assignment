@@ -46,7 +46,6 @@ public class VehicleView {
             case RED:
                 colorizer.setHue(0.0);
                 colorizer.setSaturation(0.8);
-                //colorizer.setBrightness(-0.25);
                 return colorizer;
             case ORANGE:
                 colorizer.setHue(0.16667);
@@ -56,7 +55,6 @@ public class VehicleView {
             case YELLOW:
                 colorizer.setHue(0.33);
                 colorizer.setSaturation(0.7);
-                //colorizer.setBrightness(0.1);
                 return colorizer;
             case GREEN:
                 colorizer.setHue(0.66);
@@ -66,7 +64,6 @@ public class VehicleView {
             case BLUE:
                 colorizer.setHue(-0.66);
                 colorizer.setSaturation(0.8);
-                //colorizer.setBrightness(-0.25);
                 return colorizer;
             case PINK:
                 colorizer.setHue(-0.3);
