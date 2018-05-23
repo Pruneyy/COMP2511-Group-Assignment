@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
@@ -28,7 +29,6 @@ public class Controller implements Initializable {
 
 	public static int UNIT_LENGTH = 50;
 
-	private static Double FADE_TIME = 2.0;		// the fade timer
 	private static Integer RED_CAR_ID = 1;		// the ID of the red car
 	private static Integer RED_HEAD_COLUMN = 5; // the column location the head of the red car must be to finish the game
 	private static Integer RED_TAIL_COLUMN = 4; // the column location the tail of the red car must be to finish the game
@@ -292,50 +292,22 @@ public class Controller implements Initializable {
 			pane2.getChildren().add(render);
 		}
 	}
-	
+
 	private void loadSplashScreen() {
 		Main.isSplashLoaded = true;
-		Pane sPane = loadView("SplashScreen.fxml");
-
-		FadeTransition fadeIn = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".tie");
-		FadeTransition fadeButtonOne = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".start");
-		FadeTransition fadeButtonTwo = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".settings");
-		FadeTransition fadeButtonThree = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".quit");
-
-		fadeIn.play();
-
-		fadeIn.setOnFinished((e)->{
-			fadeButtonOne.play();
-		});
-
-		fadeButtonOne.setOnFinished((e)->{
-			fadeButtonTwo.play();
-		});
-
-		fadeButtonTwo.setOnFinished((e)->{
-			fadeButtonThree.play();
-		});
+		FXMLLoader loader = loadView("SplashScreen.fxml");
+		SplashScreenController splashScreenController = loader.getController();
+		splashScreenController.setViewModel("Images/SplashBackground.jpg"); // TODO(pranav) change this
 	}
 	
 	private void loadVictoryScreen() {
-		Pane sPane = loadView("VictoryScreen.fxml");
+		FXMLLoader loader = loadView("VictoryScreen.fxml");
+		VictoryScreenController victoryScreenController = loader.getController();
 
-		FadeTransition fadeIn = fadeSet(sPane, 1.5, 0, 1, 1, ".tie");
-		FadeTransition fadeOut = fadeSet(sPane, 1.5, 1, 0, 1, ".tie");
-
-		fadeIn.play();
-
-		fadeIn.setOnFinished((e)->{
-			fadeOut.play();
-		});
-
-		fadeOut.setOnFinished((e) -> {
-			loadView("Game.fxml");
-		});
 	}
 	
-	FadeTransition fadeSet(Pane sPane, double time, int setFrom, int setTo, int setCycle, String name) {
-		FadeTransition fadeIn = new FadeTransition(Duration.seconds(time), sPane.lookup(name));
+	public static FadeTransition fadeSet(Node nodeToFade, double time, int setFrom, int setTo, int setCycle) {
+		FadeTransition fadeIn = new FadeTransition(Duration.seconds(time), nodeToFade);
 		fadeIn.setFromValue(setFrom);
 		fadeIn.setToValue(setTo);
 		fadeIn.setCycleCount(setCycle);
@@ -343,19 +315,23 @@ public class Controller implements Initializable {
 		
 	}
 
-	public Pane loadView(String fxmlPath) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-			loader.getController();
-			AnchorPane sPane = loader.load();
-			game.getChildren().setAll(sPane);
+	public FXMLLoader loadView(String fxmlPath) {
+		return Controller.genericViewLoader(fxmlPath, game);
+	}
 
-			return sPane;
+	public static FXMLLoader genericViewLoader(String fxmlPath, Pane rootPane) {
+		try {
+			FXMLLoader loader = new FXMLLoader(Controller.class.getResource(fxmlPath));
+			AnchorPane sPane = loader.load();
+			rootPane.getChildren().setAll(sPane);
+
+			return loader;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
+
 	}
 
 }

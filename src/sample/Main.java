@@ -16,14 +16,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main extends Application {
+    public enum Theme {
+        CLASSIC, ANIMALS
+    }
 
     public static Grid grid;
     public static Boolean isSplashLoaded = false;
+    public static Theme currentTheme;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Game.fxml"));
         Parent root = loader.load();
+        currentTheme = Theme.CLASSIC;
         primaryStage.setTitle("Grid Lock!");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
