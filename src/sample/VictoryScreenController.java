@@ -7,13 +7,14 @@ import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 	public class VictoryScreenController implements Initializable {
 		
-		@FXML private StackPane rootPane;
+		@FXML private AnchorPane rootPane;
 		@FXML private Text title;
 		
 		@Override
