@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,11 +19,11 @@ public class Main extends Application {
 
     public static Grid grid;
     public static Boolean isSplashLoaded = false;
-    public static Boolean isVictoryLoaded = false;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Game.fxml"));
+        Parent root = loader.load();
         primaryStage.setTitle("Grid Lock!");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
@@ -81,6 +82,8 @@ public class Main extends Application {
         System.out.println("Puzzle solved!");
         System.out.println(Main.grid);
     }
+
+
 
 
 }

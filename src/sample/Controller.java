@@ -294,68 +294,47 @@ public class Controller implements Initializable {
 	}
 	
 	private void loadSplashScreen() {
-		try {
-			Main.isSplashLoaded = true;
-			AnchorPane sPane = FXMLLoader.load(getClass().getResource(("SplashScreen.fxml")));
-			game.getChildren().setAll(sPane);	
-			
-			FadeTransition fadeIn = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".tie");
-			FadeTransition fadeButtonOne = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".start");
-			FadeTransition fadeButtonTwo = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".settings");
-			FadeTransition fadeButtonThree = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".quit");
-			
-			fadeIn.play();
-			
-			fadeIn.setOnFinished((e)->{
-				fadeButtonOne.play();
-			});
-			
-			fadeButtonOne.setOnFinished((e)->{
-				fadeButtonTwo.play();
-			});
-			
-			fadeButtonTwo.setOnFinished((e)->{
-				fadeButtonThree.play();
-			});
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Main.isSplashLoaded = true;
+		Pane sPane = loadView("SplashScreen.fxml");
+
+		FadeTransition fadeIn = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".tie");
+		FadeTransition fadeButtonOne = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".start");
+		FadeTransition fadeButtonTwo = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".settings");
+		FadeTransition fadeButtonThree = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".quit");
+
+		fadeIn.play();
+
+		fadeIn.setOnFinished((e)->{
+			fadeButtonOne.play();
+		});
+
+		fadeButtonOne.setOnFinished((e)->{
+			fadeButtonTwo.play();
+		});
+
+		fadeButtonTwo.setOnFinished((e)->{
+			fadeButtonThree.play();
+		});
 	}
 	
 	private void loadVictoryScreen() {
-		try {
-			Main.isVictoryLoaded = true;
-			AnchorPane sPane = FXMLLoader.load(getClass().getResource(("VictoryScreen.fxml")));
-			game.getChildren().setAll(sPane);	
-			
-			FadeTransition fadeIn = fadeSet(sPane, 1.5, 0, 1, 1, ".tie");
-			FadeTransition fadeOut = fadeSet(sPane, 1.5, 1, 0, 1, ".tie");
-			
-			fadeIn.play();
-			
-			fadeIn.setOnFinished((e)->{
-				fadeOut.play();
-			});
-			
-			fadeOut.setOnFinished((e) -> {
-				try {
-					AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("Game.fxml")));
-					game.getChildren().setAll(parentContent);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			});
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Pane sPane = loadView("VictoryScreen.fxml");
+
+		FadeTransition fadeIn = fadeSet(sPane, 1.5, 0, 1, 1, ".tie");
+		FadeTransition fadeOut = fadeSet(sPane, 1.5, 1, 0, 1, ".tie");
+
+		fadeIn.play();
+
+		fadeIn.setOnFinished((e)->{
+			fadeOut.play();
+		});
+
+		fadeOut.setOnFinished((e) -> {
+			loadView("Game.fxml");
+		});
 	}
 	
-	FadeTransition fadeSet(AnchorPane sPane, double time, int setFrom, int setTo, int setCycle, String name) {
+	FadeTransition fadeSet(Pane sPane, double time, int setFrom, int setTo, int setCycle, String name) {
 		FadeTransition fadeIn = new FadeTransition(Duration.seconds(time), sPane.lookup(name));
 		fadeIn.setFromValue(setFrom);
 		fadeIn.setToValue(setTo);
@@ -363,5 +342,20 @@ public class Controller implements Initializable {
 		return fadeIn;
 		
 	}
-	
+
+	public Pane loadView(String fxmlPath) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+			loader.getController();
+			AnchorPane sPane = loader.load();
+			game.getChildren().setAll(sPane);
+
+			return sPane;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
