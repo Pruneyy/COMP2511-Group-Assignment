@@ -76,7 +76,6 @@ public class SplashScreenController implements Initializable {
 //	}
 
 	public void setViewModel(String backgroundSrc) {
-		System.out.println("test");
 		background.setImage(new Image(backgroundSrc));
 	}
 
