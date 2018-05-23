@@ -59,12 +59,10 @@ public class Controller implements Initializable {
 		if (startFlag == false) {
 			this.vehicleRenders = new ArrayList<Rectangle>();
 			this.initPuzzle(new FilePuzzleService());
-//			FilePuzzleService gps = new FilePuzzleService("Easy");
-//			grid = gps.getNewPuzzle("3.txt");
-
-			//System.out.println(grid);
 			startFlag = true;
 		}
+		root.setStyle("-fx-background-image: url('Images/MainGameBackground.jpg'); -fx-background-size: 20%;");
+		pane.setStyle("-fx-background-image: url('Images/GridBorderBackground.jpg');");
 	}
 
 	@FXML protected void handleNewGamePress(ActionEvent event) {
