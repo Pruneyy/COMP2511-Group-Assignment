@@ -18,14 +18,14 @@
             	<Image url="@../Images/SplashBackground.jpg" />
          	</image>
       	</ImageView>
-      	<Text fx:id="title" fill="WHITE" layoutX="150.0" layoutY="82.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="tie" text="Gridlock!" textOrigin="CENTER">
+      	<Text fx:id="title" boundsType="LOGICAL_VERTICAL_CENTER" fill="WHITE" layoutX="150.0" layoutY="82.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="tie" text="Gridlock!" textAlignment="CENTER" textOrigin="CENTER">
          	<font>
             	<Font size="56.0" />
          	</font>
       	</Text>
       <VBox layoutX="210.0" layoutY="185.0" prefWidth="100.0">
          <children>
-            <Button fx:id="start" onAction="#handleStartGamePress" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" opacity="0.0" prefWidth="100.0" styleClass="start" text="Start" />
+            <Button fx:id="start" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleStartGamePress" opacity="0.0" prefWidth="100.0" styleClass="start" text="Start" />
             <Button fx:id="settings" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" opacity="0.0" prefWidth="100.0" styleClass="settings" text="Settings">
                <VBox.margin>
                   <Insets top="10.0" />
