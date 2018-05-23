@@ -19,12 +19,13 @@ import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.Main.Theme;
 
 
 public class SplashScreenController implements Initializable {
 
 	private static Double FADE_TIME = 0.5;		// the fade timer
-
+	
 	@FXML private AnchorPane navBar;
 	@FXML private AnchorPane rootPane;
 	@FXML private Text title;
@@ -73,9 +74,25 @@ public class SplashScreenController implements Initializable {
 		System.exit(0);
 	}
 
+	@FXML protected void handleCarSelect(ActionEvent event) {
+		Main.currentTheme = Theme.CARS;
+		setViewModel("Images/SplashBackground.jpg");
+	}
+	
+	@FXML protected void handleAnimalSelect(ActionEvent event) {
+		Main.currentTheme = Theme.ANIMALS;
+		setViewModel("Images/AnimalSplash.jpg");
+	}
+
+	@FXML protected void handleFoodSelect(ActionEvent event) {
+		Main.currentTheme = Theme.FOOD;
+		setViewModel("Images/FoodSplash.jpg");
+	}
+	
 	public FXMLLoader loadView(String fxmlPath) {
 		return Controller.genericViewLoader(fxmlPath, rootPane);
 	}
+	
 
 //	public class ViewModel {
 //		String backgroundSrc;

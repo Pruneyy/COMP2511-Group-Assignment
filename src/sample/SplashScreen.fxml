@@ -53,13 +53,13 @@
       </VBox>
       <AnchorPane fx:id="navBar" prefHeight="200.0" prefWidth="150.0" translateX="-150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <RadioButton layoutY="180.0" mnemonicParsing="false" selected="true" text="Cars" textFill="WHITE" AnchorPane.leftAnchor="30.0">
+            <RadioButton layoutY="180.0" mnemonicParsing="false" onAction="#handleCarSelect" selected="true" text="Cars" textFill="WHITE" AnchorPane.leftAnchor="30.0">
                <toggleGroup>
                   <ToggleGroup fx:id="theme" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutY="220.0" mnemonicParsing="false" text="Animals" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
-            <RadioButton layoutY="260.0" mnemonicParsing="false" text="Food" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
+            <RadioButton layoutY="220.0" mnemonicParsing="false" onAction="#handleAnimalSelect" text="Animals" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
+            <RadioButton layoutY="260.0" mnemonicParsing="false" onAction="#handleFoodSelect" text="Food" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
          </children></AnchorPane>
 	</children>
 </AnchorPane>
