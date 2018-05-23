@@ -18,14 +18,17 @@
             	<Image url="@../Images/SplashBackground.jpg" />
          	</image>
       	</ImageView>
-      	<Text fx:id="title" fill="WHITE" layoutX="150.0" layoutY="82.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="tie" text="You Win!!!" textOrigin="CENTER">
-         	<font>
-            	<Font size="56.0" />
-         	</font>
-      	</Text>
-      <VBox layoutX="210.0" layoutY="185.0" prefWidth="100.0">
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="520.0">
          <children>
-            <Button fx:id="start" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleMenuPress" opacity="0.0" prefWidth="100.0" styleClass="start" text="Menu" />
+            	<Text fx:id="title" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="tie" text="You Win!!!" textAlignment="CENTER" textOrigin="CENTER">
+               	<font>
+                  	<Font size="56.0" />
+               	</font>
+            	</Text>
+            <Button fx:id="start" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleMenuPress" opacity="0.0" prefWidth="100.0" styleClass="start" text="Menu">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin></Button>
             <Button fx:id="settings" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleRestartGamePress" opacity="0.0" prefWidth="100.0" styleClass="settings" text="Restart">
                <VBox.margin>
                   <Insets top="10.0" />
@@ -37,6 +40,9 @@
                </VBox.margin>
             </Button>
          </children>
+         <padding>
+            <Insets top="50.0" />
+         </padding>
       </VBox>
 	</children>
 </AnchorPane>
