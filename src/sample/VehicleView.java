@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
+import sample.Main.Theme;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +20,7 @@ public class VehicleView {
     public VehicleView(Vehicle v) {
         this.v = v;
     }
-
+    
     public Rectangle getRec() {
         int length = 1 * Controller.UNIT_LENGTH;
         int width = v.getLength() * Controller.UNIT_LENGTH + 2*(v.getLength()-1);
@@ -36,7 +37,7 @@ public class VehicleView {
         rec.setFill(new ImagePattern(img));
         return rec;
     }
-
+    
     public ColorAdjust getColorizer() {
         int index = v.getCarId();
         ColorAdjust colorizer = new ColorAdjust();

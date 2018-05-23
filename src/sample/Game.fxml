@@ -32,20 +32,12 @@
                 <BorderPane.margin>
                     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                 </BorderPane.margin>
-                <Button id="start" fx:id="start" mnemonicParsing="false" onAction="#handleNewGamePress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="New Puzzle">
+                <Button id="start" mnemonicParsing="false" onAction="#handleNewGamePress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="New Puzzle">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button id="generate" fx:id="generate" mnemonicParsing="false" onAction="#handleGenerateGamePress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Generate">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-                </Button>
-                <Button id="undo" fx:id="undo" mnemonicParsing="false" onAction="#handleUndoPress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Undo">
+                <Button id="generate" mnemonicParsing="false" onAction="#handleGenerateGamePress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Generate">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -53,7 +45,7 @@
                         <Insets top="10.0" />
                     </VBox.margin>
                 </Button>
-                <Button id="restart" fx:id="restart" mnemonicParsing="false" onAction="#handleRestartPress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Restart">
+                <Button id="undo" mnemonicParsing="false" onAction="#handleUndoPress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Undo">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -61,7 +53,15 @@
                         <Insets top="10.0" />
                     </VBox.margin>
                 </Button>
-                <Button id="quit" fx:id="quit" mnemonicParsing="false" onAction="#handleQuitPress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Quit">
+                <Button id="restart" mnemonicParsing="false" onAction="#handleRestartPress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Restart">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Button>
+                <Button id="quit" mnemonicParsing="false" onAction="#handleQuitPress" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 5, 4, 3, 5; -fx-background-insets: 0,1,2,0;" text="Quit">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>

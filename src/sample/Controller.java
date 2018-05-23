@@ -16,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import sample.Main.Theme;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,7 +46,8 @@ public class Controller implements Initializable {
 	private double mouseClickX;
 	private double mouseClickY;
 
-	@FXML public void initialize(URL url, ResourceBundle resourceBundle) {
+	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
 		if(!Main.isSplashLoaded) {
 			loadSplashScreen();
 		}
@@ -54,7 +56,13 @@ public class Controller implements Initializable {
 			this.initPuzzle(new FilePuzzleService());
 			startFlag = true;
 		}
-		root.setStyle("-fx-background-image: url('Images/MainGameBackground.jpg'); -fx-background-size: 20%;");
+		if (Main.currentTheme == Theme.CARS) {
+			root.setStyle("-fx-background-image: url('Images/MainGameBackground.jpg'); -fx-background-size: 20%;");
+		} else if (Main.currentTheme == Theme.ANIMALS) {
+			root.setStyle("-fx-background-image: url('Images/TreeBackground.jpg'); -fx-background-size: 20%;");
+		} else if (Main.currentTheme == Theme.FOOD) {
+			root.setStyle("-fx-background-image: url('Images/MainGameBackground.jpg'); -fx-background-size: 20%;");
+		}
 		pane.setStyle("-fx-background-image: url('Images/GridBorderBackground.jpg');");
 	}
 
