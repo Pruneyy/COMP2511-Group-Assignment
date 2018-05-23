@@ -28,6 +28,7 @@ public class Controller implements Initializable {
 
 	public static int UNIT_LENGTH = 50;
 
+	private static Double FADE_TIME = 2.0;		// the fade timer
 	private static Integer RED_CAR_ID = 1;		// the ID of the red car
 	private static Integer RED_HEAD_COLUMN = 5; // the column location the head of the red car must be to finish the game
 	private static Integer RED_TAIL_COLUMN = 4; // the column location the tail of the red car must be to finish the game
@@ -77,6 +78,17 @@ public class Controller implements Initializable {
 
 	}
 
+	@FXML protected void handleStartMenuPress(ActionEvent event) {
+		AnchorPane parentContent;
+		try {
+			parentContent = FXMLLoader.load(getClass().getResource(("sample.fxml")));
+			game.getChildren().setAll(parentContent);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	private void initPuzzle(PuzzleService puzzleService) {
 		this.reset();
 		grid = puzzleService.getNewPuzzle(PuzzleService.Difficulty.EASY);
@@ -289,15 +301,39 @@ public class Controller implements Initializable {
 			AnchorPane sPane = FXMLLoader.load(getClass().getResource(("SplashScreen.fxml")));
 			game.getChildren().setAll(sPane);	
 			
-			FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.5), sPane.lookup(".tie"));
-			fadeIn.setFromValue(0);
-			fadeIn.setToValue(1);
-			fadeIn.setCycleCount(1);
+			FadeTransition fadeIn = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".tie");
+			FadeTransition fadeButtonOne = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".start");
+			FadeTransition fadeButtonTwo = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".settings");
+			FadeTransition fadeButtonThree = fadeSet(sPane, FADE_TIME, 0, 1, 1, ".quit");
 			
-			FadeTransition fadeOut = new FadeTransition(Duration.seconds(1.5), sPane.lookup(".tie"));
-			fadeOut.setFromValue(1);
-			fadeOut.setToValue(0);
-			fadeOut.setCycleCount(1);
+			fadeIn.play();
+			
+			fadeIn.setOnFinished((e)->{
+				fadeButtonOne.play();
+			});
+			
+			fadeButtonOne.setOnFinished((e)->{
+				fadeButtonTwo.play();
+			});
+			
+			fadeButtonTwo.setOnFinished((e)->{
+				fadeButtonThree.play();
+			});
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void loadVictoryScreen() {
+		try {
+			Main.isVictoryLoaded = true;
+			AnchorPane sPane = FXMLLoader.load(getClass().getResource(("VictoryScreen.fxml")));
+			game.getChildren().setAll(sPane);	
+			
+			FadeTransition fadeIn = fadeSet(sPane, 1.5, 0, 1, 1, ".tie");
+			FadeTransition fadeOut = fadeSet(sPane, 1.5, 1, 0, 1, ".tie");
 			
 			fadeIn.play();
 			
@@ -321,41 +357,13 @@ public class Controller implements Initializable {
 		}
 	}
 	
-	private void loadVictoryScreen() {
-		try {
-			Main.isVictoryLoaded = true;
-			AnchorPane sPane = FXMLLoader.load(getClass().getResource(("VictoryScreen.fxml")));
-			game.getChildren().setAll(sPane);	
-			
-			FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.5), sPane.lookup(".tie"));
-			fadeIn.setFromValue(0);
-			fadeIn.setToValue(1);
-			fadeIn.setCycleCount(1);
-			
-			FadeTransition fadeOut = new FadeTransition(Duration.seconds(1.5), sPane.lookup(".tie"));
-			fadeOut.setFromValue(1);
-			fadeOut.setToValue(0);
-			fadeOut.setCycleCount(1);
-			
-			fadeIn.play();
-			
-			fadeIn.setOnFinished((e)->{
-				fadeOut.play();
-			});
-			
-			fadeOut.setOnFinished((e) -> {
-				try {
-					AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("sample.fxml")));
-					game.getChildren().setAll(parentContent);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			});
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	FadeTransition fadeSet(AnchorPane sPane, double time, int setFrom, int setTo, int setCycle, String name) {
+		FadeTransition fadeIn = new FadeTransition(Duration.seconds(time), sPane.lookup(name));
+		fadeIn.setFromValue(setFrom);
+		fadeIn.setToValue(setTo);
+		fadeIn.setCycleCount(setCycle);
+		return fadeIn;
+		
 	}
+	
 }
