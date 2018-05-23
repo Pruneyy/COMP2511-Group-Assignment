@@ -79,7 +79,7 @@ public class Controller implements Initializable {
 	@FXML protected void handleStartMenuPress(ActionEvent event) {
 		AnchorPane parentContent;
 		try {
-			parentContent = FXMLLoader.load(getClass().getResource(("sample.fxml")));
+			parentContent = FXMLLoader.load(getClass().getResource(("Game.fxml")));
 			game.getChildren().setAll(parentContent);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -341,7 +341,7 @@ public class Controller implements Initializable {
 			
 			fadeOut.setOnFinished((e) -> {
 				try {
-					AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("sample.fxml")));
+					AnchorPane parentContent = FXMLLoader.load(getClass().getResource(("Game.fxml")));
 					game.getChildren().setAll(parentContent);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block

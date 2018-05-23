@@ -1,6 +1,5 @@
 package sample;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -27,7 +26,7 @@ public class SplashScreenController implements Initializable {
 
 		@FXML protected void handleStartGamePress(ActionEvent event) {
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
 				Stage primaryStage = (Stage) rootPane.getScene().getWindow();
 				primaryStage.setScene(new Scene(root));
 			} catch (Exception e) {
