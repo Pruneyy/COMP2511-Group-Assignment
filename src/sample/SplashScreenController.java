@@ -27,7 +27,6 @@ public class SplashScreenController implements Initializable {
 	private static Double FADE_TIME = 0.5;		// the fade timer
 	
 	@FXML private AnchorPane navBar;
-	@FXML private AnchorPane navBarOne;
 	@FXML private AnchorPane rootPane;
 	@FXML private Text title;
 	@FXML private Text instructions;
@@ -73,7 +72,7 @@ public class SplashScreenController implements Initializable {
 			Stage primaryStage = (Stage) rootPane.getScene().getWindow();
 			primaryStage.setScene(new Scene(root));
 		} catch (Exception e) {
-			System.out.println("feels bad man");
+			System.out.println("feels bad mang");
 		}
 	}
 	

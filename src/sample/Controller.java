@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -15,6 +17,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import sample.Main.Theme;
 
@@ -118,6 +121,16 @@ public class Controller implements Initializable {
 	@FXML protected void handleQuitPress(ActionEvent event) {
 		// Exit game
 		System.exit(0);
+	}
+	
+	@FXML protected void handleMenuPress(ActionEvent event) {
+		try {
+			Parent rooot = FXMLLoader.load(getClass().getResource("SplashScreen.fxml"));
+			Stage primaryStage = (Stage) root.getScene().getWindow();
+			primaryStage.setScene(new Scene(rooot));
+		} catch (Exception e) {
+			System.out.println("feels bad man");
+		}
 	}
 
 	private Rectangle getGridTile() {
@@ -256,7 +269,7 @@ public class Controller implements Initializable {
 		} else if (Main.currentTheme == Theme.PLANE) {
 			img = new Image("Images/AirportLandingStrip.png");
 		} else if (Main.currentTheme == Theme.ANIMALS) {
-			img = new Image("Images/MrCat.png");
+			img = new Image("Images/MrCat.jpg");
 		}
 		for (int x = 0; x < grid.GRID_SIZE; x++) {
 			for (int y = 0; y < grid.GRID_SIZE; y++) {
