@@ -41,11 +41,14 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="quit" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="41.0" mnemonicParsing="false" onAction="#handleQuitGamePress" opacity="0.0" prefWidth="100.0" styleClass="quit" text="Quit">
+            <Button fx:id="quit" alignment="CENTER" contentDisplay="CENTER" layoutX="220.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleQuitGamePress" opacity="0.0" prefWidth="100.0" styleClass="quit" text="Quit">
                <VBox.margin>
                   <Insets top="10.0" />
-               </VBox.margin>
-            </Button>
+               </VBox.margin></Button>
+            <Text fx:id="instructions" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="ins" text="Move the red object to the far right marked squares on the board" textAlignment="CENTER" textOrigin="CENTER">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin></Text>
          </children>
          <padding>
             <Insets top="50.0" />

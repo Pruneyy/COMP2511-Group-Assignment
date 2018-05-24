@@ -27,8 +27,10 @@ public class SplashScreenController implements Initializable {
 	private static Double FADE_TIME = 0.5;		// the fade timer
 	
 	@FXML private AnchorPane navBar;
+	@FXML private AnchorPane navBarOne;
 	@FXML private AnchorPane rootPane;
 	@FXML private Text title;
+	@FXML private Text instructions;
 	@FXML private Button start;
 	@FXML private Button themes;
 	@FXML private Button quit;
@@ -42,6 +44,7 @@ public class SplashScreenController implements Initializable {
 		FadeTransition fadeButtonOne = Controller.fadeSet(start, FADE_TIME, 0, 1, 1);
 		FadeTransition fadeButtonTwo = Controller.fadeSet(themes, FADE_TIME, 0, 1, 1);
 		FadeTransition fadeButtonThree = Controller.fadeSet(quit, FADE_TIME, 0, 1, 1);
+		FadeTransition fadeIns = Controller.fadeSet(instructions, FADE_TIME, 0, 1, 1);
 
 		fadeIn.play();
 
@@ -57,7 +60,11 @@ public class SplashScreenController implements Initializable {
 			fadeButtonThree.play();
 		});
 		
-		slideMenu();
+		fadeButtonThree.setOnFinished((e)->{
+			fadeIns.play();
+		});
+		
+		slideMenuLeft();
 	}
 
 	@FXML protected void handleStartGamePress(ActionEvent event) {
@@ -93,20 +100,11 @@ public class SplashScreenController implements Initializable {
 		return Controller.genericViewLoader(fxmlPath, rootPane);
 	}
 	
-
-//	public class ViewModel {
-//		String backgroundSrc;
-//
-//		public ViewModel(String backgroundSrc) {
-//			this.backgroundSrc = backgroundSrc;
-//		}
-//	}
-
 	public void setViewModel(String backgroundSrc) {
 		background.setImage(new Image(backgroundSrc));
 	}
 	
-    private void slideMenu() {
+    private void slideMenuLeft() {
         TranslateTransition openNav=new TranslateTransition(new Duration(350), navBar);
         openNav.setToX(0);
         TranslateTransition closeNav=new TranslateTransition(new Duration(350), navBar);
@@ -119,5 +117,4 @@ public class SplashScreenController implements Initializable {
             }
         });
     }
-
 }
