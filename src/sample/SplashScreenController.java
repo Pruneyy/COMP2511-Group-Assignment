@@ -153,7 +153,7 @@ public class SplashScreenController implements Initializable {
 	
     private void slideMenu() {
         TranslateTransition openNavTheme=new TranslateTransition(new Duration(350), navBarTheme);
-		TranslateTransition openNavDiff=new TranslateTransition(new Duration(700), navBarDiff);
+		TranslateTransition openNavDiff=new TranslateTransition(new Duration(525), navBarDiff);
 		openNavTheme.setToX(NAVBAR_THEME_SHOW);
 		openNavDiff.setToX(NAVBAR_DIFF_SHOW);
 

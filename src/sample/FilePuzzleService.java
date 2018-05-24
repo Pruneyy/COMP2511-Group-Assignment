@@ -8,13 +8,11 @@ import java.util.Scanner;
 import sample.PuzzleService.Difficulty;
 
 public class FilePuzzleService implements PuzzleService {
+
 	private MoveSet moveSet;	//keeps track of all movements
 	private MoveSet solution;
 	private int lastRandom;
-	
 
-	
-	
 	public FilePuzzleService() {
 		// TODO Auto-generated constructor stub
 		this.moveSet = new MoveSet();
@@ -89,6 +87,7 @@ public class FilePuzzleService implements PuzzleService {
 	      }
       return puzzle;
 	}
+
 	/**
 	 * NOTE FUNCTION CURRENTLY LOOKS LIKE IT'S WORKING BUT IT ISN'T [NEED TO FIX]
 	 * @return
