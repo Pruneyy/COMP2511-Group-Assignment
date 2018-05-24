@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     /**
-     * Used to store the different kinds of themes that are available.
+     * Used to set the different kinds of themes that are available.
      * enum allows for more flexibility in managing themes.
      */
     public enum Theme {

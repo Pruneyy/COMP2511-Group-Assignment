@@ -43,6 +43,7 @@ public class Controller implements Initializable {
 
 	private Grid grid;
 	private ArrayList<Rectangle> vehicleRenders;
+	public static PuzzleService.Difficulty currentDifficulty = PuzzleService.Difficulty.EASY;	// Sets the default difficulty (if user does not select difficulty)
 
 	private double mouseClickX;
 	private double mouseClickY;
@@ -68,14 +69,25 @@ public class Controller implements Initializable {
 	}
 
 	@FXML protected void handleNewGamePress(ActionEvent event) {
-		// Make new game from the bank of pre-loaded puzzles
-		this.initPuzzle(new FilePuzzleService());
+		System.out.println("CURRENT DIFF IS " + currentDifficulty);
+		if (currentDifficulty == PuzzleService.Difficulty.EASY) {
+			System.out.println("Starting a new puzzle of EASY difficulty (from generator)");
+			this.initPuzzle(new GeneratorPuzzleService());
+		} else if (currentDifficulty == PuzzleService.Difficulty.MEDIUM) {
+			System.out.println("Starting a new puzzle of MEDIUM difficulty (from file)");
+			this.initPuzzle(new FilePuzzleService());
+		} else if (currentDifficulty == PuzzleService.Difficulty.HARD) {
+			System.out.println("Starting a new puzzle of HARD difficulty (from file)");
+			this.initPuzzle(new FilePuzzleService());
+		} else if (currentDifficulty == PuzzleService.Difficulty.DEMO) {
+			System.out.println("Starting DEMO puzzle (from file)");
+			this.initPuzzle(new FilePuzzleService());
+		}
 	}
 
 	@FXML protected void handleGenerateGamePress(ActionEvent event) {
 		// Make new game using the generator algorithm
 		this.initPuzzle(new GeneratorPuzzleService());
-
 	}
 
 	@FXML protected void handleStartMenuPress(ActionEvent event) {
@@ -91,7 +103,7 @@ public class Controller implements Initializable {
 	
 	private void initPuzzle(PuzzleService puzzleService) {
 		this.reset();
-		grid = puzzleService.getNewPuzzle(PuzzleService.Difficulty.EASY);
+		grid = puzzleService.getNewPuzzle(currentDifficulty);
 		makeGrid(grid);
 	}
 
