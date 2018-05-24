@@ -34,7 +34,7 @@
             	</Text>
             <Button fx:id="start" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleStartGamePress" opacity="0.0" prefWidth="100.0" styleClass="start" text="Start">
                <VBox.margin>
-                  <Insets top="50.0" />
+                  <Insets top="40.0" />
                </VBox.margin></Button>
              <Button fx:id="difficulties" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" opacity="0.0" prefWidth="100.0" styleClass="settings" text="Difficulty">
                  <VBox.margin>
@@ -52,7 +52,7 @@
                </VBox.margin></Button>
             <Text fx:id="instructions" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="ins" text="Move the red object to the far right marked squares on the board" textAlignment="CENTER" textOrigin="CENTER">
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="20.0" />
                </VBox.margin></Text>
          </children>
          <padding>
