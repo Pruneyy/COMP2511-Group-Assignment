@@ -49,6 +49,9 @@ public class SplashScreenController implements Initializable {
     @FXML private RadioButton carThemeRadioButton;
     @FXML private RadioButton planeThemeRadioButton;
     @FXML private RadioButton animalThemeRadioButton;
+    @FXML private RadioButton easyRadioButton;
+    @FXML private RadioButton mediumRadioButton;
+    @FXML private RadioButton hardRadioButton;
 
 	/**
 	 * This will initialise all the
@@ -95,6 +98,14 @@ public class SplashScreenController implements Initializable {
             planeThemeRadioButton.fire();
         } else if (Main.currentTheme == Theme.ANIMALS) {
             animalThemeRadioButton.fire();
+        }
+
+        if (Controller.currentDifficulty == PuzzleService.Difficulty.EASY) {
+            easyRadioButton.fire();
+        } else if (Controller.currentDifficulty == PuzzleService.Difficulty.MEDIUM) {
+            mediumRadioButton.fire();
+        } else if (Controller.currentDifficulty == PuzzleService.Difficulty.HARD) {
+            hardRadioButton.fire();
         }
     }
 

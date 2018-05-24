@@ -72,13 +72,13 @@
       </AnchorPane>
         <AnchorPane fx:id="navBarDiff" prefHeight="200.0" prefWidth="150.0" translateX="670.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <RadioButton layoutY="180.0" mnemonicParsing="false" onAction="#handleEasySelect" selected="true" text="Easy" textFill="WHITE" AnchorPane.leftAnchor="30.0">
+                <RadioButton fx:id="easyRadioButton" layoutY="180.0" mnemonicParsing="false" onAction="#handleEasySelect" selected="true" text="Easy" textFill="WHITE" AnchorPane.leftAnchor="30.0">
                     <toggleGroup>
                         <ToggleGroup fx:id="difficulty" />
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton layoutY="220.0" mnemonicParsing="false" onAction="#handleMediumSelect" text="Medium" textFill="WHITE" toggleGroup="$difficulty" AnchorPane.leftAnchor="30.0" />
-                <RadioButton layoutY="260.0" mnemonicParsing="false" onAction="#handleHardSelect" text="Hard" textFill="WHITE" toggleGroup="$difficulty" AnchorPane.leftAnchor="30.0" />
+                <RadioButton fx:id="mediumRadioButton" layoutY="220.0" mnemonicParsing="false" onAction="#handleMediumSelect" text="Medium" textFill="WHITE" toggleGroup="$difficulty" AnchorPane.leftAnchor="30.0" />
+                <RadioButton fx:id="hardRadioButton" layoutY="260.0" mnemonicParsing="false" onAction="#handleHardSelect" text="Hard" textFill="WHITE" toggleGroup="$difficulty" AnchorPane.leftAnchor="30.0" />
             </children>
         </AnchorPane>
 	</children>
