@@ -36,11 +36,6 @@
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin></Button>
-             <Button fx:id="difficulties" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" opacity="0.0" prefWidth="100.0" styleClass="settings" text="Difficulty">
-                 <VBox.margin>
-                     <Insets top="10.0" />
-                 </VBox.margin>
-             </Button>
             <Button fx:id="themes" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" opacity="0.0" prefWidth="100.0" styleClass="settings" text="Themes">
                <VBox.margin>
                   <Insets top="10.0" />
@@ -59,27 +54,15 @@
             <Insets top="50.0" />
          </padding>
       </VBox>
-      <AnchorPane fx:id="navBarTheme" prefHeight="200.0" prefWidth="150.0" translateX="-150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="navBar" prefHeight="200.0" prefWidth="150.0" translateX="-150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <RadioButton layoutY="180.0" mnemonicParsing="false" onAction="#handleCarSelect" selected="true" text="Cars" textFill="WHITE" AnchorPane.leftAnchor="30.0">
+            <RadioButton fx:id="carThemeRadioButton" layoutY="180.0" mnemonicParsing="false" onAction="#handleCarSelect" selected="true" text="Cars" textFill="WHITE" AnchorPane.leftAnchor="30.0">
                <toggleGroup>
                   <ToggleGroup fx:id="theme" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutY="220.0" mnemonicParsing="false" onAction="#handlePlaneSelect" text="Plane" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
-            <RadioButton layoutY="260.0" mnemonicParsing="false" onAction="#handleAnimalSelect" text="Animals" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
-         </children>
-      </AnchorPane>
-        <AnchorPane fx:id="navBarDiff" prefHeight="200.0" prefWidth="150.0" translateX="670.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <RadioButton layoutY="180.0" mnemonicParsing="false" onAction="#handleEasySelect" selected="true" text="Easy" textFill="WHITE" AnchorPane.leftAnchor="30.0">
-                    <toggleGroup>
-                        <ToggleGroup fx:id="difficulty" />
-                    </toggleGroup>
-                </RadioButton>
-                <RadioButton layoutY="220.0" mnemonicParsing="false" onAction="#handleMediumSelect" text="Medium" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
-                <RadioButton layoutY="260.0" mnemonicParsing="false" onAction="#handleHardSelect" text="Hard" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
-            </children>
-        </AnchorPane>
+            <RadioButton fx:id="planeThemeRadioButton" layoutY="220.0" mnemonicParsing="false" onAction="#handlePlaneSelect" text="Plane" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
+            <RadioButton fx:id="animalThemeRadioButton" layoutY="260.0" mnemonicParsing="false" onAction="#handleAnimalSelect" text="Animals" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
+         </children></AnchorPane>
 	</children>
 </AnchorPane>
