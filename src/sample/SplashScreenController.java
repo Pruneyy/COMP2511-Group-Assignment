@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,6 +36,9 @@ public class SplashScreenController implements Initializable {
 	@FXML private Button quit;
 	@FXML private ImageView background;
 	@FXML private ToggleGroup theme;
+	@FXML private RadioButton carThemeRadioButton;
+	@FXML private RadioButton planeThemeRadioButton;
+	@FXML private RadioButton animalThemeRadioButton;
 
 	@Override
 	public void initialize (URL url, ResourceBundle rb) {
@@ -64,6 +68,13 @@ public class SplashScreenController implements Initializable {
 		});
 		
 		slideMenuLeft();
+		if (Main.currentTheme == Theme.CARS) {
+			carThemeRadioButton.fire();
+		} else if (Main.currentTheme == Theme.PLANE) {
+			planeThemeRadioButton.fire();
+		} else if (Main.currentTheme == Theme.ANIMALS) {
+			animalThemeRadioButton.fire();
+		}
 	}
 
 	@FXML protected void handleStartGamePress(ActionEvent event) {
