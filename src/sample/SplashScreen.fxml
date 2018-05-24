@@ -77,8 +77,8 @@
                         <ToggleGroup fx:id="difficulty" />
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton layoutY="220.0" mnemonicParsing="false" onAction="#handleMediumSelect" text="Medium" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
-                <RadioButton layoutY="260.0" mnemonicParsing="false" onAction="#handleHardSelect" text="Hard" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
+                <RadioButton layoutY="220.0" mnemonicParsing="false" onAction="#handleMediumSelect" text="Medium" textFill="WHITE" toggleGroup="$difficulty" AnchorPane.leftAnchor="30.0" />
+                <RadioButton layoutY="260.0" mnemonicParsing="false" onAction="#handleHardSelect" text="Hard" textFill="WHITE" toggleGroup="$difficulty" AnchorPane.leftAnchor="30.0" />
             </children>
         </AnchorPane>
 	</children>
