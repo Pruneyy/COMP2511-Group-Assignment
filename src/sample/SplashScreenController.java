@@ -79,14 +79,14 @@ public class SplashScreenController implements Initializable {
 		setViewModel("Images/SplashBackground.jpg");
 	}
 	
+	@FXML protected void handlePlaneSelect(ActionEvent event) {
+		Main.currentTheme = Theme.PLANE;
+		setViewModel("Images/PlaneSplash.jpg");
+	}
+
 	@FXML protected void handleAnimalSelect(ActionEvent event) {
 		Main.currentTheme = Theme.ANIMALS;
 		setViewModel("Images/AnimalSplash.jpg");
-	}
-
-	@FXML protected void handleFoodSelect(ActionEvent event) {
-		Main.currentTheme = Theme.FOOD;
-		setViewModel("Images/FoodSplash.jpg");
 	}
 	
 	public FXMLLoader loadView(String fxmlPath) {

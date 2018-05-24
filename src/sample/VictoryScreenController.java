@@ -34,9 +34,9 @@ import sample.Main.Theme;
 			
 			if (Main.currentTheme == Theme.CARS) {
 				setViewModel("Images/SplashBackground.jpg");
+			} else if (Main.currentTheme == Theme.PLANE) {
+				setViewModel("Images/VictoryPlaneSplash.jpg");
 			} else if (Main.currentTheme == Theme.ANIMALS) {
-				setViewModel("Images/AnimalVictory.jpg");
-			} else if (Main.currentTheme == Theme.FOOD) {
 				setViewModel("Images/FoodVictory.jpg");
 			}
 			

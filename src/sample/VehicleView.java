@@ -24,18 +24,38 @@ public class VehicleView {
     public Rectangle getRec() {
         int length = 1 * Controller.UNIT_LENGTH;
         int width = v.getLength() * Controller.UNIT_LENGTH + 2*(v.getLength()-1);
-
         Rectangle rec = new Rectangle(length, width);
         if (v.getOrientation() == Vehicle.Orientation.HORIZONTAL) {
             rec.getTransforms().add(new Rotate(-90, 25, 25));
         }
         Image img = new Image("File:./src/Images/car.png");
-        if (v.getLength() == 3) {
-            img = new Image("File:./src/Images/truck.png");
+        if (Main.currentTheme == Theme.CARS) {
+       		img = new Image("File:./src/Images/car.png");
+            if (v.getLength() == 3) {
+                img = new Image("File:./src/Images/truck.png");
+            }
+        } else if (Main.currentTheme == Theme.PLANE) {
+            img = new Image("File:./src/Images/Copter.png");
+            if (v.getLength() == 3) {
+                img = new Image("File:./src/Images/Plane.png");
+            }
+        } else if (Main.currentTheme == Theme.ANIMALS) {
+            img = new Image("File:./src/Images/Animal.png");
+            if (v.getLength() == 3) {
+                img = new Image("File:./src/Images/Snake.png");
+            }
         }
         rec.setEffect(this.getColorizer());
         rec.setFill(new ImagePattern(img));
         return rec;
+        
+//        Image img = new Image("File:./src/Images/car.png");
+//        if (v.getLength() == 3) {
+//            img = new Image("File:./src/Images/truck.png");
+//        }
+//        rec.setEffect(this.getColorizer());
+//        rec.setFill(new ImagePattern(img));
+//        return rec;
     }
     
     public ColorAdjust getColorizer() {

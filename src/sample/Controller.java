@@ -58,10 +58,10 @@ public class Controller implements Initializable {
 		}
 		if (Main.currentTheme == Theme.CARS) {
 			root.setStyle("-fx-background-image: url('Images/MainGameBackground.jpg'); -fx-background-size: 20%;");
+		} else if (Main.currentTheme == Theme.PLANE) {
+			root.setStyle("-fx-background-image: url('Images/PlaneBackground.png');");
 		} else if (Main.currentTheme == Theme.ANIMALS) {
 			root.setStyle("-fx-background-image: url('Images/TreeBackground.jpg'); -fx-background-size: 20%;");
-		} else if (Main.currentTheme == Theme.FOOD) {
-			root.setStyle("-fx-background-image: url('Images/MainGameBackground.jpg'); -fx-background-size: 20%;");
 		}
 		pane.setStyle("-fx-background-image: url('Images/GridBorderBackground.jpg');");
 	}
@@ -251,6 +251,13 @@ public class Controller implements Initializable {
 
 	public void makeGrid(Grid grid) {
 		Image img = new Image("Images/MrCat.jpg");
+		if (Main.currentTheme == Theme.CARS) {
+			img = new Image("Images/Parking.png");
+		} else if (Main.currentTheme == Theme.PLANE) {
+			img = new Image("Images/AirportLandingStrip.png");
+		} else if (Main.currentTheme == Theme.ANIMALS) {
+			img = new Image("Images/MrCat.png");
+		}
 		for (int x = 0; x < grid.GRID_SIZE; x++) {
 			for (int y = 0; y < grid.GRID_SIZE; y++) {
 				Rectangle rec = getGridTile();

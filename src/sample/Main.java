@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Main extends Application {
     public enum Theme {
-        CARS, ANIMALS, FOOD
+        CARS, PLANE, ANIMALS
     }
 
     public static Grid grid;

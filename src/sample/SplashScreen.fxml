@@ -58,8 +58,8 @@
                   <ToggleGroup fx:id="theme" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutY="220.0" mnemonicParsing="false" onAction="#handleAnimalSelect" text="Animals" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
-            <RadioButton layoutY="260.0" mnemonicParsing="false" onAction="#handleFoodSelect" text="Food" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
+            <RadioButton layoutY="220.0" mnemonicParsing="false" onAction="#handlePlaneSelect" text="Plane" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
+            <RadioButton layoutY="260.0" mnemonicParsing="false" onAction="#handleAnimalSelect" text="Animals" textFill="WHITE" toggleGroup="$theme" AnchorPane.leftAnchor="30.0" />
          </children></AnchorPane>
 	</children>
 </AnchorPane>
