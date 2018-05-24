@@ -1,3 +1,4 @@
 .idea/
 Gridlock.iml
 out/
+*.class
