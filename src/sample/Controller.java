@@ -80,13 +80,10 @@ public class Controller implements Initializable {
 
 			// Determines whethere to randomly generate the puzzle or to pull from file
 			if (currentDifficulty == PuzzleService.Difficulty.EASY) {
-				//System.out.println("Starting a new puzzle of EASY difficulty (from generator)");
 				this.initPuzzle(new GeneratorPuzzleService());
 			} else if (currentDifficulty == PuzzleService.Difficulty.MEDIUM) {
-				//System.out.println("Starting a new puzzle of MEDIUM difficulty (from file)");
 				this.initPuzzle(new FilePuzzleService());
 			} else if (currentDifficulty == PuzzleService.Difficulty.HARD) {
-				//System.out.println("Starting a new puzzle of HARD difficulty (from file)");
 				this.initPuzzle(new FilePuzzleService());
 			}
 
@@ -108,15 +105,11 @@ public class Controller implements Initializable {
 	 * random generation algorithm (easy), or from pre-made files (medium and hard).
 	 */
 	@FXML protected void handleNewGamePress() {
-		// System.out.println("CURRENT DIFF IS " + currentDifficulty);
 		if (currentDifficulty == PuzzleService.Difficulty.EASY) {
-			// System.out.println("Starting a new puzzle of EASY difficulty (from generator)");
 			this.initPuzzle(new GeneratorPuzzleService());
 		} else if (currentDifficulty == PuzzleService.Difficulty.MEDIUM) {
-			// System.out.println("Starting a new puzzle of MEDIUM difficulty (from file)");
 			this.initPuzzle(new FilePuzzleService());
 		} else if (currentDifficulty == PuzzleService.Difficulty.HARD) {
-			// System.out.println("Starting a new puzzle of HARD difficulty (from file)");
 			this.initPuzzle(new FilePuzzleService());
 		}
 	}
@@ -143,7 +136,6 @@ public class Controller implements Initializable {
 	private void initPuzzle(PuzzleService puzzleService) {
 		this.reset();
 		grid = puzzleService.getNewPuzzle(currentDifficulty);
-		// System.out.println("THE PUZZLE ASKED FOR IS " + currentDifficulty);
 		makeGrid(grid);
 	}
 
@@ -204,7 +196,7 @@ public class Controller implements Initializable {
 			Stage primaryStage = (Stage) root.getScene().getWindow();
 			primaryStage.setScene(new Scene(rooot));
 		} catch (Exception e) {
-			System.out.println("feels bad man");
+			System.out.println(e);
 		}
 	}
 

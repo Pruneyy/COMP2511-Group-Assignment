@@ -83,7 +83,7 @@ public class VictoryScreenController implements Initializable {
 				Stage primaryStage = (Stage) rootPane.getScene().getWindow();
 				primaryStage.setScene(new Scene(root));
 			} catch (Exception e) {
-				System.out.println("feels bad man");
+				System.out.println(e);
 			}
 		}
 
@@ -95,7 +95,7 @@ public class VictoryScreenController implements Initializable {
 				Stage primaryStage = (Stage) rootPane.getScene().getWindow();
 				primaryStage.setScene(new Scene(root));
 			} catch (Exception e) {
-				System.out.println("feels bad man");
+				System.out.println(e);
 			}
 		}
 

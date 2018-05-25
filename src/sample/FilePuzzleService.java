@@ -40,7 +40,6 @@ public class FilePuzzleService implements PuzzleService {
 	public Grid getNewPuzzle(Difficulty d){
 
 		String input = "src/Starting Board/" + returnRandom(d) + ".txt";
-		// System.out.println("SOURCE FILE PATH IS: " + input);
         Grid puzzle = new Grid();
 		Scanner sc = null;
 	      try
@@ -69,7 +68,6 @@ public class FilePuzzleService implements PuzzleService {
 	        			  colNumber = sc.nextInt() -1;
 	        			  rowNumber = sc.nextInt() -1;
 	        		  }
-        			  //System.out.println("ORIENTATION = " + orientation);
 
 	        		  length = sc.nextInt() -1;
 	        		  
@@ -77,15 +75,10 @@ public class FilePuzzleService implements PuzzleService {
 	        		  if(orientation.equals("H")){
 	        			  Vehicle v = new Vehicle(carId, Vehicle.Orientation.HORIZONTAL, rowNumber, colNumber,(colNumber +length));
 	        			  boolean b = puzzle.addVehicle(v);
-	        			  //System.out.println("VEHICLE Horizontal V ADDED (CHECK: " + b);
-
 
 	        		  }else if(orientation.equals("V")){
 	        			  Vehicle v = new Vehicle(carId, Vehicle.Orientation.VERTICAL, colNumber, rowNumber,(rowNumber +length));
 	        			  boolean b = puzzle.addVehicle(v);
-	        			  //System.out.println("VEHICLE Vertical V ADDED (CHECK:" + b);
-
-
 	        		  }
 	        	  }
 	        	  else if(keyword.equals("Solution")) {
@@ -128,8 +121,6 @@ public class FilePuzzleService implements PuzzleService {
 				}
 			}
 		}
-
-		System.out.println("Returning the random number " + randomNum + " " + d);
 		return randomNum;
 	}
 

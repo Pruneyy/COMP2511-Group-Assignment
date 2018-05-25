@@ -39,7 +39,7 @@
                <font>
                   <Font size="18.0" />
                </font></Text>
-            <Text fx:id="instructionsTwo" fill="WHITE" layoutX="9.0" layoutY="145.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="inst" text="by dragging obstacles out of the way" textAlignment="CENTER" textOrigin="CENTER">
+            <Text fx:id="instructionsTwo" fill="WHITE" layoutX="9.0" layoutY="145.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="inst" text="by clicking and dragging obstacles out of the way" textAlignment="CENTER" textOrigin="CENTER">
                <font>
                   <Font size="18.0" />
                </font></Text>
