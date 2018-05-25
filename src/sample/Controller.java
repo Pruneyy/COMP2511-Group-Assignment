@@ -71,16 +71,16 @@ public class Controller implements Initializable {
 	@FXML protected void handleNewGamePress(ActionEvent event) {
 		System.out.println("CURRENT DIFF IS " + currentDifficulty);
 		if (currentDifficulty == PuzzleService.Difficulty.EASY) {
-			System.out.println("Starting a new puzzle of EASY difficulty (from generator)");
+			// System.out.println("Starting a new puzzle of EASY difficulty (from generator)");
 			this.initPuzzle(new GeneratorPuzzleService());
 		} else if (currentDifficulty == PuzzleService.Difficulty.MEDIUM) {
-			System.out.println("Starting a new puzzle of MEDIUM difficulty (from file)");
+			// System.out.println("Starting a new puzzle of MEDIUM difficulty (from file)");
 			this.initPuzzle(new FilePuzzleService());
 		} else if (currentDifficulty == PuzzleService.Difficulty.HARD) {
-			System.out.println("Starting a new puzzle of HARD difficulty (from file)");
+			// System.out.println("Starting a new puzzle of HARD difficulty (from file)");
 			this.initPuzzle(new FilePuzzleService());
 		} else if (currentDifficulty == PuzzleService.Difficulty.DEMO) {
-			System.out.println("Starting DEMO puzzle (from file)");
+			// System.out.println("Starting DEMO puzzle (from file)");
 			this.initPuzzle(new FilePuzzleService());
 		}
 	}
@@ -104,6 +104,7 @@ public class Controller implements Initializable {
 	private void initPuzzle(PuzzleService puzzleService) {
 		this.reset();
 		grid = puzzleService.getNewPuzzle(currentDifficulty);
+		// System.out.println("THE PUZZLE ASKED FOR IS " + currentDifficulty);
 		makeGrid(grid);
 	}
 
@@ -337,6 +338,4 @@ public class Controller implements Initializable {
 		}
 		return null;
 	}
-	
-	
 }

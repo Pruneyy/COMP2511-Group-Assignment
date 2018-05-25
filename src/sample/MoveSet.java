@@ -3,7 +3,7 @@ package sample;
 import java.util.ArrayList;
 
 /**
- * Reresents the ordered set of movements, from multiple vehicle.
+ * Repesents the ordered set of movements, from multiple vehicle.
  * @author Group 5 - Chris Armstrong, Edbert Chung, Huai Dong Loo, Pranav Singh, Utkarsh Sood.
  */
 public class MoveSet {
