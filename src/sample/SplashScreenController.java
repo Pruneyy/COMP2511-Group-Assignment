@@ -25,10 +25,11 @@ import java.util.ResourceBundle;
 
 /**
  * This class handles the JavaFX splash screens which are animated during UI interactions.
+ * @author Group 5 - Chris Armstrong, Edbert Chung, Huai Dong Loo, Pranav Singh, Utkarsh Sood.
  */
 public class SplashScreenController implements Initializable {
 
-	private static Double FADE_TIME = 0.5;		// the fade timer
+	private static Double FADE_TIME = 0.5;					// the fade timer
 	private static Integer NAVBAR_THEME_HIDE = -150;		// x value to hide the theme navigation bar
 	private static Integer NAVBAR_THEME_SHOW = 0;			// x value to show the theme navigation bar
 	private static Integer NAVBAR_DIFF_HIDE = 670;			// x value to hide the difficulty navigation bar
@@ -55,9 +56,9 @@ public class SplashScreenController implements Initializable {
     @FXML private RadioButton hardRadioButton;
 
 	/**
-	 * This will initialise all the
-	 * @param url
-	 * @param rb
+	 * This will initialise all the animations on the Splash Screen (main menu).
+	 * @param url Location of FXML document.
+	 * @param rb Location of resource bundle.
 	 */
 	@Override
 	public void initialize (URL url, ResourceBundle rb) {
@@ -115,7 +116,10 @@ public class SplashScreenController implements Initializable {
         }
     }
 
-	@FXML protected void handleStartGamePress(ActionEvent event) {
+	/**
+	 * Handles the event of the user selecting the start game button.
+	 */
+	@FXML protected void handleStartGamePress() {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
 			Stage primaryStage = (Stage) rootPane.getScene().getWindow();
@@ -125,50 +129,79 @@ public class SplashScreenController implements Initializable {
 		}
 	}
 
-	@FXML protected void handleDifficultiesPress(ActionEvent event) {
-		System.out.println("Cool story bro");
-	}
-
-	@FXML protected void handleQuitGamePress(ActionEvent event) {
+	/**
+	 * Handles the event of the user pressing the quit button.
+	 */
+	@FXML protected void handleQuitGamePress() {
 		System.exit(0);
 	}
 
-	@FXML protected void handleCarSelect(ActionEvent event) {
+	/**
+	 * Handles the event of the user selecting the car theme.
+	 */
+	@FXML protected void handleCarSelect() {
 		Main.currentTheme = Theme.CARS;
 		setViewModel("Images/SplashBackground.jpg");
 	}
-	
-	@FXML protected void handlePlaneSelect(ActionEvent event) {
+
+	/**
+	 * Handles the event of the user selecting the plane theme.
+	 */
+	@FXML protected void handlePlaneSelect() {
 		Main.currentTheme = Theme.PLANE;
 		setViewModel("Images/PlaneSplash.jpg");
 	}
 
-	@FXML protected void handleAnimalSelect(ActionEvent event) {
+	/**
+	 * Handles the event of the user selecting the animal theme.
+	 */
+	@FXML protected void handleAnimalSelect() {
 		Main.currentTheme = Theme.ANIMALS;
 		setViewModel("Images/AnimalSplash.jpg");
 	}
 
-	@FXML protected void handleEasySelect(ActionEvent event) {
+	/**
+	 * Handles the event of the user selecting the easy option.
+	 */
+	@FXML protected void handleEasySelect() {
 		Controller.currentDifficulty = PuzzleService.Difficulty.EASY;
 	}
 
-	@FXML protected void handleMediumSelect(ActionEvent event) {
+	/**
+	 * Handles the event of the user selecting the medium option.
+	 */
+	@FXML protected void handleMediumSelect() {
 		Controller.currentDifficulty = PuzzleService.Difficulty.MEDIUM;
 	}
 
-	@FXML protected void handleHardSelect(ActionEvent event) {
+	/**
+	 * Handles the event of the user selecting the hard option.
+	 */
+	@FXML protected void handleHardSelect() {
 		Controller.currentDifficulty = PuzzleService.Difficulty.HARD;
 	}
 
+	/**
+	 * Obtains the controller of the input View
+	 * @param fxmlPath The FXML needed for the controller.
+	 * @return FXML loader configuration for the view.
+	 */
 	public FXMLLoader loadView(String fxmlPath) {
 		return Controller.genericViewLoader(fxmlPath, rootPane);
 	}
-	
+
+	/**
+	 * Sets the background image.
+	 * @param backgroundSrc The source of the background image.
+	 */
 	public void setViewModel(String backgroundSrc) {
 		background.setImage(new Image(backgroundSrc));
 	}
-	
-    private void slideMenu() {
+
+	/**
+	 * Contains all of the transitions and movements for the theme and difficulty menus.
+ 	 */
+	private void slideMenu() {
         TranslateTransition openNavTheme=new TranslateTransition(new Duration(350), navBarTheme);
 		TranslateTransition openNavDiff=new TranslateTransition(new Duration(525), navBarDiff);
 		openNavTheme.setToX(NAVBAR_THEME_SHOW);
@@ -196,6 +229,11 @@ public class SplashScreenController implements Initializable {
 		});
     }
 
+	/**
+	 * Used to close the difficulty or theme menus when the other one is opened.
+	 * @param closeNav The navigation menu to be closed.
+	 * @param xValue The X value of where it should slide to.
+	 */
 	private void closeMenu(TranslateTransition closeNav, Integer xValue) {
 		closeNav.setToX(xValue);
 		closeNav.play();

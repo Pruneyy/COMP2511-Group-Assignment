@@ -10,6 +10,11 @@ import sample.Main.Theme;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class is responsible for designing the vehicles that the user will see when they are playing
+ * the game.
+ * @author Group 5 - Chris Armstrong, Edbert Chung, Huai Dong Loo, Pranav Singh, Utkarsh Sood.
+ */
 public class VehicleView {
     private Vehicle v;
     private enum colorName {
@@ -17,10 +22,19 @@ public class VehicleView {
     }
     private static final List<colorName> COLORS = Arrays.asList(colorName.values());
 
+    /**
+     * Constructor to construct a VehicleView object.
+     * @param v The vehicle that was passed in.
+     */
     public VehicleView(Vehicle v) {
         this.v = v;
     }
-    
+
+    /**
+     * Generates the rectangle object and adds in an image based on the theme, to use in the UI
+     * when playing the game.
+     * @return The rectangle with the themed image for a vehicle.
+     */
     public Rectangle getRec() {
         int length = 1 * Controller.UNIT_LENGTH;
         int width = v.getLength() * Controller.UNIT_LENGTH + 2*(v.getLength()-1);
@@ -48,16 +62,12 @@ public class VehicleView {
         rec.setEffect(this.getColorizer());
         rec.setFill(new ImagePattern(img));
         return rec;
-        
-//        Image img = new Image("File:./src/Images/car.png");
-//        if (v.getLength() == 3) {
-//            img = new Image("File:./src/Images/truck.png");
-//        }
-//        rec.setEffect(this.getColorizer());
-//        rec.setFill(new ImagePattern(img));
-//        return rec;
     }
-    
+
+    /**
+     * Used to adjust the colour of an object.
+     * @return The colour adjustment made.
+     */
     public ColorAdjust getColorizer() {
         int index = v.getCarId();
         ColorAdjust colorizer = new ColorAdjust();

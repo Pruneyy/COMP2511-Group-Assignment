@@ -1,10 +1,6 @@
 package sample;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.animation.FadeTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,10 +15,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.Main.Theme;
 
-	public class VictoryScreenController implements Initializable {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+/**
+ * @author Group 5 - Chris Armstrong, Edbert Chung, Huai Dong Loo, Pranav Singh, Utkarsh Sood.
+ */
+public class VictoryScreenController implements Initializable {
 		
 		private static Double FADE_TIME = 0.2;		// the fade timer
-		
+
 		@FXML private AnchorPane rootPane;
 		@FXML private Text title;
 		@FXML private Button start;
@@ -31,8 +33,13 @@ import sample.Main.Theme;
 		@FXML private ImageView background;
 		@FXML private Label moves;
 
-		@Override
-		public void initialize (URL url, ResourceBundle rb) {
+	/**
+	 * This will initialise all the animations on the Victory Screen.
+	 * @param url Location of FXML document.
+	 * @param rb Location of resource bundle.
+	 */
+	@Override
+	public void initialize (URL url, ResourceBundle rb) {
 			
 			if (Main.currentTheme == Theme.CARS) {
 				setViewModel("Images/SplashBackground.jpg");
@@ -48,7 +55,7 @@ import sample.Main.Theme;
 			FadeTransition fadeButtonThree = Controller.fadeSet(quit, FADE_TIME, 0, 1, 1);
 
 			fadeIn.play();
-			
+
 			fadeIn.setOnFinished((e)->{
 				fadeLabel.play();
 			});
@@ -66,9 +73,11 @@ import sample.Main.Theme;
 			});
 		}
 		public void printMoves(int num) {
-			moves.setText("Moves taken: "+num);	
+			moves.setText("Moves taken: "+num);
 		}
-		@FXML protected void handleRestartGamePress(ActionEvent event) {
+	/**
+	 * Handles the event of a user pressing the next puzzle (restart) button, by going to the next puzzle.
+	 */	@FXML protected void handleRestartGamePress() {
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
 				Stage primaryStage = (Stage) rootPane.getScene().getWindow();
@@ -77,8 +86,10 @@ import sample.Main.Theme;
 				System.out.println("feels bad man");
 			}
 		}
-		
-		@FXML protected void handleMenuPress(ActionEvent event) {
+
+	/**
+	 * Handles the event of a user pressing the menu button, by returning them to the menu.
+	 */	@FXML protected void handleMenuPress() {
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("SplashScreen.fxml"));
 				Stage primaryStage = (Stage) rootPane.getScene().getWindow();
@@ -87,16 +98,27 @@ import sample.Main.Theme;
 				System.out.println("feels bad man");
 			}
 		}
-		
-		@FXML protected void handleQuitGamePress(ActionEvent event) {
+
+	/**
+	 * Handles the event of a user pressing the quit button, by quitting the game and ending the code.
+	 */	@FXML protected void handleQuitGamePress() {
 			System.exit(0);
 		}
-		
-		public FXMLLoader loadView(String fxmlPath) {
+
+	/**
+	 * Obtains the controller of the input View
+	 * @param fxmlPath The FXML needed for the controller.
+	 * @return FXML loader configuration for the view.
+	 */
+	public FXMLLoader loadView(String fxmlPath) {
 			return Controller.genericViewLoader(fxmlPath, rootPane);
 		}
 
-		public void setViewModel(String backgroundSrc) {
+	/**
+	 * Sets the background image.
+	 * @param backgroundSrc The source of the background image.
+	 */
+	public void setViewModel(String backgroundSrc) {
 			background.setImage(new Image(backgroundSrc));
 		}
-	}
+}

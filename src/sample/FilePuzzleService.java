@@ -2,13 +2,14 @@ package sample;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import sample.PuzzleService.Difficulty;
-
+/**
+ * An implementation of the Puzzle Services interface which will load a new puzzle from one of the
+ * pre-made puzzles files.
+ * @author Group 5 - Chris Armstrong, Edbert Chung, Huai Dong Loo, Pranav Singh, Utkarsh Sood.
+ */
 public class FilePuzzleService implements PuzzleService {
 
 	private MoveSet moveSet;	//keeps track of all movements
@@ -16,24 +17,25 @@ public class FilePuzzleService implements PuzzleService {
 	private int lastRandom;
 	private int lastMedRandom;
 	private int lastHardRandom;
-//	public int medIndex;
-//	public int hardIndex;
 
 	public static Integer MED_LOWER_BOUND = 1;
 	public static Integer MED_UPPER_BOUND = 5;
 	public static Integer HARD_LOWER_BOUND = 6;
 	public static Integer HARD_UPPER_BOUND = 10;
 
+	/**
+	 * Constructor to create a new object that stores all the moves and solution.
+	 */
 	public FilePuzzleService() {
 		this.moveSet = new MoveSet();
 		this.solution = new MoveSet();
 	}
 
 	/**
-	 * creates the starting stage for a puzzle with a definite known solution
-	 * @pre orientation is always either "H" or "V"	
-	 * @param input file which provides the initial composition of the puzzle
-	 * @return a grid for the UI to display
+	 * Creates the starting stage for a puzzle which is loaded from a pre-made file. Based on the
+	 * difficulty the user has chosen, the appropriate file range is selected from.
+	 * @param d The difficulty chosen by the user.
+	 * @return A grid for the UI to display.
 	 */
 	public Grid getNewPuzzle(Difficulty d){
 
@@ -99,61 +101,11 @@ public class FilePuzzleService implements PuzzleService {
       return puzzle;
 	}
 
-//	public String returnFileNum (Difficulty d) {
-//		medLevels = new ArrayList<>();
-//		hardLevels = new ArrayList<>();
-//		String file = null;
-//
-//		// Adds all the existing files to the new array lists
-//		// This is one the basis they are consecutive numbers from lower to upper bounds
-//		// Could improve to scan in .txt files from folder
-//		for (int i = 0; i < MED_UPPER_BOUND; i++) {
-//			fileName = MED_LOWER_BOUND + i;
-//			medLevels.add(fileName);
-//		}
-//
-//		for (int i = 0; i < HARD_UPPER_BOUND - MED_UPPER_BOUND; i++) {
-//			fileName = HARD_LOWER_BOUND + i;
-//			hardLevels.add(fileName);
-//		}
-//
-//		// Print check
-////		for (int currFile : medLevels) {
-////			System.out.println(currFile);
-////		}
-////
-////		for (int currFile : hardLevels) {
-////			System.out.println(currFile);
-////		}
-//
-//		// Retrieves the file
-//		if (d == Difficulty.MEDIUM) {
-//			file = Integer.toString(medLevels.get(getMedIndex()));
-//			setMedIndex(getMedIndex() + 1);
-//
-//			 if (getMedIndex() > MED_UPPER_BOUND) {
-//				setMedIndex(0);
-//			 }
-//		} else if (d == Difficulty.HARD) {
-//			file = Integer.toString(hardLevels.get(getHardIndex()));
-//			setHardIndex(getHardIndex() + 1);
-//
-//			if (getHardIndex() > HARD_UPPER_BOUND) {
-//				setHardIndex(0);
-//			}
-//		}
-//
-//		System.out.println("File return is " + d + " " + file);
-//
-//		return file;
-//
-//	}
-
 	/**
-	 * NOTE FUNCTION CURRENTLY LOOKS LIKE IT'S WORKING BUT IT ISN'T [NEED TO FIX]
-	 * @return
+	 * Generates a random file to generate into a game board based on the difficulty the user has chosen.
+	 * @param d The difficulty chosen by the user.
+	 * @return The random number that has been generated.
 	 */
-
 	public int returnRandom(Difficulty d) {
 		// Change the upper and lower bounds as the number of pre-made files increases
 		int flag = 0;
@@ -181,50 +133,35 @@ public class FilePuzzleService implements PuzzleService {
 		return randomNum;
 	}
 
-	public int getLastRandom() {
-		return lastRandom;
-	}
-
-	public void setLastRandom(int input) {
-		lastRandom = input;
-		//System.out.println("XX" +lastRandom);
-	}
-
+	/**
+	 * Gets the last medium level randomly generated file.
+	 * @return The last medium level randomly generated file.
+	 */
 	public int getLastMedRandom() {
 		return lastMedRandom;
 	}
 
+	/**
+	 * Sets the last medium level randomly generated file.
+	 * @param lastMedRandom The last medium level randomly generated file.
+	 */
 	public void setLastMedRandom(int lastMedRandom) {
 		this.lastMedRandom = lastMedRandom;
 	}
 
+	/**
+	 * Gets the last hard level randomly generated file.
+	 * @return The last hard level randomly generated file.
+	 */
 	public int getLastHardRandom() {
 		return lastHardRandom;
 	}
 
+	/**
+	 * Sets the last hard level randomly generated file.
+	 * @param lastHardRandom The last hard level randomly generated file.
+	 */
 	public void setLastHardRandom(int lastHardRandom) {
 		this.lastHardRandom = lastHardRandom;
 	}
-
-	// ======================= REMOVE? ================================================
-
-//	public int getMedIndex() {
-//		System.out.println("Getting medium index " + medIndex);
-//		return medIndex;
-//	}
-//
-//	public void setMedIndex(int input) {
-//		System.out.println("Setting medium index " + medIndex + " to " + input);
-//		medIndex = input;
-//	}
-//
-//	public int getHardIndex() {
-//		System.out.println("Getting hard index " + hardIndex);
-//		return hardIndex;
-//	}
-//
-//	public void setHardIndex(int input) {
-//		System.out.println("Setting hard index " + hardIndex + " to " + input);
-//		hardIndex = input;
-//	}
 }

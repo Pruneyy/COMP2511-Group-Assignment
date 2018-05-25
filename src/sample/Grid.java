@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Grid
- * Data structure representing the layout of all vehicles on the playing field
- * 0, 0 at top left, positive x going left and positive y going down
+ * Data structure representing the layout of all vehicles on the playing field.
+ * 0, 0 at top left, positive x going left and positive y going down.
+ * @author Group 5 - Chris Armstrong, Edbert Chung, Huai Dong Loo, Pranav Singh, Utkarsh Sood.
  */
 public class Grid {
 
@@ -16,15 +16,19 @@ public class Grid {
     private ArrayList<Vehicle> vehicles;
     private ArrayList<Move> moves;
 
+    /**
+     * Constructor used to construct a Grid object containing an array list of vehicles and an array
+     * list of moves made.
+     */
     public Grid() {
         this.vehicles = new ArrayList<>();
         this.moves = new ArrayList<>();
     }
 
     /**
-     * Adds a vehicle to the grid, if it does not collide with any other vehicles already in the grid
-     * @param vehicle the vehicle to add
-     * @return true if the vehicle was added
+     * Adds a vehicle to the grid, if it does not collide with any other vehicles already in the grid.
+     * @param vehicle The vehicle to add.
+     * @return True if the vehicle was added.
      */
     public boolean addVehicle(Vehicle vehicle) {
 
@@ -37,23 +41,30 @@ public class Grid {
     }
 
     /**
-     * Attempts to move the vehicle in the positive direction by 1, checking if the move is valid
-     * @param vehicle The vehicle to move
-     * @return true if move is successful
+     * Attempts to move the vehicle in the positive direction by 1, checking if the move is valid.
+     * @param vehicle The vehicle to move.
+     * @return True if move is successful.
      */
     public boolean moveVehicleForward(Vehicle vehicle) {
         return moveVehicleBySteps(vehicle.getCarId(), 1);
     }
 
     /**
-     * Attempts to move the vehicle in the negative direction by 1, checking if the move is valid
-     * @param vehicle The vehicle to move
-     * @return true if move is successful
+     * Attempts to move the vehicle in the negative direction by 1, checking if the move is valid.
+     * @param vehicle The vehicle to move.
+     * @return True if move is successful.
      */
     public boolean moveVehicleBackward(Vehicle vehicle) {
         return moveVehicleBySteps(vehicle.getCarId(), -1);
     }
 
+    /**
+     * Moves the vehicle by a certan number of steps and checks if the move is valid.
+     * If it is then the vehicle is moved there.
+     * @param vehicleId The vehicle to move.
+     * @param steps The number of steps to move the vehicle.
+     * @return True if move is successful.
+     */
     public boolean moveVehicleBySteps(int vehicleId, int steps) {
 
         Vehicle vehicle = vehicles.get(vehicleId - 1);
@@ -70,7 +81,12 @@ public class Grid {
         return true;
     }
 
-    /** index is the first space occupied for which the vehicle is to move to */
+    /**
+     * The index is the first space for which the vehicle is to move to.
+     * @param vehicleId The vehicle to to move.
+     * @param index The index to move the vehicle to.
+     * @return True if the move is successful.
+     */
     public boolean moveVehicleToIndex(int vehicleId, int index) {
         Vehicle v = vehicles.get(vehicleId - 1);
         int diff = index - v.getFirstSpaceOccupied();
@@ -86,6 +102,11 @@ public class Grid {
         return true;
     }
 
+    /**
+     * Checks if the position of the car is valif to avoid collisions.
+     * @param vehicle The vehicles being checked.
+     * @return True if there are no collisions.
+     */
     private boolean vehicleIsValid(Vehicle vehicle) {
         if (vehicle.getFirstSpaceOccupied() < 0 || vehicle.getLastSpaceOccupied() >= GRID_SIZE) return false;
         for (Vehicle v : this.vehicles) {
@@ -96,8 +117,8 @@ public class Grid {
     }
 
     /**
-     * Computes a 2d array of the layout of the grid
-     * 0 is empty, while a positive integer is the id of the car
+     * Computes a 2d array of the layout of the grid.
+     * 0 is empty, while a positive integer is the id of the car.
      * @return 2d array representing the layout of the grid
      */
     public int[][] getGridObject() {
@@ -115,6 +136,11 @@ public class Grid {
         return grid;
     }
 
+    /**
+     * Gives the vehicle that has ben requested by th caller.
+     * @param id The id of the veicle wanted.
+     * @return The vehicle requested if it is in the vehicle list otherwise null.
+     */
     public Vehicle getVehicleById(int id) {
         for (Vehicle v : this.vehicles) {
             if (v.getCarId() == id) return v;
@@ -122,7 +148,10 @@ public class Grid {
         return null;
     }
 
-    /** Unfortunately this prints the grid as a flipped matrix */
+    /**
+     * Prints the grid as a flipped matrix after converting it to String format.
+     * @return An array matrix as a string.
+     */
     public String toString() {
         int[][] grid = this.getGridObject();
         return Arrays.deepToString(grid)
@@ -131,15 +160,27 @@ public class Grid {
               .replace("]]", "]");
     }
 
-
+    /**
+     * Gets the vehicle array list.
+     * @return An array list of vehicles.
+     */
     public ArrayList<Vehicle> getVehicles() {
         return vehicles;
     }
 
+    /**
+     * Gets the moves array list.
+     * @return An array list of moves.
+     */
     public ArrayList<Move> getMoves() {
         return moves;
     }
 
+    /**
+     * Will find the state of the vehicles that was last moved by checking the moves array list
+     * and restore it to that position on the grid.
+     * @return The vehicle state before the most recent move.
+     */
     public Vehicle undoLastVehicleMoves() {
         if (this.moves.size() == 0) return null;
         Vehicle vehicle = this.moves.get(this.moves.size() - 1).getVehicle();

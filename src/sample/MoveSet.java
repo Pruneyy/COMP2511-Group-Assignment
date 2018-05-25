@@ -3,7 +3,7 @@ package sample;
 import java.util.ArrayList;
 
 /**
- * Repesents the ordered set of movements, from multiple vehicle.
+ * Represents the ordered set of movements, from multiple vehicles.
  * @author Group 5 - Chris Armstrong, Edbert Chung, Huai Dong Loo, Pranav Singh, Utkarsh Sood.
  */
 public class MoveSet {
@@ -20,7 +20,7 @@ public class MoveSet {
 
     /**
      * Adds a new move to the array list of moves.
-     * @param m an object containing the vehicle and the number of steps taken to reach its current position.
+     * @param m An object containing the vehicle and the number of steps taken to reach its current position.
      */
     public void addMove(Move m) {
         this.moves.add(m);
@@ -28,8 +28,8 @@ public class MoveSet {
     }
 
     /**
-     * Returns a vehicle to its last position by reversing the last move made in the move array lis.
-     * @return parameter to acknowledge that a move has been undone.
+     * Returns a vehicle to its last position by reversing the last move made in the move array list.
+     * @return True if the undo is possible.
      */
     public boolean undo() {
         if (this.currentIndex < 0) return false;
@@ -38,6 +38,10 @@ public class MoveSet {
         return true;
     }
 
+    /**
+     * Redoes a move that was undone.
+     * @return True if the redo is possible.
+     */
     public boolean redo() {
         if (this.currentIndex >= this.moves.size() - 1) return false;
         this.moves.get(this.currentIndex + 1).revert();
