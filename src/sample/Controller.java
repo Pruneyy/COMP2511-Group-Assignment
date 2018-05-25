@@ -220,9 +220,9 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * Method used to render the vehicles that will be rendered onto the game board. ============================== CHECK ==================================
+	 * Creates the vehicle rectangle, and places it in the grid.
 	 * @param v The vehicle that is passed in to be rendered.
-	 * @return The grid tile that the vehicles will be rendered on. ===================================== CHECK ====================================
+	 * @return The grid tile that the vehicles will be rendered on.
 	 */
 	private Rectangle createVehicleRender(Vehicle v) {
 		BiConsumer<MouseEvent, Rectangle> onMouseDrag;
@@ -250,9 +250,9 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * Method used to determine which rectangle grid tile to snap a vehicle to when it is moved by the user.
+	 * Given a vehicle and the rectangle render, snap it to the grid position.
 	 * @param v The vehicle that is to be snapped into place.
-	 * @param r The rectangle that it has been moved to. ============================================== CHECK ======================================
+	 * @param r The rectangle that it has been moved to.
 	 */
 	private void snapRectangleToGrid(Vehicle v, Rectangle r) {
 		List<Coordinate> coords = v.getOccupiedSpaces();
@@ -283,7 +283,7 @@ public class Controller implements Initializable {
 
 	/**
 	 * Gets the pixel location within the grid.
-	 * @param e The row or column that is passed in. ================================ CHECK ==============================
+	 * @param e The row or column that is passed in.
 	 * @return The grid pixel location of the row or column passed in
 	 */
 	private int getGridPixelCoord(int e) {
@@ -315,7 +315,7 @@ public class Controller implements Initializable {
 	/**
 	 * Handles the event when a user releases the mouse to unselect a vehicle.
 	 * @param v The vehicle that is to be positioned.
-	 * @return The acknowledgement that the vehicle has been positioned. ==================================== CHECK ========================
+	 * @return Function to be called on mouse release.
 	 */
 	private BiConsumer<MouseEvent, Rectangle> getOnMouseRelease(Vehicle v) {
 		BiConsumer<MouseEvent, Rectangle> onMouseRelease;
@@ -334,7 +334,7 @@ public class Controller implements Initializable {
 	/**
 	 * Handles the event when a user presses the mouse to select a vehicle.
 	 * @param v The vehicle that is selected by the user.
-	 * @return The acknowledgement that the vehicle had been selected. ====================================== CHECK =============================================
+	 * @return Assign function to the onMouseRelease handler for a vehicle render (rectangle)
 	 */
 	private BiConsumer<MouseEvent, Rectangle> getOnMousePress(Vehicle v) {
 		BiConsumer<MouseEvent, Rectangle> onMousePress;
@@ -353,7 +353,7 @@ public class Controller implements Initializable {
 	/**
 	 * Used to determine the movement of the vehicle as it is being dragged by the user.
 	 * @param v The vehicle that is being dragged by the user.
-	 * @return Acknowledgement that the car has been dragged. ============================== CHECK =============================
+	 * @return Assign function to the onMouseRelease handler for a vehicle render (rectangle)
 	 */
 	private BiConsumer<MouseEvent, Rectangle> getOnMouseDrag(Vehicle v) {
 		BiConsumer<MouseEvent, Rectangle> onMouseDrag;
