@@ -41,6 +41,7 @@ public class Controller implements Initializable {
 	@FXML private Pane pane2;
 	@FXML private AnchorPane root;
 	@FXML private Label moveCounter;
+	@FXML private Label move;
 	private boolean startFlag = false;
 
 	private Grid grid;
@@ -97,8 +98,6 @@ public class Controller implements Initializable {
 		}
 	}
 	
-	
-
 	@FXML protected void handleGenerateGamePress(ActionEvent event) {
 		// Make new game using the generator algorithm
 		this.initPuzzle(new GeneratorPuzzleService());
@@ -341,6 +340,7 @@ public class Controller implements Initializable {
 	private void loadVictoryScreen() {
 		FXMLLoader loader = loadView("VictoryScreen.fxml");
 		VictoryScreenController victoryScreenController = loader.getController();
+		victoryScreenController.printMoves(numMoves);
 	}
 	
 	public static FadeTransition fadeSet(Node nodeToFade, double time, int setFrom, int setTo, int setCycle) {

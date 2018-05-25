@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -20,7 +21,7 @@ import sample.Main.Theme;
 
 	public class VictoryScreenController implements Initializable {
 		
-		private static Double FADE_TIME = 0.25;		// the fade timer
+		private static Double FADE_TIME = 0.2;		// the fade timer
 		
 		@FXML private AnchorPane rootPane;
 		@FXML private Text title;
@@ -28,6 +29,7 @@ import sample.Main.Theme;
 		@FXML private Button settings;
 		@FXML private Button quit;
 		@FXML private ImageView background;
+		@FXML private Label moves;
 
 		@Override
 		public void initialize (URL url, ResourceBundle rb) {
@@ -39,15 +41,19 @@ import sample.Main.Theme;
 			} else if (Main.currentTheme == Theme.ANIMALS) {
 				setViewModel("Images/AnimalVictory.jpg");
 			}
-			
 			FadeTransition fadeIn = Controller.fadeSet(title, FADE_TIME + 1, 0, 1, 1);
+			FadeTransition fadeLabel = Controller.fadeSet(moves, FADE_TIME, 0, 1, 1);
 			FadeTransition fadeButtonOne = Controller.fadeSet(start, FADE_TIME, 0, 1, 1);
 			FadeTransition fadeButtonTwo = Controller.fadeSet(settings, FADE_TIME, 0, 1, 1);
 			FadeTransition fadeButtonThree = Controller.fadeSet(quit, FADE_TIME, 0, 1, 1);
 
 			fadeIn.play();
-
+			
 			fadeIn.setOnFinished((e)->{
+				fadeLabel.play();
+			});
+
+			fadeLabel.setOnFinished((e)->{
 				fadeButtonOne.play();
 			});
 
@@ -59,7 +65,9 @@ import sample.Main.Theme;
 				fadeButtonThree.play();
 			});
 		}
-		
+		public void printMoves(int num) {
+			moves.setText("Moves taken: "+num);	
+		}
 		@FXML protected void handleRestartGamePress(ActionEvent event) {
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
