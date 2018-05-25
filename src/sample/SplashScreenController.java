@@ -71,6 +71,10 @@ public class SplashScreenController implements Initializable {
 		fadeIn.play();
 
 		fadeIn.setOnFinished((e)->{
+			fadeIns.play();
+		});
+		
+		fadeIns.setOnFinished((e)->{
 			fadeButtonOne.play();
 		});
 
@@ -84,10 +88,6 @@ public class SplashScreenController implements Initializable {
 
 		fadeButtonThree.setOnFinished((e)->{
 			fadeButtonFour.play();
-		});
-
-		fadeButtonFour.setOnFinished((e)->{
-			fadeIns.play();
 		});
 
 		slideMenu();
