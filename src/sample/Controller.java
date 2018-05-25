@@ -50,7 +50,9 @@ public class Controller implements Initializable {
 
 	private double mouseClickX;
 	private double mouseClickY;
-	int numMoves = 0;
+	private int before;
+	private int after;
+	private int numMoves;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -121,11 +123,6 @@ public class Controller implements Initializable {
 		makeGrid(grid);
 	}
 	
-	protected void handleMoveCounter(int moves) {
-		String s = "MOVES: " + moves;
-		moveCounter.setText(s);
-	}	
-	
 	private void reset() {
 		this.gameBoard.getChildren().clear();
 		this.pane2.getChildren().removeAll(this.vehicleRenders);
@@ -136,21 +133,21 @@ public class Controller implements Initializable {
 		Vehicle v = grid.undoLastVehicleMoves();
 		if (v != null) {
 			snapRectangleToGrid(v, vehicleRenders.get(v.getCarId() - 1));
-			numMoves = numMoves - 1;
+			numMoves = numMoves - 1 ;
 			handleMoveCounter(numMoves);
 		}
 	}
 	
 	@FXML protected void handleRestartPress(ActionEvent event) {
 		// restart the game board
-		numMoves = 0;
-		handleMoveCounter(numMoves);
 		while(!grid.getMoves().isEmpty()) {
 			Vehicle v = grid.undoLastVehicleMoves();
 			if (v != null) {
 				snapRectangleToGrid(v, vehicleRenders.get(v.getCarId() - 1));
 			}		
 		}
+		numMoves = 0;
+		handleMoveCounter(numMoves);
 	}
 	
 	@FXML protected void handleQuitPress(ActionEvent event) {
@@ -186,17 +183,16 @@ public class Controller implements Initializable {
 		Rectangle rec = new VehicleView(v).getRec();
 
 		snapRectangleToGrid(v, rec);
-
 		rec.setOnMousePressed(e -> {
+			setMovesBefore();
 			onMousePress.accept(e, rec);
 		});
 		rec.setOnMouseDragged(e -> {
 			onMouseDrag.accept(e, rec);
 		});
 		rec.setOnMouseReleased(e -> {
+			setMovesAfter();
 			onMouseRelease.accept(e, rec);
-			numMoves++;
-			handleMoveCounter(numMoves);
 		});
 		return rec;
 	}
@@ -340,7 +336,25 @@ public class Controller implements Initializable {
 	private void loadVictoryScreen() {
 		FXMLLoader loader = loadView("VictoryScreen.fxml");
 		VictoryScreenController victoryScreenController = loader.getController();
+		numMoves++;
 		victoryScreenController.printMoves(numMoves);
+	}
+	private void handleMoveCounter(int moves) {
+		if(before < after) {
+			moves++;
+			numMoves++;
+			before = 0;
+			after = 0;
+		}
+		String s = "MOVES: " + moves;
+		moveCounter.setText(s);
+	}	
+	private void setMovesBefore() {
+		before = grid.getMoves().size();
+	}
+	private void setMovesAfter() {
+		after = grid.getMoves().size();
+		handleMoveCounter(numMoves);
 	}
 	
 	public static FadeTransition fadeSet(Node nodeToFade, double time, int setFrom, int setTo, int setCycle) {
