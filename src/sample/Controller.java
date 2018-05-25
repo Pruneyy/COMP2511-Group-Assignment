@@ -52,11 +52,11 @@ public class Controller implements Initializable {
 	private double mouseClickY;
 	private int before;
 	private int after;
-	private int numMoves;
+	private int numMoves = 0;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		handleMoveCounter(numMoves);
+		moveCounter.setText("MOVES: 0");
 		if(!Main.isSplashLoaded) {
 			loadSplashScreen();
 		}
@@ -340,20 +340,25 @@ public class Controller implements Initializable {
 		victoryScreenController.printMoves(numMoves);
 	}
 	private void handleMoveCounter(int moves) {
-		if(before < after) {
+		if(grid.getMoves().size() == 0) {
+			moves = 0;
+		}
+		else if(before < after) {
 			moves++;
-			numMoves++;
 			before = 0;
 			after = 0;
 		}
 		String s = "MOVES: " + moves;
 		moveCounter.setText(s);
+		numMoves = moves;
 	}	
 	private void setMovesBefore() {
 		before = grid.getMoves().size();
+		System.out.println("before = " + before);
 	}
 	private void setMovesAfter() {
 		after = grid.getMoves().size();
+		System.out.println("after = " + after);
 		handleMoveCounter(numMoves);
 	}
 	
