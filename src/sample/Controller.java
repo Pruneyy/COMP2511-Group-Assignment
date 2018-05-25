@@ -1,4 +1,4 @@
-package sample;
+	package sample;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -39,6 +40,7 @@ public class Controller implements Initializable {
 	@FXML private Pane pane;
 	@FXML private Pane pane2;
 	@FXML private AnchorPane root;
+	@FXML private Label moveCounter;
 	private boolean startFlag = false;
 
 	private Grid grid;
@@ -47,9 +49,11 @@ public class Controller implements Initializable {
 
 	private double mouseClickX;
 	private double mouseClickY;
+	int numMoves = 0;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
+		handleMoveCounter(numMoves);
 		if(!Main.isSplashLoaded) {
 			loadSplashScreen();
 		}
@@ -78,7 +82,7 @@ public class Controller implements Initializable {
 		}
 		pane.setStyle("-fx-background-image: url('Images/GridBorderBackground.jpg');");
 	}
-
+	
 	@FXML protected void handleNewGamePress(ActionEvent event) {
 		System.out.println("CURRENT DIFF IS " + currentDifficulty);
 		if (currentDifficulty == PuzzleService.Difficulty.EASY) {
@@ -92,6 +96,8 @@ public class Controller implements Initializable {
 			this.initPuzzle(new FilePuzzleService());
 		}
 	}
+	
+	
 
 	@FXML protected void handleGenerateGamePress(ActionEvent event) {
 		// Make new game using the generator algorithm
@@ -115,28 +121,39 @@ public class Controller implements Initializable {
 		// System.out.println("THE PUZZLE ASKED FOR IS " + currentDifficulty);
 		makeGrid(grid);
 	}
-
+	
+	protected void handleMoveCounter(int moves) {
+		String s = "MOVES: " + moves;
+		moveCounter.setText(s);
+	}	
+	
 	private void reset() {
 		this.gameBoard.getChildren().clear();
 		this.pane2.getChildren().removeAll(this.vehicleRenders);
 		this.vehicleRenders = new ArrayList<Rectangle>();
 	}
-
+	
 	@FXML protected void handleUndoPress(ActionEvent event) {
 		Vehicle v = grid.undoLastVehicleMoves();
 		if (v != null) {
 			snapRectangleToGrid(v, vehicleRenders.get(v.getCarId() - 1));
+			numMoves = numMoves - 1;
+			handleMoveCounter(numMoves);
 		}
 	}
+	
 	@FXML protected void handleRestartPress(ActionEvent event) {
 		// restart the game board
+		numMoves = 0;
+		handleMoveCounter(numMoves);
 		while(!grid.getMoves().isEmpty()) {
-		Vehicle v = grid.undoLastVehicleMoves();
-		if (v != null) {
-			snapRectangleToGrid(v, vehicleRenders.get(v.getCarId() - 1));
-		}
+			Vehicle v = grid.undoLastVehicleMoves();
+			if (v != null) {
+				snapRectangleToGrid(v, vehicleRenders.get(v.getCarId() - 1));
+			}		
 		}
 	}
+	
 	@FXML protected void handleQuitPress(ActionEvent event) {
 		// Exit game
 		System.exit(0);
@@ -151,14 +168,14 @@ public class Controller implements Initializable {
 			System.out.println("feels bad man");
 		}
 	}
-
+	
 	private Rectangle getGridTile() {
 		Rectangle rec = new Rectangle();
 		rec.setWidth(UNIT_LENGTH);
 		rec.setHeight(UNIT_LENGTH);
 		return rec;
 	}
-
+	
 	private Rectangle createVehicleRender(Vehicle v) {
 		BiConsumer<MouseEvent, Rectangle> onMouseDrag;
 		BiConsumer<MouseEvent, Rectangle> onMousePress;
@@ -179,10 +196,12 @@ public class Controller implements Initializable {
 		});
 		rec.setOnMouseReleased(e -> {
 			onMouseRelease.accept(e, rec);
+			numMoves++;
+			handleMoveCounter(numMoves);
 		});
 		return rec;
 	}
-
+	
 	private void snapRectangleToGrid(Vehicle v, Rectangle r) {
 		List<Coordinate> coords = v.getOccupiedSpaces();
 		int col = coords.get(0).getColIndex();
@@ -194,7 +213,7 @@ public class Controller implements Initializable {
 			checkForWin(grid);
 		}
 	}
-
+	
 	private void checkForWin(Grid grid) {
 		Vehicle redCar = grid.getVehicleById(RED_CAR_ID);
 		Coordinate redCarHead = redCar.getOccupiedSpaces().get(1);
@@ -205,15 +224,15 @@ public class Controller implements Initializable {
 		}
 
 	}
-
+	
 	private int getGridPixelCoord(int col) {
 		return col * UNIT_LENGTH + 2*(col);
 	}
-
+	
 	private double getGridCoord(double pixelCoord) {
 		return pixelCoord / (UNIT_LENGTH + 2.0);
 	}
-
+	
 	/**
 	 * Computes the next grid position of the rectangle, given it's current position and mouse movement
 	 * @param translationInPixels The file position of a rectangle, in pixel coordinates
@@ -226,7 +245,7 @@ public class Controller implements Initializable {
 		}
 		return Math.ceil(getGridCoord(translationInPixels + 1));
 	}
-
+	
 	private BiConsumer<MouseEvent, Rectangle> getOnMouseRelease(Vehicle v) {
 		BiConsumer<MouseEvent, Rectangle> onMouseRelease;
 		if (v.getOrientation() == Vehicle.Orientation.HORIZONTAL) {
@@ -243,6 +262,7 @@ public class Controller implements Initializable {
 
 	private BiConsumer<MouseEvent, Rectangle> getOnMousePress(Vehicle v) {
 		BiConsumer<MouseEvent, Rectangle> onMousePress;
+		
 		if (v.getOrientation() == Vehicle.Orientation.HORIZONTAL) {
 			onMousePress = (e,r) -> {
 				mouseClickX = e.getSceneX();
