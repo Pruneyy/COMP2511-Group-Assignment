@@ -20,7 +20,7 @@ import sample.Main.Theme;
 
 	public class VictoryScreenController implements Initializable {
 		
-		private static Double FADE_TIME = 0.5;		// the fade timer
+		private static Double FADE_TIME = 0.25;		// the fade timer
 		
 		@FXML private AnchorPane rootPane;
 		@FXML private Text title;
@@ -37,7 +37,7 @@ import sample.Main.Theme;
 			} else if (Main.currentTheme == Theme.PLANE) {
 				setViewModel("Images/VictoryPlaneSplash.jpg");
 			} else if (Main.currentTheme == Theme.ANIMALS) {
-				setViewModel("Images/FoodVictory.jpg");
+				setViewModel("Images/AnimalVictory.jpg");
 			}
 			
 			FadeTransition fadeIn = Controller.fadeSet(title, FADE_TIME + 1, 0, 1, 1);
