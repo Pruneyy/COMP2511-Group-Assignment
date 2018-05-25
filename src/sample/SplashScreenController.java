@@ -39,6 +39,7 @@ public class SplashScreenController implements Initializable {
 	@FXML private AnchorPane rootPane;
 	@FXML private Text title;
 	@FXML private Text instructions;
+	@FXML private Text instructionsTwo;
 	@FXML private Button start;
 	@FXML private Button difficulties;
 	@FXML private Button themes;
@@ -67,6 +68,7 @@ public class SplashScreenController implements Initializable {
 		FadeTransition fadeButtonThree = Controller.fadeSet(themes, FADE_TIME, 0, 1, 1);
 		FadeTransition fadeButtonFour = Controller.fadeSet(quit, FADE_TIME, 0, 1, 1);
 		FadeTransition fadeIns = Controller.fadeSet(instructions, FADE_TIME, 0, 1, 1);
+		FadeTransition fadeInsTwo = Controller.fadeSet(instructionsTwo, FADE_TIME, 0, 1, 1);
 
 		fadeIn.play();
 
@@ -75,6 +77,10 @@ public class SplashScreenController implements Initializable {
 		});
 		
 		fadeIns.setOnFinished((e)->{
+			fadeInsTwo.play();
+		});
+		
+		fadeInsTwo.setOnFinished((e)->{
 			fadeButtonOne.play();
 		});
 

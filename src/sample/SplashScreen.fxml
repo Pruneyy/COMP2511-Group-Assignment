@@ -32,13 +32,20 @@
                   <Insets />
                </VBox.margin>
             	</Text>
-            <Text fx:id="instructions" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="ins" text="Get the red object to the marked squares by dragging obstacles out of the way" textAlignment="CENTER" textOrigin="CENTER">
+            <Text fx:id="instructions" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="ins" text="Get the red object to the marked squares" textAlignment="CENTER" textOrigin="CENTER">
                <VBox.margin>
                   <Insets />
-               </VBox.margin></Text>
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font></Text>
+            <Text fx:id="instructionsTwo" fill="WHITE" layoutX="9.0" layoutY="145.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="inst" text="by dragging obstacles out of the way" textAlignment="CENTER" textOrigin="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font></Text>
             <Button fx:id="start" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleStartGamePress" opacity="0.0" prefWidth="100.0" styleClass="start" text="Start">
                <VBox.margin>
-                  <Insets top="40.0" />
+                  <Insets top="20.0" />
                </VBox.margin></Button>
              <Button fx:id="difficulties" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" opacity="0.0" prefWidth="100.0" styleClass="settings" text="Difficulty">
                  <VBox.margin>
