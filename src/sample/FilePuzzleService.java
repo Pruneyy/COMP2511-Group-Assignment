@@ -24,10 +24,6 @@ public class FilePuzzleService implements PuzzleService {
 	public static Integer HARD_LOWER_BOUND = 6;
 	public static Integer HARD_UPPER_BOUND = 10;
 
-//	public static ArrayList<Integer> medLevels;
-//	public static ArrayList<Integer> hardLevels;
-//	public static Integer fileName;
-
 	public FilePuzzleService() {
 		this.moveSet = new MoveSet();
 		this.solution = new MoveSet();
@@ -40,6 +36,7 @@ public class FilePuzzleService implements PuzzleService {
 	 * @return a grid for the UI to display
 	 */
 	public Grid getNewPuzzle(Difficulty d){
+
 		String input = "src/Starting Board/" + returnRandom(d) + ".txt";
 		// System.out.println("SOURCE FILE PATH IS: " + input);
         Grid puzzle = new Grid();
@@ -162,6 +159,7 @@ public class FilePuzzleService implements PuzzleService {
 		int flag = 0;
 		Random rand = new Random();
 		int randomNum = 0;
+
 		while (flag == 0) {
 			if (d == Difficulty.MEDIUM) {
 				randomNum = rand.nextInt(MED_UPPER_BOUND) + MED_LOWER_BOUND;
@@ -169,16 +167,13 @@ public class FilePuzzleService implements PuzzleService {
 					setLastMedRandom(randomNum);
 					flag = 1;
 				}
+
 			} else if (d == Difficulty.HARD) {
 				randomNum = rand.nextInt(HARD_UPPER_BOUND - HARD_LOWER_BOUND + 1) + HARD_LOWER_BOUND;
-				if(randomNum != getLastHardRandom()) {
+				if (randomNum != getLastHardRandom()) {
 					setLastHardRandom(randomNum);
 					flag = 1;
 				}
-			// to be removed once easy is fixed for file generation!!!
-			} else {
-				randomNum = 1;
-				flag = 1;
 			}
 		}
 

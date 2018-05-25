@@ -115,7 +115,7 @@ public class SplashScreenController implements Initializable {
 			Stage primaryStage = (Stage) rootPane.getScene().getWindow();
 			primaryStage.setScene(new Scene(root));
 		} catch (Exception e) {
-			System.out.println("feels bad mang");
+			System.out.println("feels bad man");
 		}
 	}
 

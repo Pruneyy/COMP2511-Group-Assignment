@@ -55,7 +55,18 @@ public class Controller implements Initializable {
 		}
 		if (startFlag == false) {
 			this.vehicleRenders = new ArrayList<Rectangle>();
-			this.initPuzzle(new FilePuzzleService());
+
+			if (currentDifficulty == PuzzleService.Difficulty.EASY) {
+				System.out.println("Starting a new puzzle of EASY difficulty (from generator)");
+				this.initPuzzle(new GeneratorPuzzleService());
+			} else if (currentDifficulty == PuzzleService.Difficulty.MEDIUM) {
+				System.out.println("Starting a new puzzle of MEDIUM difficulty (from file)");
+				this.initPuzzle(new FilePuzzleService());
+			} else if (currentDifficulty == PuzzleService.Difficulty.HARD) {
+				System.out.println("Starting a new puzzle of HARD difficulty (from file)");
+				this.initPuzzle(new FilePuzzleService());
+			}
+
 			startFlag = true;
 		}
 		if (Main.currentTheme == Theme.CARS) {
@@ -78,9 +89,6 @@ public class Controller implements Initializable {
 			this.initPuzzle(new FilePuzzleService());
 		} else if (currentDifficulty == PuzzleService.Difficulty.HARD) {
 			// System.out.println("Starting a new puzzle of HARD difficulty (from file)");
-			this.initPuzzle(new FilePuzzleService());
-		} else if (currentDifficulty == PuzzleService.Difficulty.DEMO) {
-			// System.out.println("Starting DEMO puzzle (from file)");
 			this.initPuzzle(new FilePuzzleService());
 		}
 	}
