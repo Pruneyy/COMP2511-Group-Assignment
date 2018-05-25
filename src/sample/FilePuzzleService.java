@@ -19,9 +19,9 @@ public class FilePuzzleService implements PuzzleService {
 	private int lastHardRandom;
 
 	public static Integer MED_LOWER_BOUND = 1;
-	public static Integer MED_UPPER_BOUND = 5;
-	public static Integer HARD_LOWER_BOUND = 6;
-	public static Integer HARD_UPPER_BOUND = 10;
+	public static Integer MED_UPPER_BOUND = 8;
+	public static Integer HARD_LOWER_BOUND = 9;
+	public static Integer HARD_UPPER_BOUND = 16;
 
 	/**
 	 * Constructor to create a new object that stores all the moves and solution.

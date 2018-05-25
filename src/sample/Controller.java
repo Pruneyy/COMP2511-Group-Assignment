@@ -80,13 +80,13 @@ public class Controller implements Initializable {
 
 			// Determines whethere to randomly generate the puzzle or to pull from file
 			if (currentDifficulty == PuzzleService.Difficulty.EASY) {
-				System.out.println("Starting a new puzzle of EASY difficulty (from generator)");
+				//System.out.println("Starting a new puzzle of EASY difficulty (from generator)");
 				this.initPuzzle(new GeneratorPuzzleService());
 			} else if (currentDifficulty == PuzzleService.Difficulty.MEDIUM) {
-				System.out.println("Starting a new puzzle of MEDIUM difficulty (from file)");
+				//System.out.println("Starting a new puzzle of MEDIUM difficulty (from file)");
 				this.initPuzzle(new FilePuzzleService());
 			} else if (currentDifficulty == PuzzleService.Difficulty.HARD) {
-				System.out.println("Starting a new puzzle of HARD difficulty (from file)");
+				//System.out.println("Starting a new puzzle of HARD difficulty (from file)");
 				this.initPuzzle(new FilePuzzleService());
 			}
 
@@ -449,11 +449,9 @@ public class Controller implements Initializable {
 	}
 	private void setMovesBefore() {
 		before = grid.getMoves().size();
-		System.out.println("before = " + before);
 	}
 	private void setMovesAfter() {
 		after = grid.getMoves().size();
-		System.out.println("after = " + after);
 		handleMoveCounter(numMoves);
 	}
 
